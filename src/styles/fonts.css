@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'basiic';
+  src: url('/fonts/basiic.eot');
+  src:
+    url('/fonts/basiic.eot') format('embedded-opentype'),
+    url('/fonts/basiic.woff2') format('woff2'),
+    url('/fonts/basiic.woff') format('woff'),
+    url('/fonts/basiic.ttf') format('truetype'),
+    url('/fonts/basiic.svg#Elmonolight') format('svg');
+}
+
+:root {
+  --font-extra: 'basiic';
+}

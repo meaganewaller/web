@@ -1,17 +1,28 @@
+const withBundlerAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = withBundlerAnalyzer({
+  compiler: {
+    styledComponents: true,
+  },
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: [
-      "images.unsplash.com",
-      "via.placeholder.com",
-      "placekitten.com",
-      "meaganwaller.com",
-      "s3.us-west-2.amazonaws.com",
-      "prod-files-secure.s3.us-west-2.amazonaws.com",
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+      },
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
     ],
   },
-};
-
-module.exports = nextConfig;
+});

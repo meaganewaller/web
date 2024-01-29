@@ -3,30 +3,77 @@
   "version": "1.0.0",
   "description": "The frontend for meaganwaller.com",
   "private": true,
+  "engines": {
+    "node": ">=16.0.0",
+    "pnpm": ">=8.0.0",
+    "yarn": "please use pnpm to install dependencies",
+    "npm": "please use pnpm to install dependencies"
+  },
   "scripts": {
     "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx .",
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
+    "typecheck": "tsc -b .",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "babelMacros": {
+    "twin": {
+      "styled": {
+        "import": "default",
+        "from": "styled-components"
+      }
+    }
   },
   "keywords": [],
   "author": "Meagan Waller",
   "license": "MIT",
   "dependencies": {
-    "class-variance-authority": "^0.7.0",
+    "@tabler/icons-react": "^2.46.0",
     "clsx": "^2.1.0",
-    "lucide-react": "^0.314.0",
+    "framer-motion": "^10.18.0",
     "next": "^14.1.0",
+    "next-themes": "^0.2.1",
     "react": "^18.2.0",
-    "tailwind-merge": "^2.2.0",
-    "tailwindcss-animate": "^1.0.7"
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.8",
+    "twin.macro": "3.4.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.1.0",
+    "@next/font": "^14.1.0",
+    "@savvywombat/tailwindcss-grid-areas": "^4.0.0",
     "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.0.11",
     "autoprefixer": "^10.4.17",
+    "babel-plugin-styled-components": "^2.1.4",
+    "babel-plugin-twin": "1.1.0",
     "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.2",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
     "postcss": "^8.4.33",
+    "prettier": "^3.1.0",
+    "tailwind-merge": "^2.2.0",
     "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-debug-screens": "^2.2.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
-  }
+  },
+  "presets": [
+    "next/babel"
+  ],
+  "plugins": [
+    [
+      "styled-components",
+      {
+        "ssr": true
+      }
+    ]
+  ]
 }

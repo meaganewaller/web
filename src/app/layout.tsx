@@ -1,26 +1,73 @@
-import type { Metadata } from "next";
-import "@/styles/globals.css";
+import Providers from '@/providers';
+import StyledComponentsRegistry from '@/lib/registry';
+import { Suspense } from 'react';
+import type { Metadata } from 'next';
+import Navbar from '@/components/Navbar';
+import Loading from './loading';
+import { DM_Sans as Sans, Prata as Serif, Fira_Code as Mono, Press_Start_2P } from '@next/font/google';
+import GlobalStyles from '@/styles/GlobalStyles';
 
 export interface LayoutProps {
   children: React.ReactNode;
 }
 
 export const metadata: Metadata = {
+  title: {
+    template: `%s | meagan waller`,
+    default: `meagan waller | it's a blog!`,
+  },
+  description: `meagan waller's personal website and blog`,
   alternates: {
-    canonical: "/",
+    canonical: '/',
     languages: {
-      "en-US": "/en-US",
+      'en-US': '/en-US',
     },
   },
 };
 
+const sans = Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
+
+const serif = Serif({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-serif',
+});
+
+const mono = Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+});
+
+const pixel = Press_Start_2P({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-pixel',
+});
+
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning className="font-sans 2xl:text-2xl">
-      <body className="debug-screens flex flex-col bg-clouds">
-        <main className="@container">
-          <div className="block @lg:flex">{children}</div>
-        </main>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${sans.variable} ${serif.variable} ${mono.variable} ${pixel.variable} font-sans motion-safe:scroll-smooth`}
+    >
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body className="debug-screens bg-pink-100 tracking-tight text-pink-900 antialiased dark:bg-blue-950 dark:text-pink-100">
+        <Providers>
+          <StyledComponentsRegistry>
+            <GlobalStyles />
+            <Navbar />
+            <Suspense fallback={<Loading />}>
+              <div className="mx-auto my-8 max-w-[95%]">{children}</div>
+            </Suspense>
+          </StyledComponentsRegistry>
+        </Providers>
       </body>
     </html>
   );
