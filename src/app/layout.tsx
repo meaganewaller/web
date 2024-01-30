@@ -1,11 +1,11 @@
 import Providers from '@/providers';
-import StyledComponentsRegistry from '@/lib/registry';
 import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Loading from './loading';
-import { DM_Sans as Sans, Prata as Serif, Fira_Code as Mono, Press_Start_2P } from '@next/font/google';
-import GlobalStyles from '@/styles/GlobalStyles';
+import { DM_Sans as Sans, Prata as Serif, Fira_Code as Mono, Press_Start_2P } from 'next/font/google';
+
+import '@/styles/globals.css';
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -60,13 +60,10 @@ export default function RootLayout({ children }: LayoutProps) {
       </head>
       <body className="debug-screens bg-pink-100 tracking-tight text-pink-900 antialiased dark:bg-blue-950 dark:text-pink-100">
         <Providers>
-          <StyledComponentsRegistry>
-            <GlobalStyles />
-            <Navbar />
-            <Suspense fallback={<Loading />}>
-              <div className="mx-auto my-8 max-w-[95%]">{children}</div>
-            </Suspense>
-          </StyledComponentsRegistry>
+          <Navbar />
+          <Suspense fallback={<Loading />}>
+            <div className="mx-auto my-8 h-screen max-w-[95%]">{children}</div>
+          </Suspense>
         </Providers>
       </body>
     </html>

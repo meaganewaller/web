@@ -222,12 +222,17 @@ export default {
       },
       animation: {
         'page-transition': 'page-transition 300ms ease-in-out backwards',
+        marquee: 'marquee 30s linear infinite',
+        marquee2: 'marquee2 30s linear infinite',
       },
       backgroundImage: {
         clouds: "url('/images/bg/clouds.gif')",
         windowTitleBarButton: 'linear-gradient(to bottom right, #9c9c9c, #fff)',
         windowTitleBarButtonActive: 'linear-gradient(to bottom right, #444, #aaa)',
         windowTitleBar: 'repeating-linear-gradient(#fff, #000 2px)',
+      },
+      borderImage: {
+        imageBorder: "url('/images/ui/imageBorder.png') 8 fill round",
       },
       fontFamily: {
         sans: sansFontFamily,

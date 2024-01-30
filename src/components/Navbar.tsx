@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import clsx from 'clsx';
 import { IconMenu, IconX } from '@tabler/icons-react';
 import Link from 'next/link';
 import Logo from './Logo';
 import ToggleDarkMode from './ToggleDarkMode';
-import clsx from 'clsx';
 
 const Navbar = () => {
   const links = [
