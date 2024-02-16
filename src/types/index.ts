@@ -18,3 +18,7 @@ export type CategoryResponse = {
 export type Record = {
   slug: string;
 };
+
+export type Tag = {
+  title: string
+}

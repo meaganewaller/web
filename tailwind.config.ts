@@ -11,6 +11,21 @@ const serifFontFamily = ['var(--font-serif)', ...fontFamily.serif];
 const monoFontFamily = ['var(--font-mono)', ...fontFamily.mono];
 const pixelFontFamily = ['var(--font-pixel)', ...fontFamily.mono];
 
+const contentWidth = (theme, width = '3') => {
+  return {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    paddingLeft: theme('spacing.3'),
+    paddingRight: theme('spacing.3'),
+
+    '@screen md': {
+      textAlign: theme('text.left'),
+      maxWidth: theme(`maxWidth.${width}xl`),
+      paddingLeft: theme('spacing.0'),
+    },
+  }
+}
+
 export default {
   darkMode: 'class',
   content: ['./src/**/*.{ts,tsx}'],
@@ -117,6 +132,369 @@ export default {
         '2xl': '1400px',
       },
     },
+    fontSize: {
+      xs: ['0.8125rem', { lineHeight: '1.5rem' }],
+      sm: ['0.875rem', { lineHeight: '1.5rem' }],
+      base: ['1rem', { lineHeight: '1.75rem' }],
+      lg: ['1.125rem', { lineHeight: '1.75rem' }],
+      xl: ['1.25rem', { lineHeight: '2rem' }],
+      '2xl': ['1.5rem', { lineHeight: '2rem' }],
+      '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+      '4xl': ['2rem', { lineHeight: '2.5rem' }],
+      '5xl': ['3rem', { lineHeight: '3.5rem' }],
+      '6xl': ['3.75rem', { lineHeight: '1' }],
+      '7xl': ['4.5rem', { lineHeight: '1' }],
+      '8xl': ['6rem', { lineHeight: '1' }],
+      '9xl': ['8rem', { lineHeight: '1' }],
+    },
+    typography: (theme) => ({
+      DEFAULT: {
+        css: {
+          color: theme('colors.pink.900'),
+          fontSize: theme('fontSize.lg')[0],
+          '@screen md': {
+            fontSize: theme('fontSize.xl')[0],
+          },
+          lineHeight: theme('lineHeight.7'),
+          '> *': {
+            marginTop: theme('spacing.10'),
+            marginBottom: theme('spacing.10'),
+          },
+          p: {
+            marginTop: theme('spacing.7'),
+            marginBottom: theme('spacing.7'),
+            overflowX: 'auto',
+            ...contentWidth(theme),
+          },
+
+          'h2, h3, h4': {
+            color: theme('colors.purple.700'),
+            fontWeight: theme('fontWeight.semibold'),
+            ...contentWidth(theme),
+          },
+          h2: {
+            fontSize: theme('fontSize.3xl')[0],
+            lineHeight: theme('lineHeight.7'),
+            marginTop: theme('spacing.12'),
+            marginBottom: theme('spacing.4'),
+            '@screen md': {
+              marginTop: theme('spacing.16'),
+              marginBottom: theme('spacing.4'),
+            },
+          },
+          h3: {
+            fontSize: theme('fontSize.xl')[0],
+            lineHeight: theme('lineHeight.7'),
+            marginTop: theme('spacing.10'),
+            marginBottom: theme('spacing.4'),
+            '@screen md': {
+              marginTop: theme('spacing.12'),
+              marginBottom: theme('spacing.4'),
+            },
+          },
+          h4: {
+            fontSize: theme('fontSize.lg')[0],
+            lineHeight: theme('lineHeight.6'),
+            marginTop: theme('spacing.8'),
+            marginBottom: theme('spacing.4'),
+            '@screen md': {
+              marginTop: theme('spacing.10'),
+              marginBottom: theme('spacing.2'),
+            },
+          },
+          ':is(h2, h3) + *': {
+            marginTop: 0,
+          },
+
+          // Images
+          'img:not(.pic)': {
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            '@screen lg': {
+              textAlign: theme('text.left'),
+              maxWidth: theme('maxWidth.5xl'),
+              paddingLeft: theme('spacing.0'),
+            },
+          },
+
+          a: {
+            color: theme('colors.pink.600'),
+            fontWeight: theme('fontWeight.semibold'),
+            textDecoration: 'underline',
+            textDecorationColor: theme('colors.pink.700'),
+            transitionProperty: 'color, text-decoration-color',
+            transitionDuration: theme('transitionDuration.150'),
+            transitionTimingFunction: theme('transitionTimingFunction.in-out'),
+          },
+          'a:hover': {
+            color: theme('colors.pink.700'),
+            textDecorationColor: theme('colors.pink.800'),
+          },
+          strong: {
+            color: theme('colors.blue.900'),
+            fontWeight: theme('fontWeight.semibold'),
+          },
+          code: {
+            display: 'inline-block',
+            color: theme('colors.purple.700'),
+            fontSize: theme('fontSize.sm')[0],
+            fontWeight: theme('fontWeight.semibold'),
+            backgroundColor: theme('colors.purple.100'),
+            borderRadius: theme('borderRadius.lg'),
+            paddingLeft: theme('spacing.1'),
+            paddingRight: theme('spacing.1'),
+          },
+          'a code': {
+            color: 'inherit',
+          },
+          ':is(h2, h3) code': {
+            fontWeight: theme('fontWeight.bold'),
+          },
+
+          // Quotes
+          blockquote: {
+            // @apply px-24 border-blue-500 py-8 relative mx-auto
+            paddingLeft: theme('spacing.6'),
+            paddingRight: theme('spacing.6'),
+
+            width: '100%',
+            paddingTop: theme('spacing.2'),
+            paddingBottom: theme('spacing.4'),
+            position: 'relative',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            borderColor: theme('colors.blue.500'),
+            borderTopWidth: '8px',
+            borderBottomWidth: '8px',
+            borderRadius: theme('borderRadius.md'),
+
+            '@screen sm': {
+              paddingTop: theme('spacing.4'),
+              paddingBottom: theme('spacing.1'),
+              borderTopWidth: '0px',
+              borderBottomWidth: '0px',
+              borderLeftWidth: '8px',
+              borderRightWidth: '0px',
+              maxWidth: theme('maxWidth.4xl'),
+            },
+
+            p: {
+              // @apply text-2xl leading-normal font-semibold text-grey-800 text-justify mb-4
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              marginBottom: theme('spacing.4'),
+              marginTop: theme('spacing.2'),
+              padding: 0,
+              fontSize: theme('fontSize.2xl')[0],
+              color: theme('colors.pink.800'),
+              lineHeight: theme('lineHeight.8'),
+              width: '100%',
+
+              '@screen md': {
+                marginTop: theme('spacing.0'),
+                maxWidth: theme('maxWidth.3xl'),
+                lineHeight: theme('lineHeight.9'),
+              },
+            },
+            cite: {
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              display: 'block',
+              '@screen md': {
+                width: theme('maxWidth.3xl'),
+                marginBottom: theme('spacing.2'),
+              },
+            },
+          },
+
+          // Figures
+          figure: {
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            marginTop: theme('spacing.2'),
+            marginBottom: theme('spacing.2'),
+            '@screen sm': {
+              '&.alignright': {
+                float: 'right',
+                marginLeft: '1rem',
+              },
+            },
+            '@screen lg': {
+              textAlign: theme('text.left'),
+              maxWidth: theme('maxWidth.5xl'),
+              paddingLeft: theme('spacing.0'),
+            },
+            textAlign: 'center',
+
+            '.wp-block-embed__wrapper iframe': {
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              width: '100%',
+              '@screen md': {
+                maxWidth: theme('maxWidth.5xl'),
+              },
+            },
+          },
+          figcaption: {
+            color: theme('colors.green.600'),
+            fontSize: theme('fontSize.sm')[0],
+            lineHeight: theme('lineHeight.6'),
+            marginTop: theme('spacing.3'),
+            paddingLeft: theme('spacing.2'),
+          },
+          'figcaption > p': {
+            margin: 0,
+          },
+
+          // Lists
+          ul: {
+            listStyleType: 'disc',
+          },
+          ol: {
+            listStyleType: 'decimal',
+          },
+          'ul, ol': {
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            paddingLeft: theme('spacing.8'),
+            paddingRight: theme('spacing.1'),
+
+            '@screen md': {
+              textAlign: theme('text.left'),
+              width: theme('maxWidth.3xl'),
+              paddingLeft: theme('spacing.4'),
+              paddingRight: theme('spacing.0'),
+            },
+          },
+          li: {
+            marginTop: theme('spacing.1'),
+            marginBottom: theme('spacing.1'),
+            // paddingLeft: theme('spacing[3.5]'),
+          },
+          'li::marker': {
+            fontSize: theme('fontSize.sm')[0],
+            fontWeight: theme('fontWeight.semibold'),
+          },
+          'ol > li::marker': {
+            color: theme('colors.green.600'),
+          },
+          'ul > li::marker': {
+            color: theme('colors.green.400'),
+          },
+          'li :is(ol, ul)': {
+            marginTop: theme('spacing.1'),
+            marginBottom: theme('spacing.1'),
+            paddingLeft: theme('spacing.4'),
+            paddingRight: theme('spacing.0'),
+          },
+          'li :is(li, p)': {
+            marginTop: theme('spacing.1'),
+            marginBottom: theme('spacing.1'),
+          },
+
+          // Code blocks
+          pre: {
+            color: theme('colors.purple.700'),
+            fontSize: theme('fontSize.sm')[0],
+            fontWeight: theme('fontWeight.medium'),
+            backgroundColor: theme('colors.purple.100'),
+            padding: theme('spacing.4'),
+            overflowX: 'auto',
+
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            paddingLeft: theme('spacing.3'),
+            paddingRight: theme('spacing.3'),
+
+            '@screen md': {
+              textAlign: theme('text.left'),
+              maxWidth: theme('maxWidth.4xl'),
+              paddingLeft: theme('spacing.16'),
+              paddingRight: theme('spacing.4'),
+              border: '1px solid',
+              borderColor: theme('colors.pink.700'),
+              borderRadius: theme('borderRadius.2xl'),
+            },
+          },
+          'pre code': {
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            display: 'inline',
+            color: 'inherit',
+            fontSize: 'inherit',
+            fontWeight: 'inherit',
+            backgroundColor: 'transparent',
+            borderRadius: 0,
+            padding: 0,
+          },
+
+          // Horizontal rules
+          hr: {
+            marginTop: theme('spacing.20'),
+            marginBottom: theme('spacing.20'),
+            borderTopWidth: '1px',
+            borderColor: theme('colors.purple.400'),
+            '@screen lg': {
+              marginLeft: `calc(${theme('spacing.12')} * -1)`,
+              marginRight: `calc(${theme('spacing.12')} * -1)`,
+            },
+          },
+
+          // Tables
+          table: {
+            ...contentWidth(theme),
+            tableLayout: 'auto',
+            textAlign: 'left',
+            fontSize: theme('fontSize.base')[0],
+          },
+          thead: {
+            borderBottomWidth: '1px',
+            borderBottomColor: theme('colors.purple.500'),
+          },
+          'thead th': {
+            color: theme('colors.purple.500'),
+            fontWeight: theme('fontWeight.semibold'),
+            verticalAlign: 'bottom',
+            fontSize: theme('fontSize.lg')[0],
+            paddingBottom: theme('spacing.2'),
+          },
+          'thead th:not(:first-child)': {
+            paddingLeft: theme('spacing.2'),
+          },
+          'thead th:not(:last-child)': {
+            paddingRight: theme('spacing.2'),
+          },
+          'tbody tr': {
+            borderBottomWidth: '1px',
+            borderBottomColor: theme('colors.pink.300'),
+          },
+          'tbody tr:last-child': {
+            borderBottomWidth: 0,
+          },
+          'tbody td': {
+            verticalAlign: 'baseline',
+          },
+          tfoot: {
+            borderTopWidth: '1px',
+            borderTopColor: theme('colors.pink.300'),
+          },
+          'tfoot td': {
+            verticalAlign: 'top',
+            fontSize: theme('fontSize.lg')[0],
+          },
+          ':is(tbody, tfoot) td': {
+            paddingTop: theme('spacing.2'),
+            paddingBottom: theme('spacing.2'),
+          },
+          ':is(tbody, tfoot) td:not(:first-child)': {
+            paddingLeft: theme('spacing.2'),
+          },
+          ':is(tbody, tfoot) td:not(:last-child)': {
+            paddingRight: theme('spacing.2'),
+          },
+        },
+      },
+    }),
     extend: {
       gridTemplateAreas: {
         landing: ['recent-posts about', 'recent-posts about', 'outlinks outlinks'],
@@ -124,9 +502,6 @@ export default {
       },
       gridTemplateColumns: {
         landing: '2fr 4fr',
-      },
-      fontSize: {
-        md: '1rem',
       },
       opacity: {
         7: '0.07',
@@ -166,6 +541,7 @@ export default {
         'page-transition': 'page-transition 300ms ease-in-out backwards',
         marquee: 'marquee 30s linear infinite',
         marquee2: 'marquee2 30s linear infinite',
+        'waving-hand': 'wave 2s linear infinite',
       },
       backgroundImage: {
         clouds: "url('/images/bg/clouds.gif')",
@@ -209,20 +585,20 @@ export default {
           '0%': { transform: 'scale(0.975)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
+        wave: {
+          '0%': { transform: 'rotate(0.0deg)' },
+          '10%': { transform: 'rotate(14deg)' },
+          '20%': { transform: 'rotate(-8deg)' },
+          '30%': { transform: 'rotate(14deg)' },
+          '40%': { transform: 'rotate(-4deg)' },
+          '50%': { transform: 'rotate(10.0deg)' },
+          '60%': { transform: 'rotate(0.0deg)' },
+          '100%': { transform: 'rotate(0.0deg)' },
+        },
       },
       listStyleType: {
         flower: '"✿ "',
       },
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            'h1,h2,h3,h4,h5,h6': {
-              fontFamily: theme('fontFamily.serif').join(', '),
-              textTransform: 'capitalize',
-            },
-          },
-        },
-      }),
     },
   },
   future: {
