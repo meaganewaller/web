@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 import NextLink from 'next/link';
 import React from 'react';
-import { IconExternalLink } from '@tabler/icons-react';
+import Icon from '@/components/Icon';
 
 export type LinkThemeProps = {
   variant: 'default' | 'none' | 'header' | 'info' | 'tag' | 'button';
@@ -27,10 +27,10 @@ export const linkTheme: LinkTheme = {
     default: 'text-blue-600 dark:text-blue-200 hover:underline',
     none: '',
     header: 'text-blue-600 dark:text-blue-200 underline hover:no-underline',
-    info: 'link text-slate-400 text-sm hover:underline',
-    tag: 'bg-sky-100 px-1 py-0.5 rounded-sm hover:bg-gray-300 hover:text-black',
+    info: 'link text-gray-400 text-sm hover:underline',
+    tag: 'bg-turquoise-100 px-1 py-0.5 rounded-sm hover:bg-gray-300 hover:text-gray-950',
     button:
-      'inline-flex items-center border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 font-medium text-gray-700 dark:text-sky-100 shadow-sm hover:bg-gray-50 dark:hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
+      'inline-flex items-center border border-gray-300 dark:border-gray-700 bg-pink-50 dark:bg-gray-800 font-medium text-gray-700 dark:text-turquoise-100 shadow-sm hover:bg-gray-50 dark:hover:bg-turquoise-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2',
   },
   size: {
     xs: 'text-xs',
@@ -88,7 +88,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, React.PropsWithChildren<
         return (
           <a ref={ref} href={href} className={newClassName} {...props}>
             {props.children}
-            <IconExternalLink size={18} className="ml-2 hidden text-blue-600 sm:inline-block dark:text-sky-100" />
+            <Icon name="external" width={24} />
           </a>
         );
       }

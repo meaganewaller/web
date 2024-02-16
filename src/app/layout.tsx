@@ -11,12 +11,30 @@ export interface LayoutProps {
   children: React.ReactNode;
 }
 
+const title = `meagan waller | it's a blog!`;
+const description = `meagan waller's personal website and blog`;
+const images = `${process.env.NEXT_PUBLIC_BASE_URL}/favicon.ico`;
+
 export const metadata: Metadata = {
   title: {
     template: `%s | meagan waller`,
-    default: `meagan waller | it's a blog!`,
+    default: title,
   },
-  description: `meagan waller's personal website and blog`,
+  icons: [`${process.env.NEXT_PUBLIC_BASE_URL}/favicon.ico`],
+  openGraph: {
+    title,
+    description,
+    images: [images],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: [images],
+    creator: '@meaganewaller',
+  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
+  description,
   alternates: {
     canonical: '/',
     languages: {
@@ -58,7 +76,7 @@ export default function RootLayout({ children }: LayoutProps) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="debug-screens bg-pink-100 tracking-tight text-pink-900 antialiased dark:bg-blue-950 dark:text-pink-100">
+      <body className="debug-screens antialiased">
         <Providers>
           <Navbar />
           <Suspense fallback={<Loading />}>

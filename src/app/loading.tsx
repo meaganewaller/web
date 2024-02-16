@@ -28,7 +28,7 @@ const loadingMessages = [
 export default function Loading() {
   return (
     <div className="loading p-[20%] text-center">
-      <h2 className="text-pink font-pixel m-0 text-xs uppercase tracking-wide">
+      <h2 className="font-pixel m-0 text-xs uppercase tracking-wide text-lime-600">
         {loadingMessages[Math.floor(Math.random() * loadingMessages.length)]}
       </h2>
       <span />

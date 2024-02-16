@@ -35,7 +35,7 @@ export default async function BlogPage() {
 
   return (
     <div>
-      <h1 className="font-pixel text-turquoise-400 mb-2 text-6xl">the web blog</h1>
+      <h1 className="font-pixel mb-2 text-6xl text-pink-700 dark:text-purple-300">the web blog</h1>
       <PostsList posts={data?.posts} />
     </div>
   );

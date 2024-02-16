@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import clsx from 'clsx';
-import { IconMenu, IconX } from '@tabler/icons-react';
 import Link from 'next/link';
+import Icon from '@/components/Icon';
 import Logo from './Logo';
 import ToggleDarkMode from './ToggleDarkMode';
 
@@ -73,7 +73,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`md:blackdrop-blur-sm top-0 z-40 mx-auto w-full flex-none bg-pink-300/50 transition-all duration-100 ease-in-out dark:bg-blue-700/80 ${
+      className={`top-0 z-40 mx-auto w-full flex-none transition-all duration-100 ease-in-out md:bg-pink-300/50 md:backdrop-blur-sm dark:md:bg-purple-900/80 ${
         isSticky ? 'sticky' : 'relative'
       }`}
       id="header"
@@ -88,11 +88,11 @@ const Navbar = () => {
           <div className="flex items-center md:hidden">
             <button
               type="button"
-              className="text-pink ml-1.5 inline-flex items-center rounded-lg p-2.5 text-sm transition hover:bg-pink-100 focus:outline-none focus:ring-4 focus:ring-pink-300 dark:text-blue-900 dark:hover:bg-blue-500 dark:focus:ring-blue-700"
+              className="ml-1.5 inline-flex items-center rounded-lg p-2.5 text-sm text-pink-700 transition hover:bg-pink-100 focus:outline-none focus:ring-4 focus:ring-pink-300 dark:text-blue-900 dark:hover:bg-blue-500 dark:focus:ring-blue-700"
               aria-label="Toggle Menu"
               onClick={handleToggleMenuOnClick}
             >
-              {isToggleMenuOpen ? <IconX className="size-6" /> : <IconMenu className="size-6" />}
+              {isToggleMenuOpen ? <Icon name="x" width={25} /> : <Icon name="menu" width={25} />}
             </button>
           </div>
         </div>
@@ -107,8 +107,8 @@ const Navbar = () => {
               style={{ imageRendering: 'pixelated' }}
               className={clsx(
                 { hidden: !isToggleMenuOpen, 'max-md:flex hidden': isToggleMenuOpen },
-                'group-hover:decoration-0',
-                "text-center text-pink-700 border-4 border-transparent border-solid [border-image:url('/images/button.png')_4_fill_repeat] hover:[border-image:url('/images/button_hovered.png')_4_fill_repeat]",
+                'group hover:decoration-0',
+                "text-center dark:text-purple-950 text-pink-900 border-4 border-transparent border-solid [border-image:url('/images/button.png')_4_fill_repeat] hover:[border-image:url('/images/button_hovered.png')_4_fill_repeat]",
               )}
             >
               <Link
@@ -126,13 +126,13 @@ const Navbar = () => {
                   style={{ imageRendering: 'pixelated' }}
                   className={clsx(
                     'group hover:decoration-0',
-                    "text-center text-pink-700 border-4 border-transparent border-solid [border-image:url('/images/button.png')_4_fill_repeat] hover:[border-image:url('/images/button_hovered.png')_4_fill_repeat]",
+                    "text-center border-4 border-transparent border-solid [border-image:url('/images/button.png')_4_fill_repeat] hover:[border-image:url('/images/button_hovered.png')_4_fill_repeat]",
                   )}
                 >
                   {links && links.length ? (
                     <>
                       <button
-                        className="flex items-center bg-pink-300 px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-pink-900"
+                        className="flex items-center bg-pink-300 px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-pink-900 group-hover:decoration-0"
                         onClick={() => handleDropdownOnClick(index)}
                       >
                         {label}
@@ -140,7 +140,7 @@ const Navbar = () => {
                       <ul
                         className={`${
                           isDropdownOpen[index] ? 'block' : 'md:hidden'
-                        } dark:md:bg-navy-900/90 rounded pl-4 font-medium drop-shadow-xl md:absolute md:min-w-[200px] md:bg-white/90 md:pl-0 md:backdrop-blur-md`}
+                        } rounded pl-4 font-medium drop-shadow-xl md:absolute md:min-w-[200px] md:bg-pink-50/90 md:pl-0 md:backdrop-blur-md dark:md:bg-blue-900/90`}
                       >
                         {links.map(({ label: label2, href: href2 }, index2) => (
                           <li key={`item-link-${index2}`}>
@@ -159,7 +159,7 @@ const Navbar = () => {
                     </>
                   ) : (
                     <Link
-                      className="flex p-1 px-1.5 text-center font-medium transition duration-150 ease-in-out group-hover:no-underline group-hover:decoration-0 dark:text-blue-900"
+                      className="flex p-1 px-1.5 text-center font-medium text-purple-900 transition duration-150 ease-in-out group-hover:no-underline group-hover:decoration-0 dark:text-gray-900"
                       href={href as string}
                       onClick={() => (isToggleMenuOpen ? handleToggleMenuOnClick() : handleDropdownOnClick(index))}
                     >

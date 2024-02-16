@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { IconSun, IconMoon } from '@tabler/icons-react';
+import Icon from '@/components/Icon';
 
 const ToggleDarkMode = () => {
   const [mounted, setMounted] = useState<boolean>(false);
@@ -19,14 +19,14 @@ const ToggleDarkMode = () => {
   return (
     <button
       onClick={handleOnClick}
-      className="inline-block rounded-lg p-1 text-sm text-neutral-500 hover:bg-pink-300 focus:outline-none focus:ring-4 focus:ring-pink-300 dark:text-blue-300 dark:hover:bg-blue-700 dark:focus:ring-blue-700"
+      className="inline-block rounded-lg p-1 text-sm text-pink-900 hover:text-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300 dark:text-purple-50 dark:hover:text-purple-300 dark:focus:ring-purple-500"
       aria-label="Toggle Dark Mode"
     >
       {mounted ? (
         currentTheme === 'dark' ? (
-          <IconMoon className="size-8" />
+          <Icon name="sun" width={70} />
         ) : (
-          <IconSun className="size-8" />
+          <Icon name="moon" width={70} />
         )
       ) : (
         <div className="size-8"></div>

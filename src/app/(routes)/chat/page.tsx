@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 const Page = async (): Promise<JSX.Element> => {
   return (
     <div>
-      <h1 className="font-pixel text-center text-2xl uppercase before:pr-[7px] before:content-[url('/images/ui/leftsparkle.gif')] after:pl-[5px] after:content-[url('/images/ui/rightsparkle.gif')] lg:text-3xl">
+      <h1 className="font-pixel dark:text-turquoise-300 text-center text-2xl uppercase text-pink-600 before:pr-[7px] before:content-[url('/images/ui/leftsparkle.gif')] after:pl-[5px] after:content-[url('/images/ui/rightsparkle.gif')] lg:text-3xl">
         say hi!
       </h1>
       <Form />

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { IconSearch } from '@tabler/icons-react';
+import Icon from '@/components/Icon';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -20,16 +20,16 @@ const Search = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="bg-peachy-pink flex items-center rounded-lg p-1 shadow-lg">
+        <div className="flex items-center rounded-lg bg-orange-400 p-1 shadow-md shadow-orange-600 dark:bg-purple-900 dark:shadow-purple-800">
           <input
             type="text"
-            className="text-primary placeholder:text-deep-pink w-full border-none bg-[var(--color-transparent)] font-mono ring-0 placeholder:italic focus:border-none focus:ring-0"
+            className="dark:placeholder:text-purple w-full border-none bg-[var(--color-transparent)] font-mono text-orange-800 ring-0 placeholder:italic placeholder:text-orange-700 focus:border-none focus:ring-0 dark:text-purple-50"
             placeholder="search blog"
             value={query}
             onChange={handleInputChange}
           />
-          <button type="submit" className="text-espresso mr-1 text-3xl">
-            <IconSearch className="text-deep-pink hover:text-accent-dark" />
+          <button type="submit" className="mr-1 text-3xl text-pink-800 dark:text-yellow-300">
+            <Icon name="search" width={30} />
           </button>
         </div>
       </form>

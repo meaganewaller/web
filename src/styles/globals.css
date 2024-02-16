@@ -5,7 +5,12 @@
 @import './fonts.css';
 
 :root {
-  --color-white: rgba(254, 255, 252, 0.7);
+  --color-white: rgba(248, 227, 236, 1);
+}
+
+html.dark,
+html.dark-inverted {
+  --color-white: rgba(95, 7, 136, 1);
 }
 
 @layer components {
@@ -36,7 +41,7 @@
   }
 
   body {
-    @apply font-extra;
+    @apply font-extra bg-pink-50 dark:bg-purple-700;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
@@ -65,6 +70,34 @@
   h5,
   h6 {
     overflow-wrap: break-word;
+  }
+
+  h1 {
+    @apply text-5xl font-bold;
+  }
+
+  h2 {
+    @apply text-4xl font-bold;
+  }
+
+  h3 {
+    @apply text-3xl font-bold;
+  }
+
+  h4 {
+    @apply text-2xl font-bold;
+  }
+
+  h5 {
+    @apply text-xl font-bold;
+  }
+
+  blockquote {
+    @apply border-l-3 pl-4;
+  }
+
+  a {
+    @apply text-purple-700 dark:text-purple-300 hover:text-purple-800 dark:hover:text-purple-200;
   }
 
   #root,
@@ -115,7 +148,7 @@
   }
 
   .page-layout {
-    @apply w-[95%] max-w-[1300px] p-[50px] mx-auto font-extra mt-5 mb-10 bg-white relative;
+    @apply w-[95%] max-w-[1300px] p-[50px] mx-auto font-extra mt-5 mb-10 bg-pink-100 dark:bg-purple-800 relative;
   }
 
   .page-layout:before,
@@ -197,37 +230,37 @@
   }
 
   .loading span {
-    @apply bg-pink-200 m-[.19em] inline-block size-[.6em] rounded-[.6em] align-middle;
+    @apply bg-purple-500 m-[.19em] inline-block size-[.6em] rounded-[.6em] align-middle;
     animation: loading 1s infinite alternate;
   }
 
   .loading span:nth-of-type(2) {
-    @apply bg-pink-300;
+    @apply bg-purple-300;
     animation-delay: 0.2s;
   }
 
   .loading span:nth-of-type(3) {
-    @apply bg-pink-400;
+    @apply bg-purple-400;
     animation-delay: 0.4s;
   }
 
   .loading span:nth-of-type(4) {
-    @apply bg-pink-500;
+    @apply bg-purple-500;
     animation-delay: 0.6s;
   }
 
   .loading span:nth-of-type(5) {
-    @apply bg-pink-600;
+    @apply bg-purple-600;
     animation-delay: 0.8s;
   }
 
   .loading span:nth-of-type(6) {
-    @apply bg-pink-700;
+    @apply bg-purple-700;
     animation-delay: 1s;
   }
 
   .loading span:nth-of-type(7) {
-    @apply bg-pink-800;
+    @apply bg-purple-800;
     animation-delay: 1.2s;
   }
 

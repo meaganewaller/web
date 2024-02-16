@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useMemo } from 'react';
-import { IconStar } from '@tabler/icons-react';
+import Icon from '@/components/Icon';
 
 import { Link } from '@/components/Link';
 
@@ -21,22 +21,20 @@ export const PostLink = ({ post }: PostLinkProps) => {
   }, [post.tags]);
 
   return (
-    <div className={clsx('my-2 flex justify-between p-1', isHighlighted ? 'rounded bg-yellow-200' : '')}>
+    <div className={clsx('my-2 flex justify-between p-1', isHighlighted ? 'rounded-md bg-pink-500/40' : '')}>
       <div className="flex flex-col">
         <div className="flex flex-row items-center space-x-4">
           <Link
             href={`/blog/${post.slug}`}
-            className="decoration-none hover:text-mauve-300 grow text-lg font-semibold text-pink-800"
+            className="decoration-none grow text-lg font-semibold text-pink-600 hover:text-pink-700 dark:text-pink-950"
           >
-            <span>{post.title}</span>
-            {isHighlighted && <IconStar size={18} className="ml-2 inline max-w-[18px]" />}
+            {isHighlighted && <Icon name="star" size={18} />}
+            <span className="inline">{post.title}</span>
           </Link>
         </div>
-        {isHighlighted && (post.description?.length || 0) > 0 && (
-          <p className="text-purple ml-[48px]">{post.description}</p>
-        )}
+        {isHighlighted && (post.description?.length || 0) > 0 && <p className="text-purple-800">{post.description}</p>}
       </div>
-      <p className="text-turquoise-400 hidden space-x-2 whitespace-nowrap text-right text-sm md:block">
+      <p className="hidden space-x-2 whitespace-nowrap text-right text-sm text-pink-500 md:block dark:text-purple-950">
         <span>{publishedDate}</span>
       </p>
     </div>
