@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { clsx } from 'clsx';
 
-export default function RecentPosts({ posts }) {
+interface IPosts {
+  posts: any[]
+}
+
+export default function RecentPosts({ posts }: IPosts) {
   return (
     <section className="grid-in-recent-posts dark:border-turquoise-800 border-2 border-solid border-purple-400">
       <div className="dark:border-turquoise-700 sticky border-b-2 border-solid border-purple-200 bg-purple-100 text-blue-700 dark:bg-blue-800">

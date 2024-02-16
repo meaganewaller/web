@@ -85,7 +85,7 @@ export default async function SlugPage({ params: { type, slug } }: PageProps) {
           {data.description && data.description.length > 0 && <div className="p-summary hidden">{data.description}</div>}
 
           {data.cover_image && (
-            <img className="u-photo hidden" alt={`${data.title} poster`} loading="lazy" src={data.cover_image} />
+            <Image className="u-photo hidden" alt={`${data.title} poster`} loading="lazy" src={data.cover_image} />
           )}
         </div>
         {data.tags && data.tags.length > 0 && (
@@ -97,7 +97,7 @@ export default async function SlugPage({ params: { type, slug } }: PageProps) {
       <Highlight htmlContent={content} />
       <div>
         <div className="mt-12 pb-8 md:pt-4">
-          <div className="relative h-16 rotate-180 overflow-hidden md:-mt-[40px] md:h-24 lg:h-32 xl:h-48">
+          <div className="relative h-16 rotate-180 overflow-hidden md:mt-[40px] md:h-24 lg:h-32 xl:h-48">
             <div className="absolute bottom-0 h-8 w-full bg-pink-600 sm:hidden md:h-2" />
           </div>
         </div>
@@ -108,9 +108,9 @@ export default async function SlugPage({ params: { type, slug } }: PageProps) {
           </div>
           <div>
             <div className="mb-2">
-              <p className="font-semibold">Hey hey! 👋</p>
+              <p className="font-semibold">Hi there! 👋</p>
               <p>
-                I'm{' '}
+                I am{' '}
                 <Link className="p-name fn u-url" href={String(process.env.NEXT_PUBLIC_BASE_URL)} rel="author">
                   Meagan
                 </Link>

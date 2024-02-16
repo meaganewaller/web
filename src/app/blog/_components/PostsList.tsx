@@ -67,10 +67,10 @@ export interface PostTimelineProps {
   posts: any[];
   page?: number;
   totalPages?: number;
-  url: string;
+  url?: string;
   showSeparator?: boolean;
-  previousPostUrl: string;
-  pagination: string[];
+  previousPostUrl?: string;
+  pagination?: string[];
 }
 
 export const PostsList = ({ posts, showSeparator = true }: PostTimelineProps) => {

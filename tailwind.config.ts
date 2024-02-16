@@ -11,7 +11,7 @@ const serifFontFamily = ['var(--font-serif)', ...fontFamily.serif];
 const monoFontFamily = ['var(--font-mono)', ...fontFamily.mono];
 const pixelFontFamily = ['var(--font-pixel)', ...fontFamily.mono];
 
-const contentWidth = (theme, width = '3') => {
+const contentWidth = (theme: any, width = '3') => {
   return {
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -147,7 +147,7 @@ export default {
       '8xl': ['6rem', { lineHeight: '1' }],
       '9xl': ['8rem', { lineHeight: '1' }],
     },
-    typography: (theme) => ({
+    typography: (theme: any) => ({
       DEFAULT: {
         css: {
           color: theme('colors.pink.900'),

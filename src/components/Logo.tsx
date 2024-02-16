@@ -1,8 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, MouseEvent } from 'react';
 
-const Logo = ({ onClick }) => {
+type ButtonOrAnchorClickEvent = MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>;
+
+interface ILogo {
+  onClick: (event: ButtonOrAnchorClickEvent) => void;
+}
+
+const Logo = ({ onClick }: ILogo) => {
   const [isHovering, setIsHovering] = useState(false);
   const onMouseEnter = () => setIsHovering(true);
   const onMouseLeave = () => setIsHovering(false);

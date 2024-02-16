@@ -133,7 +133,6 @@ export default function Form() {
                   setSubject(e.target.value);
                 }}
                 className="block w-full rounded-md border-pink-300 bg-pink-50 text-pink-900 focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
-                placeholder="dolores.haze@virtualrealty.com"
                 aria-describedby="subject-required"
               >
                 <option disabled={true}>Select one</option>

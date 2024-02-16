@@ -28,7 +28,7 @@ export const PostLink = ({ post }: PostLinkProps) => {
             href={`/blog/${post.slug}`}
             className="decoration-none grow text-lg font-semibold text-pink-600 hover:text-pink-700 dark:text-pink-950"
           >
-            {isHighlighted && <Icon name="star" size={18} />}
+            {isHighlighted && <Icon name="star" />}
             <span className="inline">{post.title}</span>
           </Link>
         </div>
