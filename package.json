@@ -22,6 +22,7 @@
   "author": "Meagan Waller",
   "license": "MIT",
   "dependencies": {
+    "@vercel/analytics": "1.1.4",
     "clsx": "^2.1.0",
     "framer-motion": "^10.18.0",
     "highlight.js": "11.9.0",
