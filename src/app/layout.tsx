@@ -82,9 +82,10 @@ export default function RootLayout({ children }: LayoutProps) {
           <Navbar />
           <Suspense fallback={<Loading />}>
             <div className="mx-auto my-8 h-screen max-w-[95%]">{children}</div>
-            <Analytics />
+
           </Suspense>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
