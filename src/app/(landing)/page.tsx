@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Landing() {
-  const response = await fetch('http://localhost:5000/api/v1/posts?recent=true', {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/posts?recent=true`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
