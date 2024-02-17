@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Loading from './loading';
 import { DM_Sans as Sans, Prata as Serif, Fira_Code as Mono, Press_Start_2P } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 
 import '@/styles/globals.css';
 
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: LayoutProps) {
           <Navbar />
           <Suspense fallback={<Loading />}>
             <div className="mx-auto my-8 h-screen max-w-[95%]">{children}</div>
+            <Analytics />
           </Suspense>
         </Providers>
       </body>

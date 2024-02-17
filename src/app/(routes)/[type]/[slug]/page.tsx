@@ -85,7 +85,7 @@ export default async function SlugPage({ params: { type, slug } }: PageProps) {
           {data.description && data.description.length > 0 && <div className="p-summary hidden">{data.description}</div>}
 
           {data.cover_image && (
-            <Image className="u-photo hidden" alt={`${data.title} poster`} loading="lazy" src={data.cover_image} />
+            <Image className="u-photo hidden" alt={`${data.title} poster`} loading="lazy" src={data.cover_image} width={1300} height={630} />
           )}
         </div>
         {data.tags && data.tags.length > 0 && (

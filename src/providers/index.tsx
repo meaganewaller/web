@@ -3,8 +3,6 @@
 import { createContext, useEffect, useRef } from 'react';
 import { ThemeProvider, useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
-import { Analytics } from '@vercel/analytics/react';
-
 export interface ProvidersProps {
   children: React.ReactNode;
 }
@@ -54,7 +52,6 @@ const Providers = ({ children }: ProvidersProps): JSX.Element => {
       <ThemeProvider attribute="class" disableTransitionOnChange>
         <ThemeWatcher />
         {children}
-        <Analytics />
       </ThemeProvider>
     </AppContext.Provider>
   );
