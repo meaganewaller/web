@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Loading from './loading';
 import { DM_Sans as Sans, Prata as Serif, Fira_Code as Mono, Press_Start_2P } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import '@/styles/globals.css';
 
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: LayoutProps) {
           </Suspense>
         </Providers>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
