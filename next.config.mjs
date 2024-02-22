@@ -1,12 +1,13 @@
-const withBundlerAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
+// const withBundlerAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: process.env.ANALYZE === 'true',
+// });
 
-/** @type {import('next').NextConfig} */
-module.exports = withBundlerAnalyzer({
-  compiler: {
-    styledComponents: true,
-  },
+import withTwin from './withTwin.mjs';
+
+/**
+ * @type {import('next').NextConfig}
+ */
+export default withTwin({
   reactStrictMode: true,
   swcMinify: true,
   images: {
