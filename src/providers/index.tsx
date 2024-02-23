@@ -3,6 +3,7 @@
 import { createContext, useEffect, useRef } from 'react';
 import { ThemeProvider, useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
+import { ToastContainer } from 'react-toastify';
 export interface ProvidersProps {
   children: React.ReactNode;
 }
@@ -52,6 +53,7 @@ const Providers = ({ children }: ProvidersProps): JSX.Element => {
       <ThemeProvider attribute="class" disableTransitionOnChange>
         <ThemeWatcher />
         {children}
+        <ToastContainer />
       </ThemeProvider>
     </AppContext.Provider>
   );

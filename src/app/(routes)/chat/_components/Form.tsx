@@ -168,7 +168,7 @@ export default function Form() {
           </div>
           <div>
             <button
-              type="submit"
+              type='submit'
               onClick={(e) => {
                 handleSubmit(e);
               }}

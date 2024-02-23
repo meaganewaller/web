@@ -3,11 +3,12 @@ import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Loading from './loading';
-import { DM_Sans as Sans, Prata as Serif, Fira_Code as Mono, Press_Start_2P } from 'next/font/google';
+import { DM_Sans as Sans, EB_Garamond as Serif, Victor_Mono as Mono, Press_Start_2P } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import '@/styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -52,13 +53,23 @@ const sans = Sans({
 
 const serif = Serif({
   subsets: ['latin'],
-  weight: '400',
+  style: ['normal', 'italic'],
+  weight: ['400', '700'],
+  display: 'swap',
   variable: '--font-serif',
 });
 
 const mono = Mono({
   subsets: ['latin'],
+  display: 'swap',
   variable: '--font-mono',
+});
+
+const mono_italic = Mono({
+  subsets: ['latin'],
+  style: 'italic',
+  variable: '--font-mono-italic',
+  weight: ['400', '700'],
 });
 
 const pixel = Press_Start_2P({
@@ -72,7 +83,7 @@ export default function RootLayout({ children }: LayoutProps) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${sans.variable} ${serif.variable} ${mono.variable} ${pixel.variable} font-sans motion-safe:scroll-smooth`}
+      className={`${sans.variable} ${serif.variable} ${mono.variable} ${pixel.variable} ${mono_italic.variable} font-sans motion-safe:scroll-smooth`}
     >
       <head>
         <meta charSet="utf-8" />

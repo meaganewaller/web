@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "target": "ESNext",
+    "target": "es5",
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
@@ -25,6 +25,10 @@
       },
     ],
   },
-  "include": ["next-env.d.ts", "**/*.tsx", "**/*.ts", ".next/types/**/*.ts", "./.next/types/**/*.ts"],
-  "exclude": ["node_modules"],
+  "types": [
+    "node_modules/@types",
+    "src/types"
+  ],
+  "include": ["next-env.d.ts", "**/*.tsx", "**/*.ts", ".next/types/**/*.ts", "./.next/types/**/*.ts", "**/*.d.ts"],
+  "exclude": ["node_modules", ".next"],
 }

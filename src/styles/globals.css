@@ -24,7 +24,6 @@ html.dark-inverted {
 }
 
 @layer base {
-
   *,
   *::before,
   *::after {
