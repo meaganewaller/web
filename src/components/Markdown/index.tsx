@@ -1,20 +1,22 @@
-'use client';
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import remarkNormalizeHeadings from 'remark-normalize-headings';
-import rehypeRaw from 'rehype-raw';
-import rehypeSlug from 'rehype-slug';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atelierPlateauLight, atelierPlateauDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import Link from 'next/link';
-import Note from '@/components/Markdown/Note';
-import { cn } from '@/utils/cn';
-import { useTheme } from 'next-themes';
-import Tabs from '@/components/Markdown/Tabs';
-import Tab from '@/components/Markdown/Tab';
-import { Table, Head, Body, Row, HeadCell, BodyCell } from '@/components/Markdown/Table';
+'use client'
 
+import React from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import remarkNormalizeHeadings from 'remark-normalize-headings'
+import rehypeRaw from 'rehype-raw'
+import rehypeSlug from 'rehype-slug'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { atelierPlateauLight, atelierPlateauDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import Link from 'next/link'
+import Note from '@/components/Markdown/Note'
+import { cn } from '@/utils/cn'
+import { useTheme } from 'next-themes'
+import Tabs from '@/components/Markdown/Tabs'
+import Tab from '@/components/Markdown/Tab'
+import { CodeContainer, CopyBtn } from '@/components/Markdown/Code'
+import { useState, useRef } from 'react'
+import copy from 'copy-to-clipboard'
 
 interface MarkdownProps {
   children: string;
@@ -119,18 +121,37 @@ export const Markdown = ({ children }: MarkdownProps) => {
         </li>
       )
     },
+    // pre: Code,
     code({ node, inline, className, children, ...props }: any) {
-      const match = /language-(\w+)/.exec(className || '');
+      const match = /language-(\w+)/.exec(className || '')
+
       if (inline || !match) {
         return (
           <code className={cn('rounded-lg bg-pink-200/40 p-1 text-lg text-pink-600 dark:bg-purple-400/40 dark:text-purple-100', className)} {...props}>
             {children}
           </code>
-        );
+        )
+      }
+
+      const codeRef = useRef<HTMLPreElement>(null)
+      const [isCopied, setIsCopied] = useState(false)
+
+      const copyToClipboard = async () => {
+        try {
+          const content = codeRef.current?.textContent || ''
+          await navigator.clipboard.writeText(content)
+
+          if (!isCopied) {
+            setIsCopied(true)
+            setTimeout(() => setIsCopied(false), 2000)
+          }
+        } catch (err) {
+          setIsCopied(false)
+        }
       }
 
       return (
-        <div className="py-4">
+        <CodeContainer showFooter={true}>
           <div className="block w-full rounded-t-lg bg-pink-500 dark:bg-yellow-600">
             <span className="px-2 font-mono text-xs font-bold uppercase tracking-wider text-pink-50 dark:text-yellow-900">{match[1]}</span>
           </div>
@@ -143,25 +164,51 @@ export const Markdown = ({ children }: MarkdownProps) => {
           >
             {String(children).replace(/\n$/, '')}
           </SyntaxHighlighter>
-        </div>
-      );
+          <CopyBtn
+            isCopied={isCopied}
+            type='button'
+            onClick={copyToClipboard}
+            title="Copy to Clipboard"
+            aria-label="Copy to Clipboard"
+            >
+            {isCopied ? 'Copied' : 'Copy'}
+          </CopyBtn>
+        </CodeContainer>
+      )
+
+    //   return (
+    //     <div className="py-4">
+    //       <div className="block w-full rounded-t-lg bg-pink-500 dark:bg-yellow-600">
+    //         <span className="px-2 font-mono text-xs font-bold uppercase tracking-wider text-pink-50 dark:text-yellow-900">{match[1]}</span>
+    //       </div>
+    //       <SyntaxHighlighter
+    //         style={syntaxColor}
+    //         language={match[1]}
+    //         showLineNumbers={true}
+    //         wrapLines={true}
+    //         {...props}
+    //       >
+    //         {String(children).replace(/\n$/, '')}
+    //       </SyntaxHighlighter>
+    //     </div>
+    //   );
     },
     note: Note,
     tabs: Tabs,
     tab: Tab,
-    table: ({ node, className, children, ...props }) => (
+    table: ({ node, className, children, ...props }: any) => (
       <div className="w-full overflow-auto ring-1 ring-inset dark:ring-purple-300/90">
         <table className="w-full text-neutral-900 dark:text-neutral-50 ring-inset rounded-md" {...props}>
           {children}
         </table>
       </div>
     ),
-    thead: ({ node, className, children, ...props }) => (
+    thead: ({ node, className, children, ...props }: any) => (
       <thead className="font-sans bg-pink-500/10 w-full border-b-1 border-solid border-pink-500/50 text-pink-500" {...props}>
         {children}
       </thead>
     ),
-    tr: ({ node, className, children, isHeader, ...props }) => (
+    tr: ({ node, className, children, isHeader, ...props }: any) => (
       <tr
         className="w-fit [&>*]:text-md [&>*]:border [&>*]:border-solid [&>*]:border-pink-500/70 [&>*]:border-collapse [&>th]:whitespace-pre-line [&>th]:p-2 [&>td]:whitespace-pre-line [&>td]:p-2"
         {...props}
@@ -169,16 +216,16 @@ export const Markdown = ({ children }: MarkdownProps) => {
         {children}
       </tr>
     ),
-    tbody: ({ node, className, children, ...props }) => (
+    tbody: ({ node, className, children, ...props }: any) => (
       <tbody className="font-sans w-full [&>*]:border [&>*]:border-solid [&>*]:border-pink-200 [&>*]:border-collapse" {...props}>
         {children}
       </tbody>
     ),
-    img: ({ node, className, children, ...props }) => {
+    img: ({ node, className, children, ...props }: any) => {
       console.log("props", props)
 
       return (<img {...props} src={props.src} title={props.title} alt={props.caption} className="w-full overflow-hidden rounded-md ring-1 ring-pink-500/60 shadow-md my-4" />)
-     }
+    }
   };
 
   return (
