@@ -13,6 +13,7 @@ import { cn } from '@/utils/cn';
 import { useTheme } from 'next-themes';
 import Tabs from '@/components/Markdown/Tabs';
 import Tab from '@/components/Markdown/Tab';
+import { Table, Head, Body, Row, HeadCell, BodyCell } from '@/components/Markdown/Table';
 
 
 interface MarkdownProps {
@@ -95,7 +96,7 @@ export const Markdown = ({ children }: MarkdownProps) => {
           target="_blank" rel="noopener noreferrer"
         >
           {children}
-        </a >
+        </a>
       )
     },
     h1: ({ node, inline, className, children, ...props }: any) => createHeading(children, 1),
@@ -148,6 +149,36 @@ export const Markdown = ({ children }: MarkdownProps) => {
     note: Note,
     tabs: Tabs,
     tab: Tab,
+    table: ({ node, className, children, ...props }) => (
+      <div className="w-full overflow-auto ring-1 ring-inset dark:ring-purple-300/90">
+        <table className="w-full text-neutral-900 dark:text-neutral-50 ring-inset rounded-md" {...props}>
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ node, className, children, ...props }) => (
+      <thead className="font-sans bg-pink-500/10 w-full border-b-1 border-solid border-pink-500/50 text-pink-500" {...props}>
+        {children}
+      </thead>
+    ),
+    tr: ({ node, className, children, isHeader, ...props }) => (
+      <tr
+        className="w-fit [&>*]:text-md [&>*]:border [&>*]:border-solid [&>*]:border-pink-500/70 [&>*]:border-collapse [&>th]:whitespace-pre-line [&>th]:p-2 [&>td]:whitespace-pre-line [&>td]:p-2"
+        {...props}
+      >
+        {children}
+      </tr>
+    ),
+    tbody: ({ node, className, children, ...props }) => (
+      <tbody className="font-sans w-full [&>*]:border [&>*]:border-solid [&>*]:border-pink-200 [&>*]:border-collapse" {...props}>
+        {children}
+      </tbody>
+    ),
+    img: ({ node, className, children, ...props }) => {
+      console.log("props", props)
+
+      return (<img {...props} src={props.src} title={props.title} alt={props.caption} className="w-full overflow-hidden rounded-md ring-1 ring-pink-500/60 shadow-md my-4" />)
+     }
   };
 
   return (

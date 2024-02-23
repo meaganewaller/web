@@ -9,20 +9,17 @@ interface TabsProps {
 }
 
 const TabsContainer = styled.div`
-  @apply col-[1/-1] max-w-[50rem] w-full mx-auto my-4;
-  scrollbar-height: none;
-
-  &::-webkit-scrollbar {
-    @apply hidden;
-    background: transparent;
-  }
+  width: 600px;
+  margin: 100px auto;
 `;
 
 const TabsDiv = styled.div`
-  @apply w-full overflow-x-auto w-[calc(100%_-_1rem)] whitespace-nowrap mx-2 my-0 pt-8 pb-0 px-0;
+  ${tw`w-full overflow-x-auto w-[calc(100%_-_1rem)] whitespace-nowrap mx-2 my-0 pt-8 pb-0 px-0`};
 
-  @media (min-width: 50rem) {
-    @apply w-[calc(100%_-_4rem)] mx-8 my-0;
+  & {
+    @media (min-width: 50rem) {
+      @apply w-[calc(100%_-_4rem)] mx-8 my-0;
+    }
   }
 `;
 
@@ -49,13 +46,12 @@ const Tabs: FC<TabsProps> = ({ children }) => {
             className={index === activeTabIndex ? 'bg-pink-500' : 'bg-pink-300'}
           >
             {child?.props?.title ?? 'Tab Title'}
-            <Tab title={child?.props?.title ?? 'Tab Title'} isActive={index === activeTabIndex} />
           </TabButton>
         ))}
       </TabsDiv>
-      <div className='prose prose-headings:text-pink-400 prose-p:text-pink-300 prose-strong:text-pink-500 mb-12 !max-w-none text-pink-500'>
+      <Tab isActive={true}>
         {activeTabContent}
-      </div>
+      </Tab>
     </TabsContainer >
   )
 }
