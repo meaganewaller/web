@@ -26,7 +26,7 @@ export const PostLink = ({ post }: PostLinkProps) => {
         <div className="flex flex-row items-center space-x-4">
           <Link
             href={`/blog/${post.slug}`}
-            className="decoration-none grow text-lg font-semibold text-pink-600 hover:text-pink-700 dark:text-pink-950"
+            className="decoration-none grow text-lg font-semibold text-pink-600 hover:text-pink-700 dark:text-purple-300"
           >
             {isHighlighted && <Icon name="star" />}
             <span className="inline">{post.title}</span>
@@ -34,7 +34,7 @@ export const PostLink = ({ post }: PostLinkProps) => {
         </div>
         {isHighlighted && (post.description?.length || 0) > 0 && <p className="text-purple-800">{post.description}</p>}
       </div>
-      <p className="hidden space-x-2 whitespace-nowrap text-right text-sm text-pink-500 md:block dark:text-purple-950">
+      <p className="hidden space-x-2 whitespace-nowrap text-right text-sm text-pink-500 md:block dark:text-purple-100">
         <span>{publishedDate}</span>
       </p>
     </div>

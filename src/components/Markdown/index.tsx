@@ -1,12 +1,11 @@
 'use client'
 
-import React from 'react'
-import ReactMarkdown from 'react-markdown'
+import React, { FC, memo } from 'react'
+import ReactMarkdown, { Options } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import remarkNormalizeHeadings from 'remark-normalize-headings'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug'
-import SyntaxHighlighter from 'react-syntax-highlighter'
 import { atelierPlateauLight, atelierPlateauDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import Link from 'next/link'
 import Note from '@/components/Markdown/Note'
@@ -14,9 +13,14 @@ import { cn } from '@/utils/cn'
 import { useTheme } from 'next-themes'
 import Tabs from '@/components/Markdown/Tabs'
 import Tab from '@/components/Markdown/Tab'
-import { CodeContainer, CopyBtn } from '@/components/Markdown/Code'
-import { useState, useRef } from 'react'
-import copy from 'copy-to-clipboard'
+import { Code } from '@/components/Markdown/Code'
+
+export const MemoizedReactMarkdown: FC<Options> = memo(
+  ReactMarkdown,
+  (prevProps, nextProps) =>
+    prevProps.children === nextProps.children &&
+    prevProps.className === nextProps.className
+)
 
 interface MarkdownProps {
   children: string;
@@ -125,7 +129,7 @@ export const Markdown = ({ children }: MarkdownProps) => {
     code({ node, inline, className, children, ...props }: any) {
       const match = /language-(\w+)/.exec(className || '')
 
-      if (inline || !match) {
+      if (inline) {
         return (
           <code className={cn('rounded-lg bg-pink-200/40 p-1 text-lg text-pink-600 dark:bg-purple-400/40 dark:text-purple-100', className)} {...props}>
             {children}
@@ -133,65 +137,14 @@ export const Markdown = ({ children }: MarkdownProps) => {
         )
       }
 
-      const codeRef = useRef<HTMLPreElement>(null)
-      const [isCopied, setIsCopied] = useState(false)
-
-      const copyToClipboard = async () => {
-        try {
-          const content = codeRef.current?.textContent || ''
-          await navigator.clipboard.writeText(content)
-
-          if (!isCopied) {
-            setIsCopied(true)
-            setTimeout(() => setIsCopied(false), 2000)
-          }
-        } catch (err) {
-          setIsCopied(false)
-        }
-      }
-
       return (
-        <CodeContainer showFooter={true}>
-          <div className="block w-full rounded-t-lg bg-pink-500 dark:bg-yellow-600">
-            <span className="px-2 font-mono text-xs font-bold uppercase tracking-wider text-pink-50 dark:text-yellow-900">{match[1]}</span>
-          </div>
-          <SyntaxHighlighter
-            style={syntaxColor}
-            language={match[1]}
-            showLineNumbers={true}
-            wrapLines={true}
-            {...props}
-          >
-            {String(children).replace(/\n$/, '')}
-          </SyntaxHighlighter>
-          <CopyBtn
-            isCopied={isCopied}
-            type='button'
-            onClick={copyToClipboard}
-            title="Copy to Clipboard"
-            aria-label="Copy to Clipboard"
-            >
-            {isCopied ? 'Copied' : 'Copy'}
-          </CopyBtn>
-        </CodeContainer>
+        <Code
+          key={Math.random()}
+          language={(match && match[1]) || ""}
+          value={String(children).replace(/\n$/, '')}
+          {...props}
+        />
       )
-
-    //   return (
-    //     <div className="py-4">
-    //       <div className="block w-full rounded-t-lg bg-pink-500 dark:bg-yellow-600">
-    //         <span className="px-2 font-mono text-xs font-bold uppercase tracking-wider text-pink-50 dark:text-yellow-900">{match[1]}</span>
-    //       </div>
-    //       <SyntaxHighlighter
-    //         style={syntaxColor}
-    //         language={match[1]}
-    //         showLineNumbers={true}
-    //         wrapLines={true}
-    //         {...props}
-    //       >
-    //         {String(children).replace(/\n$/, '')}
-    //       </SyntaxHighlighter>
-    //     </div>
-    //   );
     },
     note: Note,
     tabs: Tabs,
@@ -229,12 +182,13 @@ export const Markdown = ({ children }: MarkdownProps) => {
   };
 
   return (
-    <ReactMarkdown
+    <MemoizedReactMarkdown
+      className="break-words prose-p:leading-relaxed prose-pre:p-0"
       remarkPlugins={[remarkGfm, remarkNormalizeHeadings]}
       rehypePlugins={[rehypeRaw, rehypeSlug]}
       components={components}
     >
       {children}
-    </ReactMarkdown>
+    </MemoizedReactMarkdown>
   )
 }

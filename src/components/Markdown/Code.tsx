@@ -1,208 +1,140 @@
-import tw, { styled, css } from "twin.macro"
-import type { FC, ReactElement } from 'react'
-import { useState, useRef } from 'react'
+'use client'
 
-interface CodeProps {
-  children: ReactElement
-  language?: string
-  showLines?: boolean
-  showCopyButton?: boolean
-  showFooter: boolean
-  fileName?: string
+import { FC, memo } from 'react'
+import { useTheme } from 'next-themes'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import tw, { styled } from 'twin.macro'
+import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
+import { FiCheck, FiCopy } from 'react-icons/fi'
+import { atelierPlateauLight, atelierPlateauDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+
+interface Props {
+  language: string
+  value: string
 }
 
-export const CodeContainer = styled.div(({ showFooter }: { showFooter: boolean }) => [
-  tw`font-mono rounded-lg relative overflow-auto my-2 mx-0 py-6 px-4 pr-0`,
-  showFooter && tw`mb-8`
-])
+interface languageMap {
+  [key: string]: string | undefined
+}
 
-export const CodeStyled = styled.pre`
-  ${tw`rounded-md bg-gray-100 dark:bg-gray-800 p-4 overflow-x-auto`}
-`
+export const languages: languageMap = {
+  javascript: '.js',
+  typescript: '.ts',
+  jsx: '.jsx',
+  tsx: '.tsx',
+  css: '.css',
+  html: '.html',
+  plaintext: '.txt',
+  shell:
+    '.sh',
+  bash: '.sh',
+  json: '.json',
+  markdown: '.md',
+  python: '.py',
+  graphql: '.graphql',
+  yaml: '.yaml',
+  yml: '.yaml',
+  sql: '.sql',
+  docker: '.dockerfile',
+  ruby: '.rb',
+  go: '.go',
+  php: '.php',
+  'c++': '.cpp',
+  'c#': '.cs',
+  swift: '.swift',
+  'objective-c': '.m',
+  rust: '.rs',
+  haskell: '.hs',
+  lua: '.lua'
+}
 
-export const CodeFooter = styled.div`
-  ${tw`flex justify-between items-center text-xs text-gray-500`}
-`
+export const generateRandomString = (length: number, lowercase = false) => {
+  const characters = lowercase ? 'abcdefghijklmnopqrstuvwxyz' : 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const charactersLength = characters.length
+  let result = ''
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+  }
+  return result
+}
 
-export const CopyBtn = styled.button(({ isCopied }: { isCopied: boolean }) => [
-  tw`border-pink-300/50 absolute bottom-12 right-3 flex h-8 w-12 items-center justify-center rounded-lg border bg-pink-300/20 text-pink-600 dark:bg-purple-400/20 dark:text-purple-100 transition-all`,
-  isCopied && tw`border-pink-300/50 translate-x-0 w-20`,
-])
+const Code: FC<Props> = memo(({ language, value }) => {
+  const { isCopied, copyToClipboard } = useCopyToClipboard({ timeout: 2000 })
+  const { systemTheme, theme } = useTheme()
+  const currentTheme = theme === 'system' ? systemTheme : theme
+  const syntaxColor = currentTheme === 'dark' ? atelierPlateauDark : atelierPlateauLight
 
-const Code: FC<CodeProps> = ({ children, language, showLines, showCopyButton, showFooter, fileName }) => {
-  const codeRef = useRef<HTMLPreElement>(null)
-  const [isCopied, setIsCopied] = useState(false)
-
-  const copyToClipboard = async () => {
-    try {
-      const content = codeRef.current?.textContent || ''
-      await navigator.clipboard.writeText(content)
-
-      if (!isCopied) {
-        setIsCopied(true)
-        setTimeout(() => setIsCopied(false), 1000)
-      }
-    } catch (err) {
-      setIsCopied(false)
+  const downloadAsFile = () => {
+    if (typeof window === 'undefined') {
+      return
     }
+
+    const fileExtension = languages[language] || '.file'
+    const suggestedFileName = `code-${generateRandomString(5)}${fileExtension}`
+    const fileName = window.prompt('Save as', suggestedFileName)
+
+    if (!fileName) {
+      return
+    }
+
+    const blob = new Blob([value], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.download = fileName
+    link.href = url
+    link.style.display = 'none'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
   }
 
-  const selected = language === 'plaintext' ? 'plaintext' : undefined
-
-  const footerProps = {
-    lines: showLines ? children.props.children.split('\n').length : undefined,
-    language,
-    selected,
-  } as const
+  const onCopy = () => {
+    if (isCopied) {
+      return
+    }
+    copyToClipboard(value)
+  }
 
   return (
-    <CodeContainer showFooter={showFooter}>
-      {showCopyButton && (
-        <CopyBtn
-          isCopied={isCopied}
-          type='button'
-          onClick={copyToClipboard}
-          title="Copy to Clipboard"
-          aria-label="Copy to Clipboard"
-        >
-          {isCopied ? 'Copied!' : 'Copy'}
-        </CopyBtn>
-      )}
-      <CodeStyled ref={codeRef}>{children}</CodeStyled>
-      {showFooter && (
-        <CodeFooter>
-          {fileName && (
-            <div tw="flex items-center">
-              {fileName}
-            </div>
-          )}
-          <div tw="flex items-center">
-            {language}
-          </div>
-          <div tw="flex items-center">
-            {footerProps.lines} lines
-          </div>
-        </CodeFooter>
-      )}
-    </CodeContainer>
+    <div className="relative w-full font-sans bg-white dark:bg-gray-800">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+        <span className="text-xs lowercase">{language}</span>
+        <div className="flex items-center space-x-1">
+          <button
+            className="hover:bg-pink-700 focus-visible:ring-1 focus-visible:ring-pink-500"
+            onClick={downloadAsFile}
+          >
+            <span className="sr-only">Download</span>
+          </button>
+          <button
+            className="text-xs hover:bg-zinc-800 focus-visible:ring-1 focus-visible:ring-slate-700 focus-visible:ring-offset-0"
+            onClick={onCopy}
+          >
+            {isCopied ? <FiCheck /> : <FiCopy />}
+            <span className="sr-only">Copy code</span>
+          </button>
+        </div>
+      </div>
+      <SyntaxHighlighter
+        language={language}
+        style={syntaxColor}
+        PreTag="div"
+        showLineNumbers
+        customStyle={{
+          margin: 0,
+          width: "100%",
+          background: "transparent",
+          padding: "1.5rem 1rem",
+        }}
+        className="rounded w-full aspect-[1/2] lg:aspect-[2/1]"
+        codeTagProps={{ style: { fontSize: "0.9rem", fontFamily: "var(--font-monospace)" } }}
+      >
+        {value}
+      </SyntaxHighlighter>
+    </div>
   )
-}
+})
 
-export default Code
+export { Code }
 
-// import { PropsWithChildren, useRef, useState } from "react"
-// import { cn } from "@/utils/cn"
-
-// import {
-//   PiFileCode,
-//   PiFileCss,
-//   PiFileHtml,
-//   PiFileJs,
-//   PiFileJsx,
-//   PiFileTs,
-//   PiFileTsx,
-//   PiFileText,
-//   PiTerminalWindow,
-//   PiCheckCircle,
-//   PiCopy,
-// } from "react-icons/pi"
-
-// interface CodeFooterProps {
-//   lines?: number
-//   language?: string
-//   selected?: string
-// }
-
-// function CodeFooter({
-//   lines,
-//   language,
-//   selected,
-// }: CodeFooterProps) {
-//   return (
-//     <div tw="flex justify-between items-center text-xs text-gray-500">
-//       {selected && (
-//         <div className={cn('flex items-center', selected === 'plaintext' && 'hidden')}>
-//           Selected: {selected}
-//         </div>
-//       )}
-//       {language && (
-//         <div className={cn('flex items-center', language === 'plaintext' && 'hidden')}>
-//           {language}
-//         </div>
-//       )}
-//       {lines && (
-//         <div className={cn('flex items-center', lines === 0 && 'hidden')}>
-//           {lines} lines
-//         </div>
-//       )}
-//     </div>
-//   )
-// }
-
-// export type CodeProps = CodeFooterProps & {
-//   withCopyButton?: boolean
-//   withFooter?: boolean
-// }
-
-// const CodeStyled = styled.pre`
-//   ${tw`rounded-md bg-gray-100 dark:bg-gray-800 p-4 overflow-x-auto`}
-// `
-
-// const CodeBlockContainer = styled.div(({ withFooter }: { withFooter: boolean}) => [
-//   tw`font-mono rounded-lg relative overflow-auto my-2 mx-0 py-6 px-4 pr-0`,
-//   withFooter && tw`mb-4`
-// ])
-
-// const CopyBtn = styled.button(({ isCopied }: { isCopied: boolean }) => [
-//   tw`border-pink-300/50 absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-lg border bg-pink-300/20 text-pink-600 dark:bg-purple-400/20 dark:text-purple-100 transition-all`,
-//   isCopied && tw`border-pink-300/50 translate-x-0`,
-// ])
-
-// function Code({
-//   withCopyButton = true,
-//   withFooter = true,
-//   children,
-// }: PropsWithChildren<CodeProps>) {
-//   const codeRef = useRef<HTMLPreElement>(null)
-//   const [isCopied, setIsCopied] = useState(false)
-
-//   const language = /language-(\w+)/.exec(props.className || '')?.[1]
-
-//   const copyToClipboard = async () => {
-//     try {
-//       const content = codeRef.current?.textContent || ''
-//       await navigator.clipboard.writeText(content)
-
-//       if (!isCopied) {
-//         setIsCopied(true)
-//         setTimeout(() => setIsCopied(false), 1000)
-//       }
-//     } catch (err) {
-//       setIsCopied(false)
-//     }
-//   }
-
-//   return (
-//     <CodeBlockContainer withFooter={withFooter}>
-//       {withCopyButton && (
-//         <CopyBtn
-//           isCopied={isCopied}
-//           type='button'
-//           onClick={copyToClipboard}
-//           title="Copy to Clipboard"
-//           aria-label="Copy to Clipboard"
-//         >
-//           {isCopied ? <PiCheckCircle className="text-green-800" /> : <PiCopy />}
-//         </CopyBtn>
-//       )}
-//       <div className={`rounded-md bg-gray-100 dark:bg-gray-800 p-4 overflow-x-auto`}>
-//         <CodeStyled ref={codeRef}>{children}</CodeStyled>
-//       </div>
-//       {withFooter && (
-//         <CodeFooter language={language} />
-//       )}
-//     </CodeBlockContainer>
-//   )
-// }
-
-// export default Code

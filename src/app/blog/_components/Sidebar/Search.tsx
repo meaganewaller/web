@@ -23,7 +23,7 @@ const Search = () => {
         <div className="flex items-center rounded-lg bg-orange-400 p-1 shadow-md shadow-orange-600 dark:bg-purple-900 dark:shadow-purple-800">
           <input
             type="text"
-            className="dark:placeholder:text-purple w-full border-none bg-[var(--color-transparent)] font-mono text-orange-800 ring-0 placeholder:italic placeholder:text-orange-700 focus:border-none focus:ring-0 dark:text-purple-50"
+            className="dark:placeholder:text-purple-500 w-full border-none bg-[var(--color-transparent)] font-mono text-orange-800 ring-0 placeholder:italic placeholder:text-orange-700 focus:border-none focus:ring-0 dark:text-purple-50"
             placeholder="search blog"
             value={query}
             onChange={handleInputChange}

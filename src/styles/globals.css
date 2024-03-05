@@ -277,3 +277,60 @@ html.dark-inverted {
 .hljs {
   background: transparent !important;
 }
+
+.pagination,
+.pagination li a {
+  @apply flex flex-wrap justify-center items-center;
+}
+
+.pagination li {
+  @apply bg-pink-200/85;
+}
+
+.pagination a {
+  @apply font-light no-underline border min-w-[44px] min-h-[44px] text-[rgba(255,255,255,0.85)] shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.35)] pt-px border-l-0 border-solid border-[rgba(0,0,0,0.25)];
+}
+
+.pagination li:not([class*="current"]) a:hover {
+  @apply bg-[rgba(255,255,255,0.2)] border-t-[rgba(0,0,0,0.35)] border-b-[rgba(0,0,0,0.5)];
+}
+.pagination li:not([class*="current"]) a:focus,
+.pagination li:not([class*="current"]) a:active {
+  @apply shadow-[0px_0px_10px_1px_rgba(0,0,0,0.25)] border-l;
+}
+.pagination li:first-of-type a {
+  @apply border-l;
+}
+.pagination li:first-of-type span,
+.pagination li:last-of-type span,
+.pagination li:nth-of-type(2) span,
+.pagination li:nth-last-of-type(2) span {
+  @apply absolute top-[-9999px] left-[-9999px];
+
+  /* screen readers only */
+}
+/* .pagination li:first-child a::before, */
+/* .pagination li:last-child a::after, */
+/* .pagination li:nth-of-type(2) a::before, */
+/* .pagination li:nth-last-of-type(2) a::after { */
+/*   @apply inline-block text-[inherit] translate-x-0 translate-y-0; */
+/*   font-family: Fontawesome; */
+/*   text-rendering: auto; */
+/*   -webkit-font-smoothing: antialiased; */
+/*   -moz-osx-font-smoothing: grayscale; */
+/* } */
+/* .pagination li:first-child a::before, */
+/* .pagination li:last-child a::after { */
+/*   @apply content-["\f100"]; */
+/* } */
+/* .pagination li:nth-of-type(2) a::before, */
+/* .pagination li:nth-last-of-type(2) a::after { */
+/*   @apply content-["\f104"]; */
+/* } */
+/* .pagination li:last-child a::after, */
+/* .pagination li:nth-last-of-type(2) a::after { */
+/*   @apply rotate-180; */
+/* } */
+.pagination li.current a {
+  @apply text-pink-700 bg-[rgba(255,255,255,0.15)] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)] cursor-default pointer-events-none pt-[0.25em];
+}
