@@ -33,7 +33,7 @@ export const ArticleHeader = ({ article }: ArticleHeaderProps) => {
             </time>
           </Link>
           {article.comment_count > 0 && (
-            <a
+            <Link
               href="#comments"
               className="flex items-center ml-2 text-sm font-semibold link--blue"
             >
@@ -41,8 +41,16 @@ export const ArticleHeader = ({ article }: ArticleHeaderProps) => {
                 {article.comment_count}{" "}
                 {pluralize("comment", article.comment_count)}
               </span>
-            </a>
+            </Link>
           )}
+          <Link
+            href="/privacy"
+            className="flex items-center ml-2 text-sm font-semibold text-orange-500"
+          >
+            <span>
+              {article.views} {pluralize("view", article.views)}
+            </span>
+          </Link>
         </p>
         <h1 className="text-3xl font-bold leading-tight text-orange-500 sm:text-center md:text-5xl font-monoItalic p-name">
           {article.title}
