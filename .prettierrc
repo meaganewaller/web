@@ -7,10 +7,9 @@
   "jsxSingleQuote": false,
   "printWidth": 120,
   "bracketSpacing": true,
-  "jsxBracketSameLine": false,
   "requirePragma": false,
   "insertPragma": false,
-  "proseWrap": "preserve",
+  "proseWrap": "never",
   "htmlWhitespaceSensitivity": "css",
   "endOfLine": "lf",
   "useTabs": false

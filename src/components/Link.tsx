@@ -1,26 +1,26 @@
 /* eslint-disable react/jsx-props-no-spreading, jsx-a11y/anchor-has-content */
-import clsx from 'clsx';
-import NextLink from 'next/link';
-import React from 'react';
-import Icon from '@/components/Icon';
+import clsx from 'clsx'
+import NextLink from 'next/link'
+import React from 'react'
+import Icon from '@/components/Icon'
 
 export type LinkThemeProps = {
-  variant: 'default' | 'none' | 'header' | 'info' | 'tag' | 'button';
-  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-};
+  variant: 'default' | 'none' | 'header' | 'info' | 'tag' | 'button'
+  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+}
 
 type LinkTheme = {
   variant: {
     [K in keyof {
-      [x: string]: LinkThemeProps;
-    } as LinkThemeProps['variant']]: string;
-  };
+      [x: string]: LinkThemeProps
+    } as LinkThemeProps['variant']]: string
+  }
   size: {
     [K in keyof {
-      [LinkThemeProps: string]: LinkThemeProps;
-    } as LinkThemeProps['size']]: string;
-  };
-};
+      [LinkThemeProps: string]: LinkThemeProps
+    } as LinkThemeProps['size']]: string
+  }
+}
 
 export const linkTheme: LinkTheme = {
   variant: {
@@ -40,7 +40,7 @@ export const linkTheme: LinkTheme = {
     xl: 'text-xl',
     '2xl': 'text-2xl',
   },
-};
+}
 
 const variantSizes = {
   none: {
@@ -66,22 +66,22 @@ const variantSizes = {
     xl: 'rounded-md px-4 py-2 text-base',
     '2xl': 'rounded-md px-6 py-3 text-base',
   },
-};
+}
 
 export type LinkProps = {
-  variant?: LinkThemeProps['variant'];
-  size?: LinkThemeProps['size'];
-  className?: string;
-  href: string;
-  target?: string;
-  showExternal?: boolean;
-};
+  variant?: LinkThemeProps['variant']
+  size?: LinkThemeProps['size']
+  className?: string
+  href: string
+  target?: string
+  showExternal?: boolean
+}
 
 // eslint-disable-next-line
 export const Link = React.forwardRef<HTMLAnchorElement, React.PropsWithChildren<LinkProps>>(
   ({ variant = 'default', size = 'md', className = '', showExternal = true, href, ...props }, ref) => {
-    const newClassName = clsx(linkTheme.variant[variant], linkTheme.size[size], variantSizes[variant][size], className);
-    const externalLink = href ? href.indexOf('http') === 0 : false;
+    const newClassName = clsx(linkTheme.variant[variant], linkTheme.size[size], variantSizes[variant][size], className)
+    const externalLink = href ? href.indexOf('http') === 0 : false
 
     if (externalLink) {
       if (showExternal) {
@@ -90,10 +90,10 @@ export const Link = React.forwardRef<HTMLAnchorElement, React.PropsWithChildren<
             {props.children}
             <Icon name="external" width={24} />
           </a>
-        );
+        )
       }
-      return <a ref={ref} href={href} className={newClassName} {...props} />;
+      return <a ref={ref} href={href} className={newClassName} {...props} />
     }
-    return <NextLink ref={ref} href={href} className={newClassName} {...props} />;
+    return <NextLink ref={ref} href={href} className={newClassName} {...props} />
   },
-);
+)

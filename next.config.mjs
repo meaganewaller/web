@@ -1,8 +1,11 @@
-// const withBundlerAnalyzer = require('@next/bundle-analyzer')({
-//   enabled: process.env.ANALYZE === 'true',
-// });
+if (!URL.canParse(process.env.NEXT_PUBLIC_BASE_API_URL)) {
+  throw new Error(`
+    Invalid NEXT_PUBLIC_BASE_API_URL.
+    Add to your environment variables: NEXT_PUBLIC_BASE_API_URL=URL_TO_YOUR_NEXT_PUBLIC_BASE_API_URL
+  `)
+}
 
-import withTwin from './withTwin.mjs';
+import withTwin from './withTwin.mjs'
 
 /**
  * @type {import('next').NextConfig}
@@ -26,4 +29,4 @@ export default withTwin({
       },
     ],
   },
-});
+})

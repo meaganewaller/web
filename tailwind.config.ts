@@ -1,16 +1,16 @@
 /** @type { import('tailwindcss').Config} */
 
-import typography from '@tailwindcss/typography';
-import type { Config } from 'tailwindcss';
-import { fontFamily } from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography'
+import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
+import forms from '@tailwindcss/forms'
 
-const sansFontFamily = ['var(--font-sans)', ...fontFamily.sans];
-const extraFontFamily = ['var(--font-extra)', ...fontFamily.sans];
-const serifFontFamily = ['var(--font-serif)', ...fontFamily.serif];
-const monoFontFamily = ['var(--font-mono)', ...fontFamily.mono];
-const monoItalicFontFamily = ['var(--font-mono-italic)', ...fontFamily.mono];
-const pixelFontFamily = ['var(--font-pixel)', ...fontFamily.mono];
+const sansFontFamily = ['var(--font-sans)', ...fontFamily.sans]
+const extraFontFamily = ['var(--font-extra)', ...fontFamily.sans]
+const serifFontFamily = ['var(--font-serif)', ...fontFamily.serif]
+const monoFontFamily = ['var(--font-mono)', ...fontFamily.mono]
+const monoItalicFontFamily = ['var(--font-mono-italic)', ...fontFamily.mono]
+const pixelFontFamily = ['var(--font-pixel)', ...fontFamily.mono]
 
 const contentWidth = (theme: any, width = '3') => {
   return {
@@ -56,6 +56,26 @@ export default {
       '9xl': ['8rem', { lineHeight: '1' }],
     },
     typography: (theme: any) => ({
+      invert: {
+        css: {
+          color: theme('colors.pink.50'),
+          fontSize: theme('fontSize.lg')[0],
+          h1: {
+            color: theme('colors.purple.100'),
+          },
+          'h2, h3, h4': {
+            color: theme('colors.purple.200'),
+          },
+          a: {
+            color: theme('colors.pink.200'),
+            textDecorationColor: theme('colors.pink.300'),
+          },
+          'a:hover': {
+            color: theme('colors.pink.300'),
+            textDecorationColor: theme('colors.pink.400'),
+          },
+        },
+      },
       DEFAULT: {
         css: {
           color: theme('colors.pink.900'),
@@ -126,7 +146,6 @@ export default {
               paddingLeft: theme('spacing.0'),
             },
           },
-
           a: {
             color: theme('colors.pink.600'),
             fontWeight: theme('fontWeight.semibold'),
@@ -258,7 +277,7 @@ export default {
 
           // Lists
           ul: {
-            listStyleType: 'disc',
+            listStyleType: 'flower',
           },
           ol: {
             listStyleType: 'decimal',
@@ -614,9 +633,8 @@ export default {
     require('tailwindcss-debug-screens'),
     forms,
     require('@tailwindcss/container-queries'),
-    require('@tailwindcss/line-clamp'),
   ],
   variants: {
     gridTemplateAreas: ['responsive'],
   },
-} satisfies Config;
+} satisfies Config
