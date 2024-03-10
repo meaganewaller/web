@@ -4,6 +4,7 @@ import { ArticleAboutMeaganFooter } from "@/components/marketing/ArticleAboutMea
 // import { Comments } from "@/components/comments/Comments";
 import { PageFooter } from "@/components/Layout/PageFooter";
 import type { PostResponse } from "@/types";
+import Comments from "@/components/Comments";
 
 import readingTime from "reading-time";
 
@@ -21,6 +22,7 @@ export const Article = ({ article }: ArticleHeaderProps) => {
 			<PageFooter>
 				<>
 					<ArticleAboutMeaganFooter />
+					<Comments />
 				</>
 			</PageFooter>
 		</article>
