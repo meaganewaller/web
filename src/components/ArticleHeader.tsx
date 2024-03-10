@@ -17,95 +17,100 @@ import { cn } from "@/utils/cn";
 import type { PostResponse } from "@/types";
 
 interface ArticleHeaderProps {
-	article: PostResponse;
-	readingTime: IReadTimeResults;
+  article: PostResponse;
+  readingTime: IReadTimeResults;
 }
 
 const ArticleHeader = ({ article, readingTime }: ArticleHeaderProps) => {
-	const { views } = useView({
-		slug: article.slug,
-		type: "Post",
-		trackView: true,
-	});
+  const { views } = useView({
+    slug: article.slug,
+    type: "Post",
+    trackView: true,
+  });
 
-	const animation = {
-		hide: { y: 32, opacity: 0 },
-		show: { y: 0, opacity: 1 },
-	};
+  const animation = {
+    hide: { y: 32, opacity: 0 },
+    show: { y: 0, opacity: 1 },
+  };
 
-	const pageHeaderRef = useRef<HTMLDivElement | null>(null);
+  const pageHeaderRef = useRef<HTMLDivElement | null>(null);
 
-	return (
-		<>
-			<div className="mx-auto mb-2 max-w-5xl">
-				<p className="flex flex-row items-center sm:justify-center">
-					<BackButton href="/blog" text="Blog" />
-					<Link
-						href={`${String(process.env.NEXT_PUBLIC_BASE_URL)}/blog/${
-							article.slug
-						}`}
-						className="u-url"
-					>
-						<time
-							className="ml-2 text-sm font-semibold text-blue-600 dt-published hover:underline-offset-3"
-							dateTime={dateFormatMicroformat(article.published_date)}
-						>
-							{dateFormatLong(article.published_date)}
-						</time>
-					</Link>
-					<span className="mx-2 text-blue-500">
-						<span className={cn("flex items-center gap-1")}>
-							<FaClock className={cn("h-4 w-4 text-blue-500")} size={4} />
-							<span title="Estimated read time">{readingTime?.text}</span>
-						</span>
-					</span>
-					<span className="mx-2 text-blue-500">
-						<span className={cn("flex items-center gap-1")}>
-							<FaEye className={cn("h-4 w-4 text-blue-500")} size={4} />
-							<span title="Number of views">
-								{views?.count ?? "-"}{" "}
-								{views?.count && pluralize("view", views.count)}
-							</span>
-						</span>
-					</span>
-				</p>
-			</div>
-			{article.tags && article.tags.length > 0 && (
-				<div className="mx-auto max-w-4xl sm:text-center my-2">
-					<Tags tags={article.tags} />
-				</div>
-			)}
+  return (
+    <>
+      <div className="mx-auto mb-2 max-w-5xl">
+        <p className="flex flex-row items-center sm:justify-center pb-5 text-sm">
+          <Link href={`/blog?category=${article.category.slug}`}>
+            {article.category.title}
+          </Link>
+        </p>
+        <p className="flex flex-row items-center sm:justify-center">
+          <BackButton href="/blog" text="Blog" />
+          <Link
+            href={`${String(process.env.NEXT_PUBLIC_BASE_URL)}/blog/${article.slug
+              }`}
+            className="u-url"
+          >
+            <time
+              className="ml-2 text-sm font-semibold text-blue-600 dt-published hover:underline-offset-3"
+              dateTime={dateFormatMicroformat(article.published_date)}
+            >
+              {dateFormatLong(article.published_date)}
+            </time>
+          </Link>
 
-			<div className={cn("bg-pattern py-16", "lg:py-20")} ref={pageHeaderRef}>
-				<m.div
-					initial={animation.hide}
-					animate={animation.show}
-					transition={{ delay: 0.1 }}
-				>
-					<h1
-						className={cn(
-							"pb-2 font-monoItalic text-4xl font-bold",
-							"md:text-5xl",
-							"lg:text-6xl",
-						)}
-					>
-						{article.title}
-					</h1>
-				</m.div>
-				{article.description && (
-					<m.div
-						initial={animation.hide}
-						animate={animation.show}
-						transition={{ delay: 0.2 }}
-					>
-						<p className={cn("mt-2 font-serif text-lg")}>
-							{article.description}
-						</p>
-					</m.div>
-				)}
-			</div>
-		</>
-	);
+          <span className="mx-2 text-blue-500">
+            <span className={cn("flex items-center gap-1")}>
+              <FaClock className={cn("h-4 w-4 text-blue-500")} size={4} />
+              <span title="Estimated read time">{readingTime?.text}</span>
+            </span>
+          </span>
+          <span className="mx-2 text-blue-500">
+            <span className={cn("flex items-center gap-1")}>
+              <FaEye className={cn("h-4 w-4 text-blue-500")} size={4} />
+              <span title="Number of views">
+                {views?.count ?? "-"}{" "}
+                {views?.count && pluralize("view", views.count)}
+              </span>
+            </span>
+          </span>
+        </p>
+      </div>
+      {article.tags && article.tags.length > 0 && (
+        <div className="mx-auto max-w-4xl sm:text-center my-2">
+          <Tags tags={article.tags} />
+        </div>
+      )}
+
+      <div className={cn("bg-pattern py-16", "lg:py-20")} ref={pageHeaderRef}>
+        <m.div
+          initial={animation.hide}
+          animate={animation.show}
+          transition={{ delay: 0.1 }}
+        >
+          <h1
+            className={cn(
+              "pb-2 font-monoItalic text-4xl font-bold",
+              "md:text-5xl",
+              "lg:text-6xl",
+            )}
+          >
+            {article.title}
+          </h1>
+        </m.div>
+        {article.description && (
+          <m.div
+            initial={animation.hide}
+            animate={animation.show}
+            transition={{ delay: 0.2 }}
+          >
+            <p className={cn("mt-2 font-serif text-lg")}>
+              {article.description}
+            </p>
+          </m.div>
+        )}
+      </div>
+    </>
+  );
 };
 
 export default ArticleHeader;
