@@ -1,8 +1,8 @@
 import type { FC, ReactElement } from "react";
 import tw, { styled } from "twin.macro";
 
-interface NoteProps {
-  children: ReactElement;
+export interface NoteProps {
+  children?: React.ReactNode;
   title?: string;
   type: "info" | "warning" | "error" | "success";
 }
