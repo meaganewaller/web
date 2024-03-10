@@ -15,7 +15,7 @@ export default function BlogLayout({
     <Layout>
       <Container className="mx-auto grid grid-cols-12 md:space-x-4">
         {pathname.split("/").length === 2 && <Sidebar />}
-        <main className="relative z-[2] mx-auto my-0 w-full max-w-[42.1875rem] list-outside px-8 leading-7 text-neutral-800 md:col-span-9 dark:text-neutral-50">
+        <main className="relative z-[2] mx-auto my-0 w-full list-outside px-8 leading-7 text-neutral-800 md:col-span-9 dark:text-neutral-50 col-span-12">
           {children}
         </main>
       </Container>

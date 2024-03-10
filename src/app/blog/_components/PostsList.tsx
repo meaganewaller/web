@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import Pagination from "@/components/Layout/Pagination";
 import { PostLink } from "./PostLink";
 import type { PostResponse } from "@/types";
+import pluralize from "@/utils/pluralize";
 
 interface PostsCountProps {
 	posts: PostResponse[];
@@ -21,10 +22,11 @@ export const PostsCount = ({ posts, year }: PostsCountProps) => {
 
 	return (
 		<span className="mb-1 block rounded-full border border-solid border-pink-400 bg-pink-300 p-2 font-mono text-xs uppercase text-pink-800 dark:border-green-500 dark:bg-green-300 dark:text-green-900">
-			{count} post{count === 1 ? "" : "s"}
+			{count} {pluralize("post", count)}
 		</span>
 	);
 };
+
 interface PostTimelineSeparatorProps {
 	posts: PostResponse[];
 	currentPost: PostResponse;
@@ -45,17 +47,11 @@ export const PostTimelineSeparator = ({
 	const currentPostDate = new Date(currentPost.published_date);
 	const currentPostYear = currentPostDate.getFullYear();
 
-	let previousPostDate: Date | null;
-	let previousPostYear: number | null;
+	let previousPostYear: number | null = null;
 
-	if (!previousPost) {
-		previousPostDate = null;
-		previousPostYear = null;
-	} else {
-		if (previousPost.published_date) {
-			previousPostDate = new Date(previousPost.published_date);
-			previousPostYear = previousPostDate.getFullYear();
-		}
+	if (previousPost?.published_date) {
+		const previousPostDate = new Date(previousPost.published_date);
+		previousPostYear = previousPostDate.getFullYear();
 	}
 
 	if (!Number.isNaN(currentPostYear) && currentPostYear !== previousPostYear) {
@@ -89,7 +85,7 @@ export const PostsList = ({
 	url,
 	previousPostUrl,
 	showSeparator = true,
-	pagination,
+	pagination = [],
 }: PostTimelineProps) => {
 	return (
 		<div>
@@ -108,7 +104,7 @@ export const PostsList = ({
 					</div>
 				))}
 
-			{page && totalPages && (
+			{page && totalPages && url && previousPostUrl && (
 				<Pagination
 					series={pagination}
 					page={page}
