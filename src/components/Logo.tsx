@@ -1,8 +1,11 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState, MouseEvent } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import type { MouseEvent } from "react";
 
-type ButtonOrAnchorClickEvent = MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>;
+type ButtonOrAnchorClickEvent =
+  | MouseEvent<HTMLButtonElement>
+  | MouseEvent<HTMLAnchorElement>;
 
 interface ILogo {
   onClick: (event: ButtonOrAnchorClickEvent) => void;
@@ -17,11 +20,17 @@ const Logo = ({ onClick }: ILogo) => {
     const timer = setTimeout(() => {
       setIsHovering(false);
     }, 2000);
+
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <Link href="/" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onClick}>
+    <Link
+      href="/"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
+    >
       {isHovering ? (
         <Image
           alt="Meagan Waller - A Software Development Blog"

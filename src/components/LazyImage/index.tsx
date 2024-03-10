@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { brokenImg } from '@/assets';
-import classNames from 'classnames';
-import type { HTMLMotionProps, Variants } from 'framer-motion';
-import { motion } from 'framer-motion';
-import type { FC } from 'react';
-import React, { useMemo, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
-import styles from './index.module.scss';
+import { brokenImg } from "@/assets";
+import classNames from "classnames";
+import type { HTMLMotionProps, Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import type { FC } from "react";
+import React, { useMemo, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import styles from "./index.module.scss";
 
 export type LazyImageExtendProps = {
   blurSrc?: string;
@@ -16,27 +16,30 @@ export type LazyImageExtendProps = {
   aspectRatio?: `${number} / ${number}`;
 };
 
-export type LazyImageProps = HTMLMotionProps<'img'> & LazyImageExtendProps;
+export type LazyImageProps = HTMLMotionProps<"img"> & LazyImageExtendProps;
 
 export const LOADED_IMAGE_URLS = new Set<string | undefined>();
 
 export const LazyImage: FC<LazyImageProps> = ({
   src,
-  className = 'object-cover w-full h-full',
+  className = "object-cover w-full h-full",
   blurSrc,
-  containerClassName = 'w-full',
+  containerClassName = "w-full",
   lazy = true,
   aspectRatio,
   ...props
 }) => {
   const [loading, setLoading] = useState(() => {
-    const isLocalDataOrEmpty = src?.startsWith('data:') || src?.startsWith('blob:') || !src;
+    const isLocalDataOrEmpty =
+      src?.startsWith("data:") || src?.startsWith("blob:") || !src;
     if (lazy) {
       if (isLocalDataOrEmpty) {
         return false;
       }
+
       return !LOADED_IMAGE_URLS.has(src);
     }
+
     return false;
   });
 
@@ -44,19 +47,20 @@ export const LazyImage: FC<LazyImageProps> = ({
     if (lazy) {
       return (LOADED_IMAGE_URLS.has(src) ? src : blurSrc) || src || brokenImg;
     }
+
     return src || blurSrc || brokenImg;
   });
 
   const variants = useMemo<Variants>(() => {
     return {
       loading: {
-        filter: 'blur(32px)',
-        willChange: 'filter',
+        filter: "blur(32px)",
+        willChange: "filter",
       },
       loaded: {
-        filter: 'blur(0px)',
+        filter: "blur(0px)",
         transitionEnd: {
-          willChange: 'auto',
+          willChange: "auto",
         },
       },
     };
@@ -68,7 +72,7 @@ export const LazyImage: FC<LazyImageProps> = ({
     onChange: (inView) => {
       if (inView && src) {
         const img = new Image();
-        img.decoding = 'async';
+        img.decoding = "async";
         if (props.crossOrigin) {
           img.crossOrigin = props.crossOrigin;
         }
@@ -90,7 +94,10 @@ export const LazyImage: FC<LazyImageProps> = ({
 
   return (
     <span
-      className={classNames(containerClassName, 'block select-none overflow-hidden')}
+      className={classNames(
+        containerClassName,
+        "block select-none overflow-hidden",
+      )}
       style={{ aspectRatio }}
     >
       <motion.img
@@ -98,8 +105,8 @@ export const LazyImage: FC<LazyImageProps> = ({
         loading="lazy"
         ref={ref}
         variants={variants}
-        initial={loading ? 'loading' : 'loaded'}
-        animate={!loading && 'loaded'}
+        initial={loading ? "loading" : "loaded"}
+        animate={!loading && "loaded"}
         className={classNames(className, {
           [styles.loading]: loading,
         })}
@@ -109,4 +116,4 @@ export const LazyImage: FC<LazyImageProps> = ({
   );
 };
 
-LazyImage.displayName = 'LazyImage';
+LazyImage.displayName = "LazyImage";

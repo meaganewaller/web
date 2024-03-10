@@ -25,13 +25,15 @@ export const countContentViews = async ({
 	type,
 	slug,
 }: CountContentViewsParams): Promise<number> => {
-	const result = await fetchData(
+	const result: ViewResponse[] = await fetchData<ViewResponse[]>(
 		`${process.env.NEXT_PUBLIC_BASE_API_URL}/views?viewable_type=${type}&viewable_slug=${slug}`,
-	).then((res: ViewResponse[]) => {
-		return res[0];
-	});
+	);
 
-	return result.count;
+	if (result.length > 0) {
+		return result[0].count;
+	}
+
+	return 0;
 };
 
 export const countUserViews = async ({
