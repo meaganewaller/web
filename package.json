@@ -27,6 +27,7 @@
 		"@emotion/serialize": "1.1.3",
 		"@emotion/styled": "11.11.0",
 		"@fortawesome/react-fontawesome": "0.2.0",
+		"@giscus/react": "3.0.0",
 		"@headlessui/react": "2.0.0-alpha.4",
 		"@mdx-js/loader": "3.0.1",
 		"@mdx-js/react": "3.0.1",
