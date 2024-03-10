@@ -1,21 +1,57 @@
 /* eslint-disable react/no-danger */
 "use client";
-import { FiClipboard } from "react-icons/fi";
-import { memo, useState, Children } from "react";
+
+import { memo, Children, useState } from "react";
 import type { ReactNode } from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
 import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-	oneLight,
-	tomorrow,
-} from "react-syntax-highlighter/dist/cjs/styles/prism";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
+import { cn } from "@/utils/cn";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { FiClipboard } from "react-icons/fi";
+import CopyToClipboard from "react-copy-to-clipboard";
+import Note from "./Note";
+import Tabs from "./Tabs";
+import Tab from "./Tab";
+
+type MdxComponentProps = {
+	className: string;
+};
 
 type ArticleContentProps = {
 	markdown: string;
 	className?: string;
+};
+
+const Blockquote = ({ children }: { children?: ReactNode }) => {
+	return (
+		<blockquote className="relative my-10 mx-0 text-pink-500 bg-pink-300/15 rounded-lg text-lg leading-loose p-12">
+			<FaQuoteLeft className="absolute left-6 top-4 text-pink-600" size={10} />
+			<div>{children}</div>
+			<FaQuoteRight
+				className="absolute right-6 bottom-4 text-pink-600"
+				size={10}
+			/>
+		</blockquote>
+	);
+};
+
+const ListItem = ({ children }: { children?: ReactNode }) => {
+	return (
+		<li className="text-xl my-2 font-serif list-inside text-pink-600">
+			{children}
+		</li>
+	);
+};
+
+const UnorderedList = ({ children }: { children?: ReactNode }) => {
+	return <ul className="my-10 mx-0 list-flower">{children}</ul>;
+};
+
+const OrderedList = ({ children }: { children?: ReactNode }) => {
+	return <ol className="my-10 mx-0 list-inside">{children}</ol>;
 };
 
 function getHeadingId(children: ReactNode) {
@@ -27,11 +63,48 @@ function getHeadingId(children: ReactNode) {
 
 function ArticleContent({ markdown, className = "" }: ArticleContentProps) {
 	return (
-		<article className={className}>
+		<article className={cn(className)}>
 			<ReactMarkdown
 				rehypePlugins={[rehypeRaw]}
 				remarkPlugins={[remarkGfm]}
 				components={{
+					table: ({ node, className, children, ...props }) => (
+						<div className="w-full overflow-auto ring-1 ring-inset dark:ring-purple-300/90">
+							<table
+								className="w-full text-neutral-900 dark:text-neutral-50 ring-inset rounded-md"
+								{...props}
+							>
+								{children}
+							</table>
+						</div>
+					),
+					thead: ({ node, className, children, ...props }) => (
+						<thead
+							className="font-sans bg-pink-500/10 w-full border-b-1 border-solid border-pink-500/50 text-pink-500"
+							{...props}
+						>
+							{children}
+						</thead>
+					),
+					tr: ({ node, className, children, isHeader, ...props }) => (
+						<tr
+							className="w-fit [&>*]:text-md [&>*]:border [&>*]:border-solid [&>*]:border-pink-500/70 [&>*]:border-collapse [&>th]:whitespace-pre-line [&>th]:p-2 [&>td]:whitespace-pre-line [&>td]:p-2"
+							{...props}
+						>
+							{children}
+						</tr>
+					),
+					tbody: ({ node, className, children, ...props }) => (
+						<tbody
+							className="font-sans w-full [&>*]:border [&>*]:border-solid [&>*]:border-pink-200 [&>*]:border-collapse"
+							{...props}
+						>
+							{children}
+						</tbody>
+					),
+					note: Note,
+					tabs: Tabs,
+					tab: Tab,
 					h1: ({ node, children, ...props }) => {
 						return (
 							<h1
@@ -49,7 +122,7 @@ function ArticleContent({ markdown, className = "" }: ArticleContentProps) {
 								className="pt-5 font-monoItalic"
 								{...props}
 								id={getHeadingId(children)}
-								style={{ marginTop: "2rem" }}
+								style={{ marginTop: "1.8rem" }}
 							>
 								{children}
 							</h2>
@@ -59,11 +132,45 @@ function ArticleContent({ markdown, className = "" }: ArticleContentProps) {
 						return (
 							<h3
 								{...props}
-								style={{ marginTop: "2rem" }}
+								style={{ marginTop: "1.6rem" }}
+								id={getHeadingId(children)}
 								className="pt-4 font-monoItalic"
 							>
 								{children}
 							</h3>
+						);
+					},
+					h4: ({ node, children, ...props }) => {
+						return (
+							<h4
+								{...props}
+								style={{ marginTop: "1.4rem" }}
+								className="pt-3 font-monoItalic"
+							>
+								{children}
+							</h4>
+						);
+					},
+					h5: ({ node, children, ...props }) => {
+						return (
+							<h5
+								{...props}
+								style={{ marginTop: "1.2rem" }}
+								className="pt-2 font-monoItalic"
+							>
+								{children}
+							</h5>
+						);
+					},
+					h6: ({ node, children, ...props }) => {
+						return (
+							<h6
+								{...props}
+								style={{ marginTop: "1rem" }}
+								className="pt-1 font-monoItalic"
+							>
+								{children}
+							</h6>
 						);
 					},
 					p: ({ node, ...props }) => {
@@ -74,9 +181,6 @@ function ArticleContent({ markdown, className = "" }: ArticleContentProps) {
 							/>
 						);
 					},
-					br: ({ node, ...props }) => {
-						return <br />;
-					},
 					a: ({ node, ...props }) => {
 						return (
 							<a
@@ -86,6 +190,10 @@ function ArticleContent({ markdown, className = "" }: ArticleContentProps) {
 						);
 					},
 					code: CodeBlock as any,
+					blockquote: ({ ...props }) => <Blockquote {...props} />,
+					ul: ({ ...props }) => <UnorderedList {...props} />,
+					ol: ({ ...props }) => <OrderedList {...props} />,
+					li: ({ ...props }) => <ListItem {...props} />,
 				}}
 			>
 				{markdown}
@@ -120,7 +228,7 @@ const CodeBlock = ({
 
 	if (language === "sh") language = "bash";
 
-	let [copyButtonText, setCopyButtonText] = useState("Copy");
+	const [copyButtonText, setCopyButtonText] = useState("Copy");
 
 	// changes the text back to `copy` after 1 second
 	const changeText = (text: string) => {

@@ -7,6 +7,7 @@ import type { IReadTimeResults } from "reading-time";
 import { dateFormatLong, dateFormatMicroformat } from "@/utils/date";
 import pluralize from "@/utils/pluralize";
 import Tags from "./Tags";
+import StickyTitle from "./StickyTitle";
 
 import BackButton from "@/components/BackButton";
 
@@ -69,6 +70,7 @@ const ArticleHeader = ({ article, readingTime }: ArticleHeaderProps) => {
           </span>
         </p>
       </div>
+      <StickyTitle title={article.title} elementRef={pageHeaderRef} />
       {article.tags && article.tags.length > 0 && (
         <div className="mx-auto max-w-4xl sm:text-center my-2">
           <Tags tags={article.tags} />
