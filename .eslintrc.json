@@ -1,34 +1,39 @@
 {
-	"$schema": "https://json.schemastore.org/eslintrc",
-	"env": {
-		"browser": true,
-		"commonjs": true,
-		"es6": true,
-		"es2021": true,
-		"node": true
-	},
-	"root": true,
-	"extends": ["next/core-web-vitals", "prettier"],
-	"plugins": ["tailwindcss"],
-	"rules": {
-		"tailwindcss/no-custom-classname": "off",
-		"jsx-a11y/anchor-is-valid": "off",
-		"newline-before-return": "error",
-		"max-lines": [
-			"error",
-			{
-				"max": 1000,
-				"skipBlankLines": true,
-				"skipComments": true
-			}
-		],
-		"no-unsafe-optional-chaining": "off"
-	},
-	"settings": {
-		"tailwindcss": {
-			"callees": ["cn", "cva"],
-			"config": "tailwind.config.js"
-		}
-	},
-	"overrides": []
+  "$schema": "https://json.schemastore.org/eslintrc",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "es2021": true,
+    "node": true
+  },
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:tailwindcss/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "tailwindcss"
+  ],
+  "rules": {
+    "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/classnames-order": "error"
+  },
+  "settings": {
+    "tailwindcss": {
+      "callees": [
+        "cn"
+      ]
+    }
+  },
+  "next": {
+    "rootDir": true
+  },
+  "overrides": []
 }
