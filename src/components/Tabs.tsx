@@ -4,17 +4,17 @@ import Tab from "./Tab";
 import styled from "@emotion/styled";
 import tw from "twin.macro";
 
-interface TabsProps {
-  children?: ReactElement[];
+export interface TabsProps {
+	children?: ReactElement[];
 }
 
 const TabsContainer = styled.div`
   width: 600px;
-  margin: 100px auto;
+  margin: 10px auto;
 `;
 
 const TabsDiv = styled.div`
-  ${tw`w-full overflow-x-auto w-[calc(100%_-_1rem)] whitespace-nowrap mx-2 my-0 pt-8 pb-0 px-0`};
+  ${tw`w-full overflow-x-auto w-[calc(100%_-_1rem)] whitespace-nowrap mx-2 my-0 pt-2 pb-0 px-0`};
 
   & {
     @media (min-width: 50rem) {
@@ -32,26 +32,26 @@ const TabButton = styled.button`
 `;
 
 const Tabs: FC<TabsProps> = ({ children }) => {
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const arrayChildren = Children.toArray(children) as ReactElement[];
-  const activeTabContent = arrayChildren[activeTabIndex]?.props?.children;
+	const [activeTabIndex, setActiveTabIndex] = useState(0);
+	const arrayChildren = Children.toArray(children) as ReactElement[];
+	const activeTabContent = arrayChildren[activeTabIndex]?.props?.children;
 
-  return (
-    <TabsContainer>
-      <TabsDiv>
-        {arrayChildren.map((child, index: number) => (
-          <TabButton
-            key={index}
-            onClick={() => setActiveTabIndex(index)}
-            className={index === activeTabIndex ? "bg-pink-500" : "bg-pink-300"}
-          >
-            {child?.props?.title ?? "Tab Title"}
-          </TabButton>
-        ))}
-      </TabsDiv>
-      <Tab isActive={true}>{activeTabContent}</Tab>
-    </TabsContainer>
-  );
+	return (
+		<TabsContainer>
+			<TabsDiv>
+				{arrayChildren.map((child, index: number) => (
+					<TabButton
+						key={`${child.type}-${index}`}
+						onClick={() => setActiveTabIndex(index)}
+						className={index === activeTabIndex ? "bg-pink-500" : "bg-pink-300"}
+					>
+						{child?.props?.title ?? "Tab Title"}
+					</TabButton>
+				))}
+			</TabsDiv>
+			<Tab isActive={true}>{activeTabContent}</Tab>
+		</TabsContainer>
+	);
 };
 
 export default Tabs;

@@ -15,15 +15,17 @@ import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import Note from "./Note";
-import Tab from "./Tab";
-import Tabs from "./Tabs";
+import Tab, { type TabProps } from "./Tab";
+import Tabs, { type TabsProps } from "./Tabs";
+import Accordion, { type AccordionProps } from "./Accordion";
 
 import type { NoteProps } from "./Note";
 
 interface CustomComponents extends Components {
 	note: React.ComponentType<NoteProps>;
-	tabs: React.ComponentType<any>;
-	tab: React.ComponentType<any>;
+	tabs: React.ComponentType<TabsProps>;
+	tab: React.ComponentType<TabProps>;
+	accordion: React.ComponentType<AccordionProps>;
 }
 
 type ArticleContentProps = {
@@ -294,6 +296,7 @@ const components: Partial<CustomComponents> = {
 	ul: ({ ...props }) => <UnorderedList {...props} />,
 	ol: ({ ...props }) => <OrderedList {...props} />,
 	li: ({ ...props }) => <ListItem {...props} />,
+	accordion: Accordion,
 };
 
 function ArticleContent({ markdown, className = "" }: ArticleContentProps) {

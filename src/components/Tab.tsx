@@ -1,12 +1,10 @@
 import type { FC, ReactNode } from "react";
-import { Children, useState } from "react";
 import styled from "@emotion/styled";
-import tw from "twin.macro";
 import { theme } from "twin.macro";
 
-interface TabProps {
-  isActive?: boolean;
-  children?: ReactNode;
+export interface TabProps {
+	isActive?: boolean;
+	children?: ReactNode;
 }
 
 const TabContainer = styled.div`
@@ -55,15 +53,15 @@ const Page = styled.div`
 `;
 
 const Tab: FC<TabProps> = ({ isActive, children }) => {
-  return (
-    <TabContainer className={isActive ? "block" : "hidden"}>
-      <TabContent>
-        <TabContentInner className="font-sans">
-          <Page>{children ? <div>{children}</div> : null}</Page>
-        </TabContentInner>
-      </TabContent>
-    </TabContainer>
-  );
+	return (
+		<TabContainer className={isActive ? "block" : "hidden"}>
+			<TabContent>
+				<TabContentInner className="font-sans">
+					<Page>{children ? <div>{children}</div> : null}</Page>
+				</TabContentInner>
+			</TabContent>
+		</TabContainer>
+	);
 };
 
 export default Tab;
