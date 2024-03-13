@@ -1,8 +1,7 @@
 import clsx from 'clsx';
 import { useMemo } from 'react';
 import Icon from '@/components/Icon';
-
-import { Link } from '@/components/Link';
+import Link from '@/components/Link';
 
 import { formatDate } from '@/utils/date';
 
