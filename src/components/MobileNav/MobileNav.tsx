@@ -8,7 +8,6 @@ import cn from '@/utils/cn';
 
 import { LuMenu as Hamburger } from 'react-icons/lu'
 
-import Button from '@/components/Button'
 import Link from '@/components/Link'
 
 const animation = {
@@ -24,14 +23,7 @@ const MobileNav = ({ sticky = false }: { sticky?: boolean }) => {
           <Menu>
             {({ open }) => (
               <>
-                <Menu.Button
-                  title="Menu"
-                  aria-label="Menu"
-                  htmlType="button"
-                  variant="ghost"
-                  className={cn('flex h-9 w-9 items-center justify-center p-0')}
-                  as={Button}
-                >
+                <Menu.Button className={cn('flex h-9 w-9 items-center justify-center p-0 hover:text-pink-100')}>
                   <Hamburger size={18} className={cn('')} />
                 </Menu.Button>
                 {open && (

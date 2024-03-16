@@ -150,7 +150,6 @@ export function Buttons() {
             className={`max-w-[${button.width}px] max-h-[${button.height}px] hover:scale-150`}
             src={button.src}
             alt={button.alt}
-            priority={true}
             key={`button-${i}`}
             width={button.width}
             height={button.height}
@@ -164,7 +163,6 @@ export function Buttons() {
             src={button.src}
             alt={button.alt}
             key={`button2-${i}`}
-            priority={true}
             width={button.width}
             height={button.height}
           />

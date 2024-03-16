@@ -6,7 +6,7 @@ import cn from '@/utils/cn'
 interface PaginationProps {
   page: number;
   url: string;
-  previousPostUrl: string;
+  previousPostUrl?: string;
   series: (string | number)[];
 }
 
@@ -20,7 +20,10 @@ const Pagination: FC<PaginationProps> = ({ page, url, previousPostUrl, series })
 
   const links = [
     {
-      label: <span className="inline-flex items-center"><LiaCaretLeftSolid size={16} className='align-bottom' /> Prev</span>,
+      label:
+        <span className={cn("inline-flex items-center")}>
+          <LiaCaretLeftSolid size={16} className='align-bottom' /> Prev
+        </span>,
       url: previousPostUrl,
       active: false,
       key: 'prev',
@@ -42,20 +45,20 @@ const Pagination: FC<PaginationProps> = ({ page, url, previousPostUrl, series })
   ];
 
   return (
-    <div className="flex p-[8px] flex-wrap bg-primary-500/20 rounded-full shadow-[0px_10px_15px_rgba(0,0,0,0.1)] justify-around w-full">
+    <div className="flex p-2 flex-wrap bg-primary-500/20 rounded-full shadow-[0px_10px_15px_rgba(0,0,0,0.1)] justify-around w-full mt-32">
       {links.map((link) => {
         return (
           <div
             key={link.key}
-            className="text-primary-700 leading-10 text-center text-lg font-medium cursor-pointer select-none transition-all duration-[0.3s] ease-in-out"
+            className="text-primary-700 leading-10 text-center text-lg font-medium cursor-pointer select-none transition-all duration-300 ease-in-out"
           >
             {link.label === 'gap' && <div>...</div>}
-            {link.url !== null &&
+            {link.url !== undefined && link.url !== null &&
               <Link
                 path={link.url}
                 label={link.label}
                 className={cn([
-                  "text-primary-700 p-2 rounded-full transition-all duration-[0.3s] ease-in-out hover:bg-primary-400 hover:text-primary-100",
+                  "text-primary-700 py-1.5 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-primary-500",
                   link.active && "bg-primary-500 text-primary-100 underline-offset-4 underline decoration-pink-500"
                 ])} />
             }

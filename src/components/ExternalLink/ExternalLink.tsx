@@ -10,7 +10,7 @@ export default function ExternalLink({
   text,
   link,
 }: {
-  text: string;
+  text: string | number | JSX.Element;
   link: string;
 }) {
   const [x, setX] = useState(0);

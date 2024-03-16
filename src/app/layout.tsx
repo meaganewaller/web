@@ -77,8 +77,10 @@ const serif = Serif({
 
 const mono = Mono({
   subsets: ["latin"],
+  weight: "400",
   display: "swap",
   variable: "--font-mono",
+  adjustFontFallback: false,
 });
 
 const mono_italic = Mono({
@@ -98,11 +100,7 @@ const pixel = Press_Start_2P({
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${sans.variable} ${serif.variable} ${mono.variable} ${pixel.variable} ${mono_italic.variable} font-sans scroll-smooth`}
-    >
+    <html lang="en" suppressHydrationWarning className={`${sans.variable} ${serif.variable} ${mono.variable} ${pixel.variable} ${mono_italic.variable} font-sans scroll-smooth`}>
       <head>
         <meta charSet="utf-8" />
       </head>

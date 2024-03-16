@@ -11,7 +11,7 @@ import { HiLink } from 'react-icons/hi2';
 
 interface LinkProps {
   path: string
-  label: string
+  label: string | JSX.Element | number
   icon?: IconType
   className?: string
 }

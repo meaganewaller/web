@@ -14,6 +14,7 @@ import EmptyState from '@/components/EmptyState';
 import Container from "@/components/Container";
 import PageHeader from "@/components/PageHeader";
 import { createMetadata } from '@/utils/metadata'
+import Pagination from "@/components/Pagination";
 
 interface PostData {
   page: number;
@@ -77,7 +78,7 @@ export default function BlogPage() {
   }, [currentPage, tag, category, search]);
 
   let postUrl = `/blog?page=${currentPage}`;
-  const previousPostUrl = `/blog?page=${currentPage - 1}`;
+  const previousPostUrl = currentPage > 1 ? `/blog?page=${currentPage - 1}` : undefined;
 
   if (tag) {
     postUrl += `&tag=${tag}`;
@@ -118,13 +119,14 @@ export default function BlogPage() {
       <Container>
         {renderSearchComponent()}
         {!isLoading && blogData?.posts && blogData.posts.length ? (
-          <PostsList
-            posts={blogData.posts}
-            url={postUrl}
-            pagination={blogData.pagy.series}
-            page={currentPage}
-            previousPostUrl={previousPostUrl}
-          />
+          <>
+            <PostsList
+              posts={blogData.posts}
+              url={postUrl}
+              page={currentPage}
+            />
+            <Pagination page={currentPage} url={postUrl} previousPostUrl={previousPostUrl} series={blogData.pagy.series} />
+          </>
         ) : (
           <EmptyState message={search ? `No posts for "${search}" Perhaps the little guy is too busy running in the wheel of code.` : "The posts are playing hide and seek - we just can't find them!"} />
         )}

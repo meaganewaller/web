@@ -15,7 +15,7 @@ const Pagination = ({ page, totalPages, url, previousPostUrl, series }: Params) 
   }
 
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flex flex-col justify-center items-center mt-10'>
       <ul
         className="pagination"
         role="menubar"

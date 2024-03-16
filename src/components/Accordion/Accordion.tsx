@@ -5,7 +5,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import React from 'react';
 import { ReactNode } from 'react';
 
-type AccordionProps = {
+export type AccordionProps = {
   label: string;
   children: ReactNode;
 };
