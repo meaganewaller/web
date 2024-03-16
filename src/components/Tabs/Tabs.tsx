@@ -24,7 +24,7 @@ const TabsDiv = styled.div`
 `;
 
 const TabButton = styled.button`
-  ${tw`uppercase leading-[0.8] inline-block ml-[-35px] relative whitespace-nowrap cursor-pointer mr-16 rounded-[6px_6px_0_0] border-[none] first-of-type:ml-[30px] before:skew-x-[25deg] before:rounded-[0_8px_0_0] before:-right-4 after:skew-x-[-25deg] after:rounded-[8px_0_0_0] after:-left-4 font-pixel bg-pink-500`};
+  ${tw`uppercase leading-[0.8] inline-block ml-[-35px] relative whitespace-nowrap cursor-pointer mr-16 rounded-[6px_6px_0_0] border-[none] first-of-type:ml-[30px] before:skew-x-[25deg] before:rounded-[0_8px_0_0] before:-right-4 after:skew-x-[-25deg] after:rounded-[8px_0_0_0] after:-left-4 font-pixel bg-primary-500`};
 
   & {
     filter: drop-shadow(0px -3px 2px rgba(0, 0, 0, 0.05));
@@ -43,7 +43,7 @@ const Tabs: FC<TabsProps> = ({ children }) => {
           <TabButton
             key={`${child.type}-${index}`}
             onClick={() => setActiveTabIndex(index)}
-            className={index === activeTabIndex ? "bg-pink-500" : "bg-pink-300"}
+            className={index === activeTabIndex ? "bg-primary-500" : "bg-primary-300"}
           >
             {child?.props?.title ?? "Tab Title"}
           </TabButton>

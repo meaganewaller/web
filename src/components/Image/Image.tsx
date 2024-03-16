@@ -1,18 +1,18 @@
 import NextImage from 'next/image';
+import cn from '@/utils/cn';
 
-export default function Image({ src, alt }: { src: string; alt: string }) {
+export default function Image({ src, alt, className, width, height }: { src: string; alt: string, className?: string, width: number, height: number }) {
   return (
-    <div className="img mb-12 mt-6 w-full">
-      <NextImage
-        src={src}
-        alt={alt}
-        fill={true}
-        className="rounded-md shadow-2xl shadow-pink-300 dark:shadow-purple-950"
-      />
-      <p className="mt-4 text-center text-xs text-pink-700 dark:text-purple-100">
-        {alt}
-      </p>
-    </div>
+    <NextImage
+      width={width}
+      height={height}
+      src={src}
+      alt={alt}
+      className={cn(
+        className,
+        'rounded-md'
+      )}
+    />
   )
 }
 

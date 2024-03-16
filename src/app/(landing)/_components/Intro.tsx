@@ -1,14 +1,14 @@
-import Link from 'next/link';
+import Link from '@/components/Link'
 import Icon from '@/components/Icon'
 
 export default function Intro() {
   return (
-    <section className="grid-in-about dark:border-turquoise-800 border-2 border-solid border-purple-400">
-      <div className="dark:border-turquoise-700 sticky h-full border-b-2 border-solid border-purple-200 bg-purple-100 text-blue-700 dark:bg-blue-800">
-        <header className="font-pixel dark:bg-turquoise-700 dark:border-turquoise-300 border-b-2 border-dashed border-pink-500 bg-pink-300 p-2 text-center text-xl uppercase text-pink-700 dark:text-blue-800">
+    <section className="grid-in-about border-2 border-solid border-purple-400">
+      <div className="sticky h-full border-b-2 border-solid border-purple-200 bg-purple-100 text-blue-700">
+        <header className="font-pixel border-b-2 border-dashed border-primary-500 bg-primary-300 p-2 text-center text-xl uppercase text-primary-700">
           Hi! I&apos;m Meagan.
         </header>
-        <div className="dark:text-turquoise-100 flex h-full flex-col justify-center text-pink-700">
+        <div className="flex h-full flex-col justify-center text-primary-700">
           <p className="font-extra text-md px-8 py-2 leading-relaxed">
             <span className="font-bold italic">I wrote my first line of HTML on Microsoft Notepad in 2004 </span>
             and fell head-over-heels for how magical it all felt. The problem I was solving in 2004? My Neopets shop
@@ -23,12 +23,10 @@ export default function Intro() {
           </p>
           <div className="font-pixel mb-7 flex place-content-end px-8 text-lg">
             <Link
-              className="text-md text-purple-700 hover:text-purple-600 hover:no-underline hover:decoration-0 dark:text-purple-200 dark:hover:text-purple-100"
-              href="/meagan"
-            >
-              <span className="text-xs">Read more</span>
-              <Icon name="arrow-right" width={20} />
-            </Link>
+              className="text-md text-purple-700 hover:text-purple-600 hover:decoration-purple-400"
+              path="/meagan"
+              label="Read more"
+            />
           </div>
         </div>
       </div>

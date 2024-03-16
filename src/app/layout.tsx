@@ -1,7 +1,7 @@
 import Providers from "@/providers";
 import { Suspense } from "react";
-import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
+import type { Metadata, Viewport } from "next";
+import Header from "@/components/Header";
 import Loading from "./loading";
 import {
   DM_Sans as Sans,
@@ -17,6 +17,15 @@ import "@/styles/globals.css";
 export interface LayoutProps {
   children: React.ReactNode;
 }
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  width: 'device-width',
+}
+
 
 const title = `meagan waller | it's a blog!`;
 const description = `meagan waller's personal website and blog`;
@@ -52,6 +61,9 @@ export const metadata: Metadata = {
 
 const sans = Sans({
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "700"],
+  display: "swap",
   variable: "--font-sans",
 });
 
@@ -80,6 +92,7 @@ const mono_italic = Mono({
 const pixel = Press_Start_2P({
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
   variable: "--font-pixel",
 });
 
@@ -88,21 +101,22 @@ export default function RootLayout({ children }: LayoutProps) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${sans.variable} ${serif.variable} ${mono.variable} ${pixel.variable} ${mono_italic.variable} font-sans motion-safe:scroll-smooth`}
+      className={`${sans.variable} ${serif.variable} ${mono.variable} ${pixel.variable} ${mono_italic.variable} font-sans scroll-smooth`}
     >
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="debug-screens antialiased">
         <Providers>
-          <Navbar />
-          <Suspense fallback={<Loading />}>
-            <div className="mx-auto my-8 h-screen max-w-[95%]">{children}</div>
-          </Suspense>
+          <div id="__app">
+            <Header />
+            <Suspense fallback={<Loading />}>
+              <main className="mx-auto my-8 h-screen max-w-[95%]">{children}</main>
+            </Suspense>
+          </div>
+          <Analytics />
+          <SpeedInsights />
         </Providers>
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

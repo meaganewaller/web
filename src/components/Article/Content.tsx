@@ -3,7 +3,7 @@
 
 import type { Components } from "react-markdown";
 
-import { cn } from "@/utils/cn";
+import cn from "@/utils/cn";
 import { Children, memo, useState } from "react";
 import type { ReactNode } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -76,17 +76,17 @@ const CodeBlock = ({
   // parse and format "inline" CodeBlocks, (e.g. `single ticked`) or full code blocks (e.g. ``` )
   if (inline || !language)
     return (
-      <code className="p-1 m-1 text-lg text-pink-700 bg-pink-200 rounded-md font-monoItalic">
+      <code className="p-1 m-1 text-lg text-primary-700 bg-primary-200 rounded-md font-monoItalic">
         {children}
       </code>
     );
 
   return (
     <div className="my-4">
-      <div className="flex justify-between items-center py-2 px-4 bg-gradient-to-b from-pink-500 via-pink-400 to-pink-300">
+      <div className="flex justify-between items-center py-2 px-4 bg-gradient-to-b from-primary-500 via-primary-400 to-primary-300">
         <button
           type="button"
-          className="text-pink-100 focus:outline-none"
+          className="text-primary-100 focus:outline-none"
           onClick={toggleLineNumbers}
         >
           {showLineNumbers ? (
@@ -104,11 +104,11 @@ const CodeBlock = ({
           )}
         </button>
 
-        <span className="text-pink-50 font-monoItalic">{language}</span>
+        <span className="text-primary-100 font-monoItalic">{language}</span>
         <CopyToClipboard text={children}>
           <button
             type="button"
-            className="inline-flex items-center py-1 px-2.5 text-sm font-medium text-center hover:text-pink-500 hover:bg-pink-100 rounded-lg text-pink-50 bg-transparent border-pink-100 border border-solid hover:border-transparent"
+            className="inline-flex items-center py-1 px-2.5 text-sm font-medium text-center hover:text-primary-500 hover:bg-primary-100 rounded-lg text-primary-100 bg-transparent border-primary-100 border border-solid hover:border-transparent"
             onClick={() => {
               changeText("Copied!");
             }}
@@ -138,11 +138,11 @@ const CodeBlock = ({
 
 const Blockquote = ({ children }: { children?: ReactNode }) => {
   return (
-    <blockquote className="relative my-10 mx-0 text-pink-500 bg-pink-300/15 rounded-lg text-lg leading-loose p-12">
-      <FaQuoteLeft className="absolute left-6 top-4 text-pink-600" size={10} />
+    <blockquote className="relative my-10 mx-0 text-primary-500 bg-primary-300/15 rounded-lg text-lg leading-loose p-12">
+      <FaQuoteLeft className="absolute left-6 top-4 text-primary-600" size={10} />
       <div>{children}</div>
       <FaQuoteRight
-        className="absolute right-6 bottom-4 text-pink-600"
+        className="absolute right-6 bottom-4 text-primary-600"
         size={10}
       />
     </blockquote>
@@ -151,7 +151,7 @@ const Blockquote = ({ children }: { children?: ReactNode }) => {
 
 const ListItem = ({ children }: { children?: ReactNode }) => {
   return (
-    <li className="text-xl my-2 font-serif list-inside text-pink-600">
+    <li className="text-xl my-2 font-serif list-inside text-primary-600">
       {children}
     </li>
   );
@@ -174,9 +174,9 @@ function getHeadingId(children: ReactNode) {
 
 const components: Partial<CustomComponents> = {
   table: ({ node, className, children, ...props }) => (
-    <div className="w-full overflow-auto ring-1 ring-inset dark:ring-purple-300/90">
+    <div className="w-full overflow-auto ring-1 ring-inset">
       <table
-        className="w-full text-neutral-900 dark:text-neutral-50 ring-inset rounded-md"
+        className="w-full text-neutral-900 ring-inset rounded-md"
         {...props}
       >
         {children}
@@ -185,7 +185,7 @@ const components: Partial<CustomComponents> = {
   ),
   thead: ({ node, className, children, ...props }) => (
     <thead
-      className="font-sans bg-pink-500/10 w-full border-b-1 border-solid border-pink-500/50 text-pink-500"
+      className="font-sans bg-primary-500/10 w-full border-b-1 border-solid border-primary-500/50 text-primary-500"
       {...props}
     >
       {children}
@@ -193,7 +193,7 @@ const components: Partial<CustomComponents> = {
   ),
   tr: ({ node, className, children, ...props }) => (
     <tr
-      className="w-fit [&>*]:text-md [&>*]:border [&>*]:border-solid [&>*]:border-pink-500/70 [&>*]:border-collapse [&>th]:whitespace-pre-line [&>th]:p-2 [&>td]:whitespace-pre-line [&>td]:p-2"
+      className="w-fit [&>*]:text-md [&>*]:border [&>*]:border-solid [&>*]:border-primary-500/70 [&>*]:border-collapse [&>th]:whitespace-pre-line [&>th]:p-2 [&>td]:whitespace-pre-line [&>td]:p-2"
       {...props}
     >
       {children}
@@ -201,7 +201,7 @@ const components: Partial<CustomComponents> = {
   ),
   tbody: ({ node, className, children, ...props }) => (
     <tbody
-      className="font-sans w-full [&>*]:border [&>*]:border-solid [&>*]:border-pink-200 [&>*]:border-collapse"
+      className="font-sans w-full [&>*]:border [&>*]:border-solid [&>*]:border-primary-200 [&>*]:border-collapse"
       {...props}
     >
       {children}
@@ -287,7 +287,7 @@ const components: Partial<CustomComponents> = {
     return (
       <a
         {...props}
-        className="p-1 text-purple-700 rounded-lg hover:text-purple-800 bg-purple-200/30 hover:bg-purple-600/15"
+        className="p-1 text-info-700 rounded-lg hover:text-info-800 bg-info-200/30 hover:bg-info-600/15"
       />
     );
   },

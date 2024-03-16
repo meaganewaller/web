@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { Article } from "@/components/Article";
+import Article from "@/components/Article";
 
 type Props = {
   params: {

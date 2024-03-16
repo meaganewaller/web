@@ -1,14 +1,42 @@
 'use client';
+import { useRouter } from 'next/navigation';
+import { createMetadata } from '@/utils/metadata'
 
-import Link from 'next/link';
+import PageLayout from '@/components/Layout';
+import Container from '@/components/Container';
+import Button from '@/components/Button';
 
 export default function NotFound() {
+  createMetadata({
+    title: 'page not found',
+    description: 'The page you are looking for does not exist.',
+  });
+
+  const router = useRouter();
   return (
-    <main className="flex h-screen flex-col items-center justify-center gap-4 p-4 text-center">
-      <h1 className="text-xl font-bold md:text-2xl">Not found!!!</h1>
-      <div className="flex items-center justify-center gap-4">
-        <Link href="/">Go back to home</Link>
-      </div>
-    </main>
-  );
+    <PageLayout>
+      <Container className="mx-auto grid grid-cols-12 md:space-x-4">
+        <div className="col-span-12 p-2">
+          <h1 className="font-pixel text-center text-2xl uppercase text-primary-600 before:pr-[7px] before:content-[url('/images/ui/leftsparkle.gif')] after:pl-[5px] after:content-[url('/images/ui/rightsparkle.gif')] lg:text-3xl">
+            404 - Page Not Found
+          </h1>
+
+          <p className="text-center text-lg mt-4">
+            The page you are looking for does not exist.
+          </p>
+
+          <div className="text-center mt-8 w-full items-center">
+            <Button
+              color="blue"
+              size="small"
+              type="button"
+              onClick={() => { router.replace("/") }}
+            >
+              Go Back
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </PageLayout>
+  )
 }

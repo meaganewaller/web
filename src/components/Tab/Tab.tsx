@@ -8,7 +8,7 @@ export interface TabProps {
 }
 
 const TabContainer = styled.div`
-  background: ${theme`colors.pink.500`};
+  background: ${theme`colors.primary.500`};
   padding: 6px 0;
   position: relative;
   z-index: 10;
@@ -46,9 +46,9 @@ const Page = styled.div`
   border-radius: 10px;
   min-height: 10rem;
   line-height: 160%;
-  background: ${theme`colors.pink.200`};
+  background: ${theme`colors.primary.200`};
   filter: drop-shadow(0px -2px 2px rgba(0, 0, 0, 0.15));
-  background-image: linear-gradient(${theme`colors.pink.300`} 1px, transparent 1px);
+  background-image: linear-gradient(${theme`colors.primary.300`} 1px, transparent 1px);
   background-size: 8% 8%, 2px 2px;
 `;
 

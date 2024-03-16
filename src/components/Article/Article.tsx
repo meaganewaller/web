@@ -35,21 +35,25 @@ export const Article = ({ article }: ArticleProps) => {
   }, [article.published_date]);
 
   return (
-    <article className="h-entry">
-      <Header article={article} readingTime={readingTimeOfArticle} />
-      {isOutdated && article.category.title === "Tutorials & Guides" && (
-        <Note type="info" title="Before Reading:">
-          This article was published more than {outdatedThresholdInDays} days
-          ago. Please verify the information as it may be outdated.
-        </Note>
-      )}
-      {article.content && <Content markdown={article.content} />}
-      <PageFooter>
-        <>
-          <AuthorFooter />
-          <Comments />
-        </>
-      </PageFooter>
+    <article className="relative leading-4 box-border z-1 list-outside">
+      <div className="relative mx-auto min-h-[515px]">
+        <div className="md:px-10">
+          <Header article={article} readingTime={readingTimeOfArticle} />
+          {isOutdated && article.category.title === "Tutorials & Guides" && (
+            <Note type="info" title="Before Reading:">
+              This article was published more than {outdatedThresholdInDays} days
+              ago. Please verify the information as it may be outdated.
+            </Note>
+          )}
+          {article.content && <Content markdown={article.content} />}
+          <PageFooter>
+            <>
+              <AuthorFooter />
+              <Comments />
+            </>
+          </PageFooter>
+        </div>
+      </div>
     </article>
   );
 };

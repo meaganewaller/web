@@ -1,123 +1,60 @@
-/* eslint-disable react/jsx-props-no-spreading, jsx-a11y/anchor-has-content */
-import clsx from "clsx";
-import NextLink from "next/link";
-import React from "react";
-import Icon from "@/components/Icon";
+'use client';
 
-export type LinkThemeProps = {
-  variant: "default" | "none" | "header" | "info" | "tag" | "button";
-  size: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
-};
+import NextLink from 'next/link';
+import React, { useState } from 'react';
+import { m } from 'framer-motion';
+import cn from '@/utils/cn';
+import { IconType } from 'react-icons';
+import ExternalLink from '@/components/ExternalLink';
+import { HiDownload, HiDocument } from 'react-icons/hi';
+import { HiLink } from 'react-icons/hi2';
 
-type LinkTheme = {
-  variant: {
-    [K in keyof {
-      [x: string]: LinkThemeProps;
-    } as LinkThemeProps["variant"]]: string;
-  };
-  size: {
-    [K in keyof {
-      [LinkThemeProps: string]: LinkThemeProps;
-    } as LinkThemeProps["size"]]: string;
-  };
-};
+interface LinkProps {
+  path: string
+  label: string
+  icon?: IconType
+  className?: string
+}
 
-export const linkTheme: LinkTheme = {
-  variant: {
-    default: "text-blue-600 dark:text-blue-200 hover:underline",
-    none: "",
-    header: "text-blue-600 dark:text-blue-200 underline hover:no-underline",
-    info: "link text-gray-400 text-sm hover:underline",
-    tag: "bg-turquoise-100 px-1 py-0.5 rounded-sm hover:bg-gray-300 hover:text-gray-950",
-    button:
-      "inline-flex items-center border border-gray-300 dark:border-gray-700 bg-pink-50 dark:bg-gray-800 font-medium text-gray-700 dark:text-turquoise-100 shadow-sm hover:bg-gray-50 dark:hover:bg-turquoise-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2",
-  },
-  size: {
-    xs: "text-xs",
-    sm: "text-sm",
-    md: "text-md ",
-    lg: "text-lg",
-    xl: "text-xl",
-    "2xl": "text-2xl",
-  },
-};
+const Link = ({ path, label, icon: Icon, className = '' }: LinkProps) => {
+  const [hover, setHover] = useState(false);
 
-const variantSizes = {
-  none: {
-    ...{ ...linkTheme.size },
-  },
-  default: {
-    ...{ ...linkTheme.size },
-  },
-  header: {
-    ...{ ...linkTheme.size },
-  },
-  info: {
-    ...{ ...linkTheme.size },
-  },
-  tag: {
-    ...{ ...linkTheme.size },
-  },
-  button: {
-    xs: "rounded px-2.5 py-1.5 text-xs",
-    sm: "rounded px-2.5 py-1.5 text-xs",
-    md: "rounded-md px-3 py-2 text-sm",
-    lg: "rounded-md px-4 py-2 text-sm",
-    xl: "rounded-md px-4 py-2 text-base",
-    "2xl": "rounded-md px-6 py-3 text-base",
-  },
-};
+  const internal = path.startsWith('/') || path.startsWith('#');
+  const external = !internal || (path.startsWith('http') && !path.includes(process.env.NEXT_PUBLIC_BASE_URL || 'localhost'));
+  const download = path.startsWith('download:');
+  const file = path.startsWith('file:');
+  const anchor = path.startsWith('#');
 
-export type LinkProps = {
-  variant?: LinkThemeProps["variant"];
-  size?: LinkThemeProps["size"];
-  className?: string;
-  href: string;
-  target?: string;
-  showExternal?: boolean;
-};
-
-// eslint-disable-next-line
-export const Link = React.forwardRef<
-  HTMLAnchorElement,
-  React.PropsWithChildren<LinkProps>
->(
-  (
-    {
-      variant = "default",
-      size = "md",
-      className = "",
-      showExternal = true,
-      href,
-      ...props
-    },
-    ref,
-  ) => {
-    const newClassName = clsx(
-      linkTheme.variant[variant],
-      linkTheme.size[size],
-      variantSizes[variant][size],
-      className,
-    );
-    const externalLink = href ? href.indexOf("http") === 0 : false;
-
-    if (externalLink) {
-      if (showExternal) {
-        return (
-          <a ref={ref} href={href} className={newClassName} {...props}>
-            {props.children}
-            <Icon name="external" width={24} />
-          </a>
-        );
-      }
-
-      return <a ref={ref} href={href} className={newClassName} {...props} />;
-    }
-
+  if (external) {
     return (
-      <NextLink ref={ref} href={href} className={newClassName} {...props} />
-    );
-  },
-);
+      <ExternalLink text={label} link={path} />
+    )
+  }
+
+  return (
+    <>
+      <NextLink
+        href={path}
+        className={cn(`flex text-base hover:text-primary-700 transition-all pointer-events-auto font-medium hover:no-underline`, className)}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+
+        <div className='relative'>
+          {Icon && <><Icon size={18} className='inline mr-2 font-thin text-pink-500' /></>}
+          {anchor && <HiLink size={18} className='inline mr-1' />}
+          {label}
+          {download && <HiDownload size={18} className='inline mr-1' />}
+          {file && <HiDocument size={18} className='inline mr-1' />}
+          <m.div
+            initial={{ width: 0 }}
+            animate={{ width: hover ? '100%' : 0 }}
+            className='absolute bg-pink-700 h-[2px] bottom-0 left-0'
+          />
+        </div>
+      </NextLink>
+    </>
+  )
+}
 
 export default Link;

@@ -88,7 +88,7 @@ export default function Form() {
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
-                className="block w-full rounded-md border-pink-300 bg-pink-50 text-pink-900 focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                className="block w-full rounded-md border-primary-300 bg-primary-100 text-primary-900 focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                 placeholder="Darlene Alderson"
                 required={true}
                 aria-describedby="name-required"
@@ -111,7 +111,7 @@ export default function Form() {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                className="block w-full rounded-md border-pink-300 bg-pink-50 text-pink-900 focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                className="block w-full rounded-md border-primary-300 bg-primary-100 text-primary-900 focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                 placeholder="dolores.haze@virtualrealty.com"
                 aria-describedby="email-required"
               />
@@ -132,7 +132,7 @@ export default function Form() {
                 onChange={(e) => {
                   setSubject(e.target.value);
                 }}
-                className="block w-full rounded-md border-pink-300 bg-pink-50 text-pink-900 focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                className="block w-full rounded-md border-primary-300 bg-primary-100 text-primary-900 focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                 aria-describedby="subject-required"
               >
                 <option disabled={true}>Select one</option>
@@ -160,7 +160,7 @@ export default function Form() {
                 onChange={(e) => {
                   setMessage(e.target.value);
                 }}
-                className="block w-full rounded-md border-pink-300 bg-pink-50 text-pink-900 focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                className="block w-full rounded-md border-primary-300 bg-primary-100 text-primary-900 focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                 placeholder="i have a question about your blog post on the how to ..."
                 aria-describedby="message-required"
               ></textarea>
@@ -172,7 +172,7 @@ export default function Form() {
               onClick={(e) => {
                 handleSubmit(e);
               }}
-              className="focus:ring-turquoise-500 text-md justify-center rounded-md border border-transparent bg-pink-200 px-4 py-2 font-medium text-pink-700 hover:bg-pink-400 hover:text-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+              className="focus:ring-turquoise-500 text-md justify-center rounded-md border border-transparent bg-primary-200 px-4 py-2 font-medium text-primary-700 hover:bg-primary-400 hover:text-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
             >
               Send
             </button>

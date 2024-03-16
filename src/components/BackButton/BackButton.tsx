@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import { cn } from "@/utils/cn";
+import cn from "@/utils/cn";
 
 import { CiCircleChevLeft } from "react-icons/ci";
 import Link from "next/link";

@@ -1,11 +1,11 @@
 /** @type { import('tailwindcss').Config} */
 
 import typography from "@tailwindcss/typography";
+import svgDataUri from "mini-svg-data-uri";
 import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import forms from "@tailwindcss/forms";
 import type { PluginAPI } from "tailwindcss/types/config";
-import svgDataUri from "mini-svg-data-uri";
 import animate from "tailwindcss-animate";
 
 const sansFontFamily = ["var(--font-sans)", ...fontFamily.sans];
@@ -81,6 +81,61 @@ export default {
         };
       },
       colors: {
+        primary: {
+          100: "#FDE6EA",
+          200: "#FBCEDB",
+          300: "#F4B3CC",
+          400: "#EA9BC2",
+          500: "#DD7AB4",
+          600: "#BE599E",
+          700: "#9F3D8A",
+          800: "#802675",
+          900: "#6A1768",
+        },
+        success: {
+          100: "#CFFCD7",
+          200: "#A0FAB9",
+          300: "#6FF2A1",
+          400: "#4AE695",
+          500: "#15D685",
+          600: "#0FB882",
+          700: "#0A9A7A",
+          800: "#067C6D",
+          900: "#046664",
+        },
+        info: {
+          100: "#CDFEFC",
+          200: "#9BFAFE",
+          300: "#69EDFD",
+          400: "#44DAFB",
+          500: "#07BDF9",
+          600: "#0593D6",
+          700: "#036EB3",
+          800: "#024E90",
+          900: "#013877",
+        },
+        warning: {
+          100: "#FEFDD0",
+          200: "#FDFAA2",
+          300: "#FBF673",
+          400: "#F8F050",
+          500: "#F4E918",
+          600: "#D1C711",
+          700: "#AFA50C",
+          800: "#8D8407",
+          900: "#756D04",
+        },
+        danger: {
+          100: "#FFECDB",
+          200: "#FFD4B8",
+          300: "#FFB795",
+          400: "#FF9A7A",
+          500: "#FF6C4F",
+          600: "#DB4739",
+          700: "#B72927",
+          800: "#931921",
+          900: "#7A0F1E"
+        },
         pink: {
           50: "#FEF0F7",
           100: "#FEE2EF",
@@ -232,6 +287,9 @@ export default {
         marquee: "marquee 30s linear infinite",
         marquee2: "marquee2 30s linear infinite",
         "waving-hand": "wave 2s linear infinite",
+        glitch: 'glitch 1s linear infinite',
+        'glitch-top': 'glitch-top 1s linear infinite',
+        'glitch-bottom': 'glitch-bottom 1.5s linear infinite',
       },
       backgroundImage: {
         "rainbow-gradient":
@@ -307,6 +365,39 @@ export default {
           "60%": { transform: "rotate(0.0deg)" },
           "100%": { transform: "rotate(0.0deg)" },
         },
+        glitch: {
+          '2%, 64%': {
+            transform: 'translate(2px, 0) skew(0deg)',
+          },
+          '4%, 60%': {
+            transform: 'translate(-2px, 0) skew(0deg)',
+          },
+          '62%': {
+            transform: 'translate(0, 0) skew(5deg)',
+          },
+        },
+        'glitch-top': {
+          '2%, 64%': {
+            transform: 'translate(2px, -2px)',
+          },
+          '4%, 60%': {
+            transform: 'translate(-2px, 2px)',
+          },
+          '62%': {
+            transform: 'translate(13px, -1px) skew(-13deg)',
+          },
+        },
+        'glitch-bottom': {
+          '2%, 64%': {
+            transform: 'translate(-2px, 0)',
+          },
+          '4%, 60%': {
+            transform: 'translate(-2px, 0)',
+          },
+          '62%': {
+            transform: 'translate(-22px, 5px) skew(21deg)',
+          },
+        }
       },
       listStyleType: {
         flower: '"✿ "',

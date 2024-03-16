@@ -1,5 +1,5 @@
 'use client'
-import { cn } from '@/utils/cn'
+import cn from '@/utils/cn'
 import type { FC } from 'react'
 import React from 'react'
 import { Tooltip as ReactTooltip } from 'react-tooltip' // fixed version to 6.8.3 https://github.com/ReactTooltip/react-tooltip/issues/972

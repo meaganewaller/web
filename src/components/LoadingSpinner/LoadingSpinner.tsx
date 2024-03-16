@@ -16,7 +16,7 @@ const sizes = {
 
 const variants = {
   none: '',
-  primary: 'dark:text-gray-400 text-gray-600',
+  primary: 'text-gray-600',
 }
 
 const LoadingSpinner = ({ size = 'md', variant = 'none', className, ...rest }: Props) => {
