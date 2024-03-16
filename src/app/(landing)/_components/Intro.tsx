@@ -1,5 +1,6 @@
-import Link from '@/components/Link'
+import Link from 'next/link'
 import Icon from '@/components/Icon'
+import { LuArrowRight } from 'react-icons/lu'
 
 export default function Intro() {
   return (
@@ -23,10 +24,11 @@ export default function Intro() {
           </p>
           <div className="font-pixel mb-7 flex place-content-end px-8 text-lg">
             <Link
-              className="text-md text-purple-700 hover:text-purple-600 hover:decoration-purple-400"
-              path="/meagan"
-              label="Read more"
-            />
+              className="text-xs text-purple-700 hover:text-purple-600 hover:decoration-purple-400"
+              href="/meagan"
+            >
+              Read more <LuArrowRight size={16} className="inline-flex" />
+            </Link>
           </div>
         </div>
       </div>

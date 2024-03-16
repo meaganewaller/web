@@ -19,8 +19,9 @@ const Navbar = () => {
           const isActive = pathname === path || pathname.startsWith(path);
 
           return (
-            <li key={path} className={cn('relative', isActive ? 'underline underline-offset-4 decoration-1 decoration-pink-600 decoration-wavy hover:no-underline' : '')}>
+            <li key={path} className={cn('relative px-2', isActive ? 'underline underline-offset-4 decoration-1 decoration-pink-600 decoration-wavy hover:no-underline' : '')}>
               <Link
+                className={cn('text-lg font-medium')}
                 path={path}
                 label={label}
               />
