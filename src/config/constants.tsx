@@ -127,3 +127,7 @@ export const FOOTER_ICON_LINKS: FooterIconLink[] = [
     className: 'hover:text-[#FFA500]',
   },
 ]
+
+export const OG = {
+  static: ""
+}

@@ -45,6 +45,7 @@ export default function Button({
 
   const colors: Colors = {
     transparent: 'bg-transparent hover:bg-transparent active:bg-transparent',
+    pink: 'bg-pink-500 hover:bg-pink-700 active:bg-pink-800',
     blue: 'bg-blue-500 hover:bg-blue-700 active:bg-blue-800',
     red: 'bg-red-500 hover:bg-red-700 text-white',
     green: 'bg-green-500 hover:bg-green-700 active:bg-green-800',

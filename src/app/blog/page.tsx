@@ -30,7 +30,7 @@ const getPosts = async (
   tag?: string,
   category?: string,
   search?: string,
-): Promise<PostData> => {
+) => {
   let urlString = `?page=${page}&limit=${limit}`;
 
   if (tag) {
@@ -45,9 +45,9 @@ const getPosts = async (
     urlString += `&query=${search}`;
   }
 
-  return await fetchData<PostData>(
-    `${requests.posts.fetchAll}${urlString}`
-  );
+  const [data] = await fetchData<PostData>(`${requests.posts.fetchAll}${urlString}`)
+
+  return data
 };
 
 createMetadata({
@@ -117,7 +117,9 @@ export default function BlogPage() {
     <>
       <PageHeader title="the weblog" description="my thoughts, musings, and ramblings." />
       <Container>
-        {renderSearchComponent()}
+        <div className="flex items-center gap-4">
+          {renderSearchComponent()}
+        </div>
         {!isLoading && blogData?.posts && blogData.posts.length ? (
           <>
             <PostsList

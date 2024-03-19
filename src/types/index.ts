@@ -216,3 +216,44 @@ export enum Theme {
   DARK = 'dark',
   SYSTEM = 'system',
 }
+
+export interface GuestbookEntry {
+  id: string
+  approved: boolean
+  body: string
+  name: string
+  email: string
+  created_at: string
+  updated_at: string
+  session_id: string
+}
+
+export interface TGuestbookPayload {
+  body: string
+  name: string
+  email: string
+  session_id: string
+}
+
+export interface GuestbookEntryResponse {
+  id: string
+  type: string
+  attributes: GuestbookEntry
+}
+
+export interface TGuestbookResponse {
+  data: TGuestbook[]
+  pagy: Pagy
+  body: string
+}
+
+export type TGuestbook = {
+  id: string
+  body: string
+  name: string
+  email: string
+  approved: boolean
+  created_at: string
+  updated_at: string
+  session_id: string
+}

@@ -78,7 +78,7 @@ export const PostTimelineSeparator = ({
 
 const PostsList = ({ posts, page = 1, url, showSeparator = true }: PostsListProps) => {
   return (
-    <>
+    <div className="mt-10">
       {posts.length === 0 && <p>No posts found.</p>}
       {posts.length > 0 &&
         posts.map((post: PostResponse, index: number) => (
@@ -93,7 +93,7 @@ const PostsList = ({ posts, page = 1, url, showSeparator = true }: PostsListProp
             <PostCard index={index} post={post} />
           </div>
         ))}
-    </>
+    </div>
   )
 }
 

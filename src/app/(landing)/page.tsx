@@ -16,12 +16,12 @@ interface PostData {
 }
 
 export default async function Landing() {
-  const data = await fetchData<PostData>(`${requests.posts.fetchRecent}`)
+  const [data] = await fetchData<PostData>(`${requests.posts.fetchRecent}`)
 
   return (
     <main className="grid-areas-landingMobile md:grid-areas-landing grid-cols-landing my-auto grid max-w-full grid-flow-row flex-col gap-2 p-2 text-neutral-800">
       <Suspense fallback={<>Loading...</>}>
-        {data.posts && <RecentPosts posts={data.posts} />}
+        {data?.posts && <RecentPosts posts={data.posts} />}
       </Suspense>
 
       <Intro />
