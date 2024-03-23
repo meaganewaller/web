@@ -1,16 +1,15 @@
+@import './fonts.css';
 @import 'tailwindcss/base';
 @tailwind components;
 @tailwind utilities;
 
-@import './fonts.css';
-
 :root {
-  --color-white: rgba(248, 227, 236, 1);
+  --color-white: rgba(251, 206, 219, 1);
 }
 
 html.dark,
 html.dark-inverted {
-  --color-white: rgba(95, 7, 136, 1);
+  --color-white: rgba(64, 64, 64, 1);
 }
 
 @layer components {
@@ -26,8 +25,8 @@ html.dark-inverted {
     @apply relative z-0;
 
     &::before {
-      @apply grid-pattern-pink-500/50 absolute inset-0 z-[-1] content-[''];
-      @apply dark:grid-pattern-purple-500/50;
+      @apply grid-pattern-primary-500/50 absolute inset-0 z-[-1] content-[''];
+      @apply dark:grid-pattern-zinc-900/50;
       mask-image: linear-gradient(transparent, black, transparent);
     }
   }
@@ -75,7 +74,7 @@ html.dark-inverted {
   }
 
   body {
-    @apply font-extra bg-pink-50 dark:bg-purple-700;
+    @apply font-extra bg-primary-100 text-primary-900 dark:bg-neutral-900 dark:text-primary-100;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
@@ -107,27 +106,31 @@ html.dark-inverted {
   }
 
   h1 {
-    @apply text-5xl font-bold;
+    @apply text-7xl font-bold;
   }
 
   h2 {
-    @apply text-4xl font-bold;
+    @apply text-6xl font-bold;
   }
 
   h3 {
-    @apply text-3xl font-bold;
+    @apply text-5xl font-bold;
   }
 
   h4 {
-    @apply text-2xl font-bold;
+    @apply text-4xl font-bold;
   }
 
   h5 {
-    @apply text-xl font-bold;
+    @apply text-3xl font-bold;
+  }
+
+  h6 {
+    @apply text-2xl font-bold;
   }
 
   a {
-    @apply text-purple-700 dark:text-purple-300 hover:text-purple-800 dark:hover:text-purple-200;
+    @apply text-primary-500 hover:text-primary-600 dark:text-pink-300 dark:hover:text-primary-200;
   }
 
   #root,
@@ -178,7 +181,7 @@ html.dark-inverted {
   }
 
   .page-layout {
-    @apply w-[95%] max-w-[1300px] p-[50px] mx-auto font-extra mt-5 mb-10 bg-pink-100 dark:bg-purple-800 relative;
+    @apply w-[95%] max-w-[1300px] p-[50px] mx-auto font-extra mt-5 mb-10 bg-primary-200 relative dark:bg-neutral-700;
   }
 
   .page-layout:before,
@@ -260,37 +263,37 @@ html.dark-inverted {
   }
 
   .loading span {
-    @apply bg-purple-500 m-[.19em] inline-block size-[.6em] rounded-[.6em] align-middle;
+    @apply bg-info-500 m-[.19em] inline-block size-[.6em] rounded-[.6em] align-middle;
     animation: loading 1s infinite alternate;
   }
 
   .loading span:nth-of-type(2) {
-    @apply bg-purple-300;
+    @apply bg-info-300;
     animation-delay: 0.2s;
   }
 
   .loading span:nth-of-type(3) {
-    @apply bg-purple-400;
+    @apply bg-info-400;
     animation-delay: 0.4s;
   }
 
   .loading span:nth-of-type(4) {
-    @apply bg-purple-500;
+    @apply bg-info-500;
     animation-delay: 0.6s;
   }
 
   .loading span:nth-of-type(5) {
-    @apply bg-purple-600;
+    @apply bg-info-600;
     animation-delay: 0.8s;
   }
 
   .loading span:nth-of-type(6) {
-    @apply bg-purple-700;
+    @apply bg-info-700;
     animation-delay: 1s;
   }
 
   .loading span:nth-of-type(7) {
-    @apply bg-purple-800;
+    @apply bg-info-800;
     animation-delay: 1.2s;
   }
 
@@ -315,7 +318,7 @@ html.dark-inverted {
 }
 
 .pagination li {
-  @apply bg-pink-200/85;
+  @apply bg-primary-200/85;
 }
 
 .pagination a {
@@ -363,5 +366,9 @@ html.dark-inverted {
 /*   @apply rotate-180; */
 /* } */
 .pagination li.current a {
-  @apply text-pink-700 bg-[rgba(255,255,255,0.15)] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)] cursor-default pointer-events-none pt-[0.25em];
+  @apply text-primary-700 bg-[rgba(255,255,255,0.15)] shadow-[inset_0px_2px_1px_0px_rgba(0,0,0,0.25)] cursor-default pointer-events-none pt-[0.25em];
+}
+
+.outlined {
+  @apply outline outline-1;
 }

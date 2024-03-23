@@ -41,24 +41,42 @@ export interface PostResponse {
 }
 
 export interface Pagy {
+  scaffold_url: string;
+  first_url: string;
+  prev_url: string;
+  page_url: string;
+  next_url: string;
+  last_url: string;
   count: number;
-  firstUrl: string;
-  from: number;
-  in: number;
-  items: number;
-  last: number;
-  lastUrl: string;
-  next: number;
-  nextUrl: string;
   page: number;
-  pageUrl: string;
+  items: number;
+  vars: Vars;
   pages: number;
-  prev: null;
-  prevUrl: string;
-  scaffoldUrl: string;
-  series: string[];
+  last: number;
+  in: number;
+  from: number;
   to: number;
+  prev: number;
+  next: number;
+  series: Array<number | string>;
 }
+
+interface Vars {
+  page: number;
+  items: number;
+  outset: number;
+  size: number[];
+  page_param: string;
+  params: Params;
+  fragment: string;
+  link_extra: string;
+  i18n_key: string;
+  cycle: boolean;
+  metadata: string[];
+  count: number;
+}
+
+type Params = Record<string, string>;
 
 export interface Article {
   id: number;
@@ -104,7 +122,7 @@ export type RecordTypes =
   | "workspaces"
   | "categories"
   | "posts";
-export type ColorsType = "pink-500 dark:pink-100";
+export type ColorsType = "primary-500";
 export type Icons =
   | "arrow-left"
   | "arrow-right"
@@ -159,9 +177,9 @@ export type CategoryResponse = {
   title: string;
 };
 
-export type Record = {
-  slug: string;
-};
+// export type Record = {
+//   slug: string;
+// };
 
 export interface Asset {
   id: number;
@@ -186,4 +204,56 @@ export interface Asset {
     height: number;
   };
   alt: string;
+}
+
+export interface Settings {
+  animations: boolean | null;
+  sound: boolean;
+}
+
+export enum Theme {
+  LIGHT = 'light',
+  DARK = 'dark',
+  SYSTEM = 'system',
+}
+
+export interface GuestbookEntry {
+  id: string
+  approved: boolean
+  body: string
+  name: string
+  email: string
+  created_at: string
+  updated_at: string
+  session_id: string
+}
+
+export interface TGuestbookPayload {
+  body: string
+  name: string
+  email: string
+  session_id?: string
+}
+
+export interface GuestbookEntryResponse {
+  id: string
+  type: string
+  attributes: GuestbookEntry
+}
+
+export interface TGuestbookResponse {
+  data: TGuestbook[]
+  pagy: Pagy
+  body: string
+}
+
+export type TGuestbook = {
+  id: string
+  body: string
+  name: string
+  email: string
+  approved: boolean
+  created_at: string
+  updated_at: string
+  session_id: string
 }

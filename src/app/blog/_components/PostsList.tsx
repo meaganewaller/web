@@ -1,118 +1,100 @@
-import { useMemo } from "react";
-import Pagination from "@/components/Layout/Pagination";
-import { PostLink } from "./PostLink";
+'use client';
+
 import type { PostResponse } from "@/types";
+import { useMemo } from 'react';
+import PostCard from '@/components/PostCard'
 import pluralize from "@/utils/pluralize";
 
+interface PostsListProps {
+  posts: PostResponse[];
+  page?: number;
+  url?: string;
+  showSeparator?: boolean;
+}
+
 interface PostsCountProps {
-	posts: PostResponse[];
-	year: number;
+  posts: PostResponse[];
+  year: number;
 }
 
 export const PostsCount = ({ posts, year }: PostsCountProps) => {
-	const count = useMemo(() => {
-		return posts.filter((a) => {
-			if (!a.published_date) {
-				return false;
-			}
+  const count = useMemo(() => {
+    return posts.filter((a) => {
+      if (!a.published_date) {
+        return false;
+      }
 
-			return new Date(a.published_date).getFullYear() === year;
-		}).length;
-	}, [posts, year]);
+      return new Date(a.published_date).getFullYear() === year;
+    }).length;
+  }, [posts, year]);
 
-	return (
-		<span className="mb-1 block rounded-full border border-solid border-pink-400 bg-pink-300 p-2 font-mono text-xs uppercase text-pink-800 dark:border-green-500 dark:bg-green-300 dark:text-green-900">
-			{count} {pluralize("post", count)}
-		</span>
-	);
+  return (
+    <span className="mb-1 block rounded-full border border-solid border-primary-400 bg-primary-300 p-2 font-mono text-xs uppercase text-primary-800">
+      {count} {pluralize("post", count)}
+    </span>
+  );
 };
 
 interface PostTimelineSeparatorProps {
-	posts: PostResponse[];
-	currentPost: PostResponse;
-	previousPost: PostResponse | null;
+  posts: PostResponse[];
+  currentPost: PostResponse;
+  previousPost: PostResponse | null;
 }
 
 export const PostTimelineSeparator = ({
-	posts,
-	currentPost,
-	previousPost,
+  posts,
+  currentPost,
+  previousPost,
 }: PostTimelineSeparatorProps) => {
-	if (
-		!currentPost.published_date ||
-		(previousPost && !previousPost.published_date)
-	) {
-		return <></>;
-	}
-	const currentPostDate = new Date(currentPost.published_date);
-	const currentPostYear = currentPostDate.getFullYear();
+  if (
+    !currentPost.published_date ||
+    (previousPost && !previousPost.published_date)
+  ) {
+    return <></>;
+  }
+  const currentPostDate = new Date(currentPost.published_date);
+  const currentPostYear = currentPostDate.getFullYear();
 
-	let previousPostYear: number | null = null;
+  let previousPostYear: number | null = null;
 
-	if (previousPost?.published_date) {
-		const previousPostDate = new Date(previousPost.published_date);
-		previousPostYear = previousPostDate.getFullYear();
-	}
+  if (previousPost?.published_date) {
+    const previousPostDate = new Date(previousPost.published_date);
+    previousPostYear = previousPostDate.getFullYear();
+  }
 
-	if (!Number.isNaN(currentPostYear) && currentPostYear !== previousPostYear) {
-		return (
-			<div className="mt-8 flex items-baseline justify-between border-b border-pink-700 md:mt-12 dark:border-purple-950">
-				<span className="font-pixel my-4 inline-block text-xl font-bold text-orange-500 dark:text-green-400">
-					{currentPostYear}
-				</span>
-				<PostsCount posts={posts} year={currentPostYear} />
-			</div>
-		);
-	}
+  if (!Number.isNaN(currentPostYear) && currentPostYear !== previousPostYear) {
+    return (
+      <div className="mt-8 flex items-baseline justify-between border-b border-primary-700 md:mt-12 dark:border-orange-300">
+        <span className="font-pixel my-4 inline-block text-xl font-bold text-orange-500 dark:text-yellow-200">
+          {currentPostYear}
+        </span>
+        <PostsCount posts={posts} year={currentPostYear} />
+      </div>
+    );
+  }
 
-	return <></>;
+  return <></>;
 };
 
-export interface PostTimelineProps {
-	posts: PostResponse[];
-	page?: number;
-	totalPages?: number;
-	url?: string;
-	showSeparator?: boolean;
-	previousPostUrl?: string;
-	pagination?: string[];
+const PostsList = ({ posts, page = 1, url, showSeparator = true }: PostsListProps) => {
+  return (
+    <div className="mt-10">
+      {posts.length === 0 && <p>No posts found.</p>}
+      {posts.length > 0 &&
+        posts.map((post: PostResponse, index: number) => (
+          <div key={`${post.slug}-${post.title}-${post.published_date}`}>
+            {showSeparator && (
+              <PostTimelineSeparator
+                posts={posts}
+                currentPost={post}
+                previousPost={index > 0 ? posts[index - 1] : null}
+              />
+            )}
+            <PostCard index={index} post={post} />
+          </div>
+        ))}
+    </div>
+  )
 }
 
-export const PostsList = ({
-	posts,
-	page = 1,
-	totalPages = 1,
-	url,
-	previousPostUrl,
-	showSeparator = true,
-	pagination = [],
-}: PostTimelineProps) => {
-	return (
-		<div>
-			{posts.length === 0 && <p>No Posts Found :(</p>}
-			{posts.length > 0 &&
-				posts.map((post: PostResponse, index: number) => (
-					<div key={`${post.slug}-${post.title}-${post.published_date}`}>
-						{showSeparator && (
-							<PostTimelineSeparator
-								posts={posts}
-								currentPost={post}
-								previousPost={index > 0 ? posts[index - 1] : null}
-							/>
-						)}
-						<PostLink post={post} />
-					</div>
-				))}
-
-			{page && totalPages && url && previousPostUrl && (
-				<Pagination
-					series={pagination}
-					page={page}
-					totalPages={totalPages}
-					url={url}
-					previousPostUrl={previousPostUrl}
-				/>
-			)}
-		</div>
-	);
-};
+export default PostsList;

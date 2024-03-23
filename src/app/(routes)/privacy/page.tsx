@@ -3,7 +3,7 @@ import Link from "next/link";
 const Page = async (): Promise<JSX.Element> => {
   return (
     <div>
-      <h1 className="font-pixel dark:text-turquoise-300 text-center text-2xl uppercase text-pink-600 before:pr-[7px] before:content-[url('/images/ui/leftsparkle.gif')] after:pl-[5px] after:content-[url('/images/ui/rightsparkle.gif')] lg:text-3xl mb-4">
+      <h1 className="font-pixel text-center text-2xl uppercase text-primary-600 before:pr-[7px] before:content-[url('/images/ui/leftsparkle.gif')] after:pl-[5px] after:content-[url('/images/ui/rightsparkle.gif')] lg:text-3xl mb-4">
         Privacy policy
       </h1>
 

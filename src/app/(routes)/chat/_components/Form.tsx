@@ -1,14 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export default function Form() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     e.preventDefault();
@@ -22,20 +21,19 @@ export default function Form() {
     fetch(`/api/contact`, {
       method: 'POST',
       headers: {
-        Accept: 'application/json, text/plain, */*',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     }).then((res) => {
       if (res.status === 200) {
-        setSuccess(true);
-        setError(false);
         setName('');
         setEmail('');
         setSubject('');
         setMessage('');
+        toast.success('Message sent!');
       } else {
-        setError(true);
+        toast.error('Error!');
       }
     });
   };
@@ -47,28 +45,6 @@ export default function Form() {
           hey there! got questions, ideas, or just want to chat? fill out the form below and i&apos;ll get back to you
           as soon as i can.
         </p>
-        {success && (
-          <div
-            className="border-turquoise-400 bg-turquoise-50 text-turquoise-700 mb-4 flex items-center border-l-4 p-4 text-sm"
-            role="alert"
-          >
-            <span className="sr-only">Success:</span>
-            <div>
-              <span className="font-bold">Success!</span> Your message has been sent.
-            </div>
-          </div>
-        )}
-        {error && (
-          <div
-            className="border-coral-400 bg-coral-50 text-coral-700 mb-4 flex items-center border-l-4 p-4 text-sm"
-            role="alert"
-          >
-            <span className="sr-only">Error:</span>
-            <div>
-              <span className="font-bold">Error!</span> There was an error sending your message.
-            </div>
-          </div>
-        )}
       </div>
 
       <div>
@@ -88,7 +64,7 @@ export default function Form() {
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
-                className="block w-full rounded-md border-pink-300 bg-pink-50 text-pink-900 focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                className="block w-full rounded-md border-primary-300 bg-primary-100 text-primary-900 focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                 placeholder="Darlene Alderson"
                 required={true}
                 aria-describedby="name-required"
@@ -111,7 +87,7 @@ export default function Form() {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                className="block w-full rounded-md border-pink-300 bg-pink-50 text-pink-900 focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                className="block w-full rounded-md border-primary-300 bg-primary-100 text-primary-900 focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                 placeholder="dolores.haze@virtualrealty.com"
                 aria-describedby="email-required"
               />
@@ -132,7 +108,7 @@ export default function Form() {
                 onChange={(e) => {
                   setSubject(e.target.value);
                 }}
-                className="block w-full rounded-md border-pink-300 bg-pink-50 text-pink-900 focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                className="block w-full rounded-md border-primary-300 bg-primary-100 text-primary-900 focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                 aria-describedby="subject-required"
               >
                 <option disabled={true}>Select one</option>
@@ -160,7 +136,7 @@ export default function Form() {
                 onChange={(e) => {
                   setMessage(e.target.value);
                 }}
-                className="block w-full rounded-md border-pink-300 bg-pink-50 text-pink-900 focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                className="block w-full rounded-md border-primary-300 bg-primary-100 text-primary-900 focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                 placeholder="i have a question about your blog post on the how to ..."
                 aria-describedby="message-required"
               ></textarea>
@@ -172,7 +148,7 @@ export default function Form() {
               onClick={(e) => {
                 handleSubmit(e);
               }}
-              className="focus:ring-turquoise-500 text-md justify-center rounded-md border border-transparent bg-pink-200 px-4 py-2 font-medium text-pink-700 hover:bg-pink-400 hover:text-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+              className="focus:ring-turquoise-500 text-md justify-center rounded-md border border-transparent bg-primary-200 px-4 py-2 font-medium text-primary-700 hover:bg-primary-400 hover:text-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
             >
               Send
             </button>

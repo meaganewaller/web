@@ -20,15 +20,15 @@ const Search = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="flex items-center rounded-lg bg-orange-400 p-1 shadow-md shadow-orange-600 dark:bg-purple-900 dark:shadow-purple-800">
+        <div className="flex items-center rounded-lg bg-orange-400 p-1 shadow-md shadow-orange-600">
           <input
             type="text"
-            className="dark:placeholder:text-purple-500 w-full border-none bg-[var(--color-transparent)] font-mono text-orange-800 ring-0 placeholder:italic placeholder:text-orange-700 focus:border-none focus:ring-0 dark:text-purple-50"
+            className="w-full border-none bg-[var(--color-transparent)] font-mono text-orange-800 ring-0 placeholder:italic placeholder:text-orange-700 focus:border-none focus:ring-0"
             placeholder="search blog"
             value={query}
             onChange={handleInputChange}
           />
-          <button type="submit" className="mr-1 text-3xl text-pink-800 dark:text-yellow-300">
+          <button type="submit" className="mr-1 text-3xl text-primary-800">
             <Icon name="search" width={30} />
           </button>
         </div>

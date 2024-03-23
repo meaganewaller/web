@@ -2,6 +2,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import requests from "./requests";
 import type { PostResponse } from "@/types";
+import { fetchData } from "./fetchData";
 
 export interface BlogPost {
   source: MDXRemoteSerializeResult;
@@ -10,9 +11,14 @@ export interface BlogPost {
 }
 
 export const getPosts = async (): Promise<BlogPost[]> => {
-  const posts = await fetch(`${requests.posts.fetchAll}`).then(
-    (res) => res.json() as Promise<PostResponse[]>,
-  );
+  const [postsResponse, error] = await fetchData<PostResponse[]>(`${requests.posts.fetchAll}`);
+  if (error || !postsResponse) {
+    console.error("Error fetching posts", error);
+    return [];
+  }
+
+  const posts: PostResponse[] = postsResponse;
+
   const serializedPosts = await Promise.all(
     posts.map(async (post: PostResponse) => {
       const source = await serialize(post.content);
@@ -29,9 +35,13 @@ export const getPosts = async (): Promise<BlogPost[]> => {
 };
 
 export const getPost = async (slug: string): Promise<BlogPost> => {
-  const post = await fetch(`${requests.posts.fetchBySlug(slug)}`).then((res) =>
-    res.json(),
-  );
+  const [postResponse, error] = await fetchData<PostResponse>(`${requests.posts.fetchBySlug(slug)}`);
+  if (error || !postResponse) {
+    throw new Error(`Error fetching post with slug ${slug}: ${error}`);
+  }
+
+  const post: PostResponse = postResponse;
+
   const source = await serialize(post.content);
 
   return {
