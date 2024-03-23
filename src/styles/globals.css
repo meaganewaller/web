@@ -9,7 +9,7 @@
 
 html.dark,
 html.dark-inverted {
-  --color-white: rgba(128, 38, 117, 1);
+  --color-white: rgba(64, 64, 64, 1);
 }
 
 @layer components {
@@ -26,7 +26,7 @@ html.dark-inverted {
 
     &::before {
       @apply grid-pattern-primary-500/50 absolute inset-0 z-[-1] content-[''];
-      @apply dark:grid-pattern-primary-500/50;
+      @apply dark:grid-pattern-zinc-900/50;
       mask-image: linear-gradient(transparent, black, transparent);
     }
   }
@@ -74,7 +74,7 @@ html.dark-inverted {
   }
 
   body {
-    @apply font-extra bg-primary-100 text-primary-900 dark:bg-primary-900 dark:text-primary-100;
+    @apply font-extra bg-primary-100 text-primary-900 dark:bg-neutral-900 dark:text-primary-100;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
@@ -130,7 +130,7 @@ html.dark-inverted {
   }
 
   a {
-    @apply text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300;
+    @apply text-primary-500 hover:text-primary-600 dark:text-pink-300 dark:hover:text-primary-200;
   }
 
   #root,
@@ -181,7 +181,7 @@ html.dark-inverted {
   }
 
   .page-layout {
-    @apply w-[95%] max-w-[1300px] p-[50px] mx-auto font-extra mt-5 mb-10 bg-primary-200 relative dark:bg-primary-800;
+    @apply w-[95%] max-w-[1300px] p-[50px] mx-auto font-extra mt-5 mb-10 bg-primary-200 relative dark:bg-neutral-700;
   }
 
   .page-layout:before,

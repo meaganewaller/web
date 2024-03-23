@@ -13,6 +13,7 @@ import Container from '@/components/Container';
 import PageHeader from '@/components/PageHeader';
 import { createMetadata } from '@/utils/metadata';
 import Pagination from '@/components/Pagination';
+import { toast } from 'react-hot-toast';
 
 interface GuestbookData {
   entries: GuestbookEntry[];
@@ -55,7 +56,7 @@ export default function GuestbookPage() {
         const data = await getEntries(10, currentPage);
         setGuestbookData(data);
       } catch (error) {
-        console.error('Error fetching guestbook entries', error);
+        toast.error('Failed to fetch guestbook entries');
         setGuestbookData(null);
       }
       setIsLoading(false);
@@ -67,6 +68,7 @@ export default function GuestbookPage() {
     let urlString = `?page=${page}&limit=${limit}`;
     const [data, error] = await fetchData<GuestbookData>(`${requests.guestbook.fetchAll}${urlString}`);
     if (error) {
+      toast.error('Failed to fetch guestbook entries');
       throw new Error(`Failed to fetch guestbook entries: ${error}`);
     }
     return data;
@@ -78,13 +80,15 @@ export default function GuestbookPage() {
       body: {
         name,
         email,
-        message,
+        body: message,
       }
     });
 
     if (error) {
       throw new Error(`Failed to add guestbook entry: ${error}`);
     }
+
+    toast.success('Message submitted to the guestbook! Once approved, it will appear below.')
     return data;
   }
 
@@ -106,7 +110,6 @@ export default function GuestbookPage() {
       <Container>
         {!isLoading && guestbookData?.entries && guestbookData.entries.length ? (
           <>
-            <GuestbookPanel onSendMessage={onSendMessage} />
             <EntriesList
               entries={guestbookData.entries}
               url={entryUrl}
@@ -120,6 +123,7 @@ export default function GuestbookPage() {
                 series={guestbookData.pagy.series}
               />
             )}
+            <GuestbookPanel onSendMessage={onSendMessage} />
           </>
         ) : (
           <EmptyState message={"The posts are playing hide and seek - we just can't find them!"} />

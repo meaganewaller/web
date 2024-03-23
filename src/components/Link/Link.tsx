@@ -35,13 +35,13 @@ const Link = ({ path, label, icon: Icon, className = '' }: LinkProps) => {
     <>
       <NextLink
         href={path}
-        className={cn(`flex text-base hover:text-primary-700 transition-all pointer-events-auto font-medium hover:no-underline`, className)}
+        className={cn(`flex text-base hover:text-primary-700 transition-all pointer-events-auto font-medium hover:no-underline dark:text-primary-100 dark:hover:text-pink-200`, className)}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
 
         <div className='relative'>
-          {Icon && <><Icon size={18} className='inline mr-2 font-thin text-pink-500' /></>}
+          {Icon && <><Icon size={18} className='inline mr-2 font-thin text-pink-500 dark:text-pink-200' /></>}
           {anchor && <HiLink size={18} className='inline mr-1' />}
           {label}
           {download && <HiDownload size={18} className='inline mr-1' />}

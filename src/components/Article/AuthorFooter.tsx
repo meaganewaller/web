@@ -6,7 +6,8 @@ import tw, { css } from "twin.macro";
 
 const styles = {
   card: () => [
-    tw`md:rounded-lg leading-snug text-gray-600 text-base p-4 relative shadow-xl mt-8 mx-auto border border-gray-100`,
+    tw`md:rounded-lg leading-snug text-neutral-800 text-base p-4 relative shadow-xl mt-8 mx-auto border border-neutral-100 bg-pink-300`,
+    tw`dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700`,
     css`
       min-height: 100px;
     `,

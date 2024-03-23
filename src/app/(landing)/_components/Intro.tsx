@@ -4,12 +4,12 @@ import { LuArrowRight } from 'react-icons/lu'
 
 export default function Intro() {
   return (
-    <section className="grid-in-about border-2 border-solid border-purple-400">
-      <div className="sticky h-full border-b-2 border-solid border-purple-200 bg-purple-100 text-blue-700">
-        <header className="font-pixel border-b-2 border-dashed border-primary-500 bg-primary-300 p-2 text-center text-xl uppercase text-primary-700">
+    <section className="grid-in-about border-2 border-solid border-purple-400 bg-purple-100 dark:bg-zinc-600">
+      <div className="flex flex-col bg-purple-100 dark:bg-zinc-600 h-full">
+        <header className="font-pixel border-b-2 border-dashed border-primary-500 bg-primary-300 p-2 text-center text-xl uppercase text-primary-700 dark:bg-pink-900 dark:text-pink-300">
           Hi! I&apos;m Meagan.
         </header>
-        <div className="flex h-full flex-col justify-center text-primary-700">
+        <div className="flex h-full flex-col justify-center text-primary-700 dark:text-pink-100">
           <p className="font-extra text-md px-8 py-2 leading-relaxed">
             <span className="font-bold italic">I wrote my first line of HTML on Microsoft Notepad in 2004 </span>
             and fell head-over-heels for how magical it all felt. The problem I was solving in 2004? My Neopets shop
@@ -24,7 +24,7 @@ export default function Intro() {
           </p>
           <div className="font-pixel mb-7 flex place-content-end px-8 text-lg">
             <Link
-              className="text-xs text-purple-700 hover:text-purple-600 hover:decoration-purple-400"
+              className="text-xs text-purple-700 hover:text-purple-600 hover:decoration-purple-400 dark:text-pink-300 dark:hover:text-pink-200"
               href="/meagan"
             >
               Read more <LuArrowRight size={16} className="inline-flex" />

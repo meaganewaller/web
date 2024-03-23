@@ -18,6 +18,8 @@ import Note from "@/components/Note";
 import Tab, { type TabProps } from "@/components/Tab";
 import Tabs, { type TabsProps } from "@/components/Tabs";
 import Accordion, { type AccordionProps } from "@/components/Accordion";
+import Anchor, { type AnchorProps } from '@/components/Anchor'
+import { m } from "framer-motion";
 
 import type { NoteProps } from "@/components/Note";
 
@@ -26,6 +28,7 @@ interface CustomComponents extends Components {
   tabs: React.ComponentType<TabsProps>;
   tab: React.ComponentType<TabProps>;
   accordion: React.ComponentType<AccordionProps>;
+  Anchor: React.ComponentType<AnchorProps>;
 }
 
 export type ContentProps = {
@@ -76,7 +79,7 @@ const CodeBlock = ({
   // parse and format "inline" CodeBlocks, (e.g. `single ticked`) or full code blocks (e.g. ``` )
   if (inline || !language)
     return (
-      <code className="p-1 m-1 text-lg text-primary-700 bg-primary-200 rounded-md font-monoItalic">
+      <code className="p-1 m-1 text-lg text-primary-700 bg-pink-200 rounded-md font-monoItalic dark:text-zinc-300 dark:bg-zinc-800">
         {children}
       </code>
     );
@@ -283,14 +286,12 @@ const components: Partial<CustomComponents> = {
       <p {...props} className="pt-2 font-serif text-2xl leading-relaxed" />
     );
   },
-  a: ({ node, ...props }) => {
-    return (
-      <a
-        {...props}
-        className="p-1 text-info-700 rounded-lg hover:text-info-800 bg-info-200/30 hover:bg-info-600/15"
-      />
-    );
+  a: function A(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+    return <Anchor
+      underline
+      {...props} />;
   },
+  Anchor,
   code: CodeBlock as any,
   blockquote: ({ ...props }) => <Blockquote {...props} />,
   ul: ({ ...props }) => <UnorderedList {...props} />,
@@ -301,7 +302,12 @@ const components: Partial<CustomComponents> = {
 
 function Content({ markdown, className = "" }: ContentProps) {
   return (
-    <article className={cn(className)}>
+    <m.article
+      variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+      initial="hidden"
+      animate="visible"
+      className={cn(className)}
+    >
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}
         remarkPlugins={[remarkGfm]}
@@ -309,7 +315,7 @@ function Content({ markdown, className = "" }: ContentProps) {
       >
         {markdown}
       </ReactMarkdown>
-    </article>
+    </m.article>
   );
 }
 

@@ -232,7 +232,7 @@ export interface TGuestbookPayload {
   body: string
   name: string
   email: string
-  session_id: string
+  session_id?: string
 }
 
 export interface GuestbookEntryResponse {

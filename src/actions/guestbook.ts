@@ -5,12 +5,17 @@ export const getGuestbookEntries = async (): Promise<
   GuestbookEntry[] | undefined
 > => {
   try {
-    const entries: GuestbookEntry[] = await fetchData(`${process.env.NEXT_PUBLIC_BASE_API_URL}/guestbook`)
+    const [entries, error] = await fetchData<GuestbookEntry[]>(`${process.env.NEXT_PUBLIC_BASE_API_URL}/guestbook`)
 
-    console.log("entries", entries)
+    if (error || !entries) {
+      console.error("Error getting guestbook entries: ", error)
+      return undefined;
+    }
+
+    return entries;
   } catch (error) {
     console.error('Error getting guestbook entries: ', error)
-    return [];
+    return undefined;
   }
 }
 
@@ -35,14 +40,15 @@ export const addEntry = async ({
         'Content-Type': 'application/json',
       }
     })
-    console.log("res", res)
     if (res.ok) {
-      console.log('yeaaaaaa')
+      return true
+
     } else {
-      console.log('oops! something went wrong')
+      return false
     }
   } catch (error) {
-    console.log('error')
+    console.error('error', error)
+    return false
   }
 }
 

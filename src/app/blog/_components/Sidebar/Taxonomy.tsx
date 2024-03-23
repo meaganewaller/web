@@ -7,9 +7,15 @@ import React, { useState, useEffect } from "react";
 import cn from '@/utils/cn';
 
 async function getCategories(): Promise<Category[]> {
-  return await fetchData(
-    `${process.env.NEXT_PUBLIC_BASE_API_URL}/categories?published_only=true`,
+  const [data, error] = await fetchData<Category[]>(
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/categories?published_only=true`
   );
+
+  if (error || !data) {
+    throw new Error(`Error fetching categories: ${error}`);
+  }
+
+  return data;
 }
 
 export default function Taxonomy() {

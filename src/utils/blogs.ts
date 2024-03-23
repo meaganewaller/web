@@ -11,7 +11,13 @@ export interface BlogPost {
 }
 
 export const getPosts = async (): Promise<BlogPost[]> => {
-  const posts: PostResponse[] = await fetchData(`${requests.posts.fetchAll}`)
+  const [postsResponse, error] = await fetchData<PostResponse[]>(`${requests.posts.fetchAll}`);
+  if (error || !postsResponse) {
+    console.error("Error fetching posts", error);
+    return [];
+  }
+
+  const posts: PostResponse[] = postsResponse;
 
   const serializedPosts = await Promise.all(
     posts.map(async (post: PostResponse) => {
@@ -29,7 +35,13 @@ export const getPosts = async (): Promise<BlogPost[]> => {
 };
 
 export const getPost = async (slug: string): Promise<BlogPost> => {
-  const post: PostResponse = await fetchData(`${requests.posts.fetchBySlug(slug)}`)
+  const [postResponse, error] = await fetchData<PostResponse>(`${requests.posts.fetchBySlug(slug)}`);
+  if (error || !postResponse) {
+    throw new Error(`Error fetching post with slug ${slug}: ${error}`);
+  }
+
+  const post: PostResponse = postResponse;
+
   const source = await serialize(post.content);
 
   return {

@@ -67,6 +67,12 @@ export default {
         return {
           DEFAULT: {
             css: {
+              ':root': {
+                '--primary': theme("colors.pink.500"),
+                '--button_primary': theme("colors.purple.300"),
+                '--button_primary_hover': theme("colors.purple.400"),
+                '--button_primary_pressed': theme("colors.purple.500"),
+              },
               color: theme("colors.pink.900"),
               a: {
                 textDecoration: "none",

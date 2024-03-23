@@ -9,9 +9,11 @@ import { HiArrowUp } from "react-icons/hi2";
 export default function ExternalLink({
   text,
   link,
+  className,
 }: {
   text: string | number | JSX.Element;
   link: string;
+  className?: string;
 }) {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
@@ -19,6 +21,7 @@ export default function ExternalLink({
   return (
     <div className="font-bold inline-flex">
       <Link
+        className={className}
         href={{
           pathname: link,
         }}
@@ -44,7 +47,7 @@ export default function ExternalLink({
           >
             <HiArrowUp
               size={16}
-              className="rotate-45 text-neutral-500"
+              className="rotate-45"
             />
           </m.div>
         </m.button>

@@ -97,11 +97,3 @@ const EntriesList = ({ entries, page = 1, url, showSeparator = false }: EntriesL
 }
 
 export default EntriesList;
-
-// import * as React from 'react'
-//
-// function EntriesList() {
-//   return <div></div>
-// }
-//
-// export default EntriesList

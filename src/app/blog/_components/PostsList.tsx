@@ -64,8 +64,8 @@ export const PostTimelineSeparator = ({
 
   if (!Number.isNaN(currentPostYear) && currentPostYear !== previousPostYear) {
     return (
-      <div className="mt-8 flex items-baseline justify-between border-b border-primary-700 md:mt-12">
-        <span className="font-pixel my-4 inline-block text-xl font-bold text-orange-500">
+      <div className="mt-8 flex items-baseline justify-between border-b border-primary-700 md:mt-12 dark:border-orange-300">
+        <span className="font-pixel my-4 inline-block text-xl font-bold text-orange-500 dark:text-yellow-200">
           {currentPostYear}
         </span>
         <PostsCount posts={posts} year={currentPostYear} />

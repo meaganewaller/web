@@ -90,7 +90,7 @@ export const Providers: React.FC<Props> = ({ children }) => {
               <EmotionStyles styles={GlobalStyles} />
               <TailwindStyles />
               {children}
-              <ToastProvider position='top-right' />
+              <ToastProvider position="top-center" />
             </m.div>
             <Suspense fallback={null}>
               <ProgressBar height='4px' color='#9f7aea' options={{ showSpinner: false }} />

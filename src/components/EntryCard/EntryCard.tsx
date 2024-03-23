@@ -4,7 +4,6 @@ import type { GuestbookEntry } from '@/types';
 import { m } from 'framer-motion';
 import cn from '@/utils/cn';
 import { useMemo } from 'react';
-import Link from '@/components/Link'
 
 import { formatDate } from '@/utils/date';
 

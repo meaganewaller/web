@@ -32,11 +32,20 @@ const Header = ({ article, readingTime }: HeaderProps) => {
 
   return (
     <>
-      <div className="relative flex flex-col justify-center overflow-hidden py-6 sm:py-12">
-        <div className="flex items-center justify-between border-b border-primary-300/50 bg-transparent p-3">
+      <div className="relative flex flex-col justify-center overflow-hidden py-6 md:py-12">
+        <div className={cn(
+          "flex items-center justify-between border-b bg-transparent p-3",
+          "border-primary-300",
+          "dark:border-zinc-900",
+        )}>
           <BackButton />
           <Link
-            className={cn('bg-pink-500 p-2 text-pink-100 rounded-md hover:bg-pink-100 hover:text-pink-500 hover:no-underline ease-in-out hover:translate-y-1 transition duration-300')}
+            className={cn(
+              'p-2 rounded-md ease-in-out transition duration-300 font-bold uppercase font-sans',
+              'hover:no-underline hover:translate-y-1',
+              'bg-pink-500 text-pink-200 hover:bg-pink-400 hover:text-pink-100',
+              'dark:bg-teal-500 dark:text-teal-200 dark:hover:bg-teal-400 dark:hover:text-teal-100'
+            )}
             href={`/blog?category=${article.category.slug}`}
           >
             {article.category.title}
@@ -47,7 +56,12 @@ const Header = ({ article, readingTime }: HeaderProps) => {
       <PageHeader title={article.title} description={article.description} ref={pageHeaderRef} />
       <StickyTitle title={article.title} elementRef={pageHeaderRef} />
       <Container wide={true}>
-        <div className={cn('flex flex-col justify-between gap-2 text-sm font-medium text-primary-700', 'sm:flex-row')}>
+        <div className={cn(
+          'flex flex-col justify-between gap-2 text-sm font-medium',
+          'text-purple-700',
+          'sm:flex-row',
+          'dark:text-teal-100'
+        )}>
           <div>
             Published on
             <time dateTime={dateFormatMicroformat(article.published_date)} className={cn('px-1')}>

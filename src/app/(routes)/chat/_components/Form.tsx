@@ -1,14 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export default function Form() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     e.preventDefault();
@@ -22,20 +21,19 @@ export default function Form() {
     fetch(`/api/contact`, {
       method: 'POST',
       headers: {
-        Accept: 'application/json, text/plain, */*',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     }).then((res) => {
       if (res.status === 200) {
-        setSuccess(true);
-        setError(false);
         setName('');
         setEmail('');
         setSubject('');
         setMessage('');
+        toast.success('Message sent!');
       } else {
-        setError(true);
+        toast.error('Error!');
       }
     });
   };
@@ -47,28 +45,6 @@ export default function Form() {
           hey there! got questions, ideas, or just want to chat? fill out the form below and i&apos;ll get back to you
           as soon as i can.
         </p>
-        {success && (
-          <div
-            className="border-turquoise-400 bg-turquoise-50 text-turquoise-700 mb-4 flex items-center border-l-4 p-4 text-sm"
-            role="alert"
-          >
-            <span className="sr-only">Success:</span>
-            <div>
-              <span className="font-bold">Success!</span> Your message has been sent.
-            </div>
-          </div>
-        )}
-        {error && (
-          <div
-            className="border-coral-400 bg-coral-50 text-coral-700 mb-4 flex items-center border-l-4 p-4 text-sm"
-            role="alert"
-          >
-            <span className="sr-only">Error:</span>
-            <div>
-              <span className="font-bold">Error!</span> There was an error sending your message.
-            </div>
-          </div>
-        )}
       </div>
 
       <div>

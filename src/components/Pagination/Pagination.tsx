@@ -45,7 +45,7 @@ const Pagination: FC<PaginationProps> = ({ page, url, previousPostUrl, series })
   ];
 
   return (
-    <div className="flex p-2 flex-wrap bg-primary-500/20 rounded-full shadow-[0px_10px_15px_rgba(0,0,0,0.1)] justify-around w-full mt-32">
+    <div className="flex p-2 flex-wrap bg-primary-500/20 rounded-full shadow-[0px_10px_15px_rgba(0,0,0,0.1)] justify-around w-full mt-32 dark:bg-zinc-800">
       {links.map((link) => {
         return (
           <div
@@ -58,8 +58,8 @@ const Pagination: FC<PaginationProps> = ({ page, url, previousPostUrl, series })
                 path={link.url}
                 label={link.label}
                 className={cn([
-                  "text-primary-700 py-1.5 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-primary-500",
-                  link.active && "bg-primary-500 text-primary-100 underline-offset-4 underline decoration-pink-500"
+                  "text-primary-700 py-1.5 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-primary-500 dark:text-orange-200 dark:hover:text-orange-50",
+                  link.active && "bg-primary-500 text-primary-100 underline-offset-4 underline decoration-pink-500 dark:bg-orange-500 dark:text-orange-900 dark:underline-offset-4 dark:underline dark:decoration-orange-100"
                 ])} />
             }
           </div>

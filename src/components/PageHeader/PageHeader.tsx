@@ -37,6 +37,8 @@ const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
                 'pb-2 font-cal text-4xl font-bold',
                 'md:text-5xl',
                 'lg:text-6xl',
+                'text-pink-500',
+                'dark:text-purple-200',
               )}
             >
               {title}
@@ -48,7 +50,7 @@ const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
               animate={animation.show}
               transition={{ delay: 0.2 }}
             >
-              <p className={cn('mt-2 font-cal text-lg')}>{description}</p>
+              <p className={cn('mt-2 font-cal text-lg', 'dark:text-purple-300', 'text-pink-600')}>{description}</p>
             </m.div>
           )}
         </Container>
