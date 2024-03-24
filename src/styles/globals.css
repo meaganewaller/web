@@ -74,7 +74,7 @@ html.dark-inverted {
   }
 
   body {
-    @apply font-extra bg-primary-100 text-primary-900 dark:bg-neutral-900 dark:text-primary-100;
+    @apply font-extra bg-primary-100 text-primary-900 dark:bg-zinc-900 dark:text-primary-100;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
@@ -181,7 +181,7 @@ html.dark-inverted {
   }
 
   .page-layout {
-    @apply w-[95%] max-w-[1300px] p-[50px] mx-auto font-extra mt-5 mb-10 bg-primary-200 relative dark:bg-neutral-700;
+    @apply w-[95%] max-w-[1300px] p-[50px] mx-auto font-extra mt-5 mb-10 bg-primary-200 relative dark:bg-zinc-700;
   }
 
   .page-layout:before,

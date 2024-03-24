@@ -85,7 +85,7 @@ export const Providers: React.FC<Props> = ({ children }) => {
               animate='enter'
               exit='exit'
               variants={pageVariants}
-              className='transition-color flex min-h-screen flex-col bg-primary-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100'
+              className='transition-color flex min-h-screen flex-col bg-primary-100 dark:bg-zinc-900 text-neutral-900 dark:text-neutral-100'
             >
               <EmotionStyles styles={GlobalStyles} />
               <TailwindStyles />

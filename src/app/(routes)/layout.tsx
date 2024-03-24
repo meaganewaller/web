@@ -6,8 +6,8 @@ import Container from '@/components/Container'
 export default function RoutesLayout({ children }: { children: React.ReactNode }) {
   return (
     <PageLayout>
-      <Container className="mx-auto grid grid-cols-12 md:space-x-4">
-        <div className="col-span-12 p-2">
+      <Container>
+        <div className="m-0 min-w-0 flex-grow flex-shrink basis-auto min-h-screen mt-24">
           {children}
         </div>
       </Container>

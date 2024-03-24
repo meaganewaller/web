@@ -36,7 +36,7 @@ export const Article = ({ article }: ArticleProps) => {
 
   return (
     <article className="relative leading-4 box-border z-1 list-outside">
-      <div className="relative mx-auto min-h-[515px]">
+      <div className="relative mx-auto mb-16 min-h-screen">
         <div className="md:px-10">
           <Header article={article} readingTime={readingTimeOfArticle} />
           {isOutdated && article.category.title === "Tutorials & Guides" && (
@@ -45,7 +45,9 @@ export const Article = ({ article }: ArticleProps) => {
               ago. Please verify the information as it may be outdated.
             </Note>
           )}
-          {article.content && <Content markdown={article.content} />}
+          <div className="mt-20">
+            {article.content && <Content markdown={article.content} />}
+          </div>
           <PageFooter>
             <>
               <AuthorFooter />

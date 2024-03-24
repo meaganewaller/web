@@ -227,7 +227,7 @@ const components: Partial<CustomComponents> = {
   h2: ({ node, children, ...props }) => {
     return (
       <h2
-        className="pt-5 font-monoItalic"
+        className="pt-5 font-monoItalic text-4xl leading-tight text-pink-700 dark:text-zinc-300 dark:text-opacity-90"
         {...props}
         id={getHeadingId(children)}
         style={{ marginTop: "1.8rem" }}
@@ -242,7 +242,7 @@ const components: Partial<CustomComponents> = {
         {...props}
         style={{ marginTop: "1.6rem" }}
         id={getHeadingId(children)}
-        className="pt-4 font-monoItalic"
+        className="pt-4 font-monoItalic text-3xl leading-tight text-pink-600 dark:text-zinc-300 dark:text-opacity-90"
       >
         {children}
       </h3>
@@ -256,7 +256,7 @@ const components: Partial<CustomComponents> = {
         className="pt-3 font-monoItalic"
       >
         {children}
-      </h4>
+      </h4 >
     );
   },
   h5: ({ node, children, ...props }) => {
@@ -306,7 +306,7 @@ function Content({ markdown, className = "" }: ContentProps) {
       variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
       initial="hidden"
       animate="visible"
-      className={cn(className)}
+      className={cn(className, "my-10")}
     >
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}

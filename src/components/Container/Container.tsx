@@ -11,8 +11,8 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(
       <div
         className={cn(
           'mx-auto flex w-full flex-col px-8',
-          'sm:px-12 md:px-10 lg:px-16 xl:px-6',
-          wide ? 'max-w-12xl' : 'max-w-5xl',
+          'sm:px-12 md:px-10 lg:px-8 xl:px-6',
+          wide ? 'max-w-[1200px]' : 'max-w-6xl',
           className,
         )}
         {...props}
