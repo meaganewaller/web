@@ -148,7 +148,7 @@ export default function Form() {
               onClick={(e) => {
                 handleSubmit(e);
               }}
-              className="focus:ring-turquoise-500 text-md justify-center rounded-md border border-transparent bg-primary-200 px-4 py-2 font-medium text-primary-700 hover:bg-primary-400 hover:text-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+              className="focus:ring-primary-500 text-md justify-center rounded-md border border-transparent bg-primary-500 px-4 py-2 font-medium text-primary-900 hover:bg-primary-400 hover:text-primary-800 focus:outline-none focus:ring-2 focus:ring-offset-2"
             >
               Send
             </button>

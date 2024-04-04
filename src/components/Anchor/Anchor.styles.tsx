@@ -4,7 +4,7 @@ import { AnchorProps, ArrowPosition } from './Anchor.types'
 
 const BaseAnchor = styled.a(({ discreet }: { discreet?: boolean }) => [
   tw`font-medium transition-colors duration-200 ease-in-out text-pink-700 hover:text-orange-600 focus:text-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500`,
-  discreet && tw`text-primary-500`,
+  discreet && tw`text-pink-500`,
 ]);
 
 const UnderlineAnchor = styled(BaseAnchor)(({ underline }: { underline?: boolean }) => [

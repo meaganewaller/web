@@ -34,10 +34,9 @@ export default function PostCard({ post, index }: PostCardProps) {
       <div className="flex flex-col">
         <div className="flex flex-row items-center space-x-4">
           <Link
-            path={`/blog/${post.slug}`}
+            href={`/blog/${post.slug}`}
             className="decoration-none grow text-lg font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
-            label={post.title}
-          />
+          >{post.title}</Link>
         </div>
         {isHighlighted && (post.description?.length || 0) > 0 && <p className="text-primary-800">{post.description}</p>}
       </div>

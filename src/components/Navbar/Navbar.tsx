@@ -22,9 +22,10 @@ const Navbar = () => {
             <li key={path} className={cn('relative px-2', isActive ? 'underline underline-offset-4 decoration-1 decoration-pink-600 decoration-wavy hover:no-underline dark:decoration-pink-300' : '')}>
               <Link
                 className={cn('text-lg font-medium')}
-                path={path}
-                label={label}
-              />
+                href={path}
+              >
+                {label}
+              </Link>
             </li>
           )
         })}

@@ -1,3 +1,17 @@
+import Container from '@/components/Container'
+import Skeleton from '@/components/Skeleton'
+import cn from '@/utils/cn'
+
+const Loading = () => {
+  return (
+    <div className={cn('py-16', 'lg:py-20')}>
+      <Container>
+        <Skeleton className={cn('mb-4 h-10 w-full', 'md:w-3/4')} />
+        <Skeleton className={cn('mb-4 h-10 w-full', 'md:w-3/4')} />
+      </Container>
+    </div>
+  )
+}
 const loadingMessages = [
   'pushing pixels',
   'satellites are moving into position',
@@ -25,19 +39,21 @@ const loadingMessages = [
   'transmitting thoughts to the collective',
 ];
 
-export default function Loading() {
-  return (
-    <div className="loading p-[20%] text-center">
-      <h2 className="font-pixel m-0 text-xs uppercase tracking-wide text-lime-600">
-        {loadingMessages[Math.floor(Math.random() * loadingMessages.length)]}
-      </h2>
-      <span />
-      <span />
-      <span />
-      <span />
-      <span />
-      <span />
-      <span />
-    </div>
-  );
-}
+// export default function Loading() {
+//   return (
+//     <div className="loading p-[20%] text-center">
+//       <h2 className="font-pixel m-0 text-xs uppercase tracking-wide text-lime-600">
+//         {loadingMessages[Math.floor(Math.random() * loadingMessages.length)]}
+//       </h2>
+//       <span />
+//       <span />
+//       <span />
+//       <span />
+//       <span />
+//       <span />
+//       <span />
+//     </div>
+//   );
+// }
+
+export default Loading

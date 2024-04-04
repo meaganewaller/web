@@ -1,16 +1,22 @@
 'use client';
+
 import { useRouter } from 'next/navigation';
-import { createMetadata } from '@/utils/metadata'
+import createMetadata from '@/utils/metadata'
+import type { Metadata } from 'next';
 
 import PageLayout from '@/components/Layout';
 import Container from '@/components/Container';
 import Button from '@/components/Button';
 
+export const metadata: Metadata = createMetadata({
+  date: String(new Date()),
+  title: '404',
+  description: 'Page Not Found',
+  tags: ['404', 'not found', 'error'],
+});
+
+
 export default function NotFound() {
-  createMetadata({
-    title: 'page not found',
-    description: 'The page you are looking for does not exist.',
-  });
 
   const router = useRouter();
   return (
@@ -37,6 +43,6 @@ export default function NotFound() {
           </div>
         </div>
       </Container>
-    </PageLayout>
+    </PageLayout >
   )
 }

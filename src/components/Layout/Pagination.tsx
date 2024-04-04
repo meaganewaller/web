@@ -25,14 +25,14 @@ const Pagination = ({ page, totalPages, url, previousPostUrl, series }: Params) 
           <Link
             href={previousPostUrl}
           >
-            <FaChevronLeft size={24} className='fill-primary-400' aria-hidden='true' />
+            <FaChevronLeft size={24} className='fill-pink-400' aria-hidden='true' />
           </Link>
         </li>
         <li>
           <Link
             href={`${url.replaceAll(`page=${page}`, `page=${page + 1}`)}`}
           >
-            <FaChevronRight size={24} className='fill-primary-400' aria-hidden='true' />
+            <FaChevronRight size={24} className='fill-pink-400' aria-hidden='true' />
           </Link>
         </li>
       </ul>

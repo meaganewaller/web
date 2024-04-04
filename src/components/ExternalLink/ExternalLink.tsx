@@ -11,7 +11,7 @@ export default function ExternalLink({
   link,
   className,
 }: {
-  text: string | number | JSX.Element;
+  text: string | number | JSX.Element | React.ReactNode;
   link: string;
   className?: string;
 }) {

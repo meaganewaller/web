@@ -15,7 +15,7 @@ function Accordion({ label, children }: AccordionProps) {
 
   return (
     <div
-      className="w-full mx-auto mb-6 outlined outline-pink-500 rounded-sm p-1 bg-pink-100"
+      className="w-full mx-auto mb-6 outlined outline-pink-700 rounded-sm p-1 bg-pink-200"
     >
       <m.div
         initial={false}
@@ -28,8 +28,8 @@ function Accordion({ label, children }: AccordionProps) {
           className="flex justify-between items-center p-2 w-full text-left"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="text-lg font-monoItalic text-pink-500">{label}</span>
-          <m.span key={isOpen ? "up" : "down"} initial={{ rotate: 0 }} animate={{ rotate: 180 }}>{isOpen ? <FaChevronDown size={20} className="text-pink-500" /> : <FaChevronUp size={20} className="text-pink-500" />}</m.span>
+          <span className="text-lg font-monoItalic text-pink-900">{label}</span>
+          <m.span key={isOpen ? "up" : "down"} initial={{ rotate: 0 }} animate={{ rotate: 180 }}>{isOpen ? <FaChevronDown size={20} className="text-pink-800" /> : <FaChevronUp size={20} className="text-pink-800" />}</m.span>
         </button>
       </m.div>
       <AnimatePresence initial={false}>
@@ -43,7 +43,7 @@ function Accordion({ label, children }: AccordionProps) {
               collapsed: { opacity: 0, height: 0 },
             }}
             transition={{ duration: 0.2, ease: [0.04, 0.62, 0.23, 0.98] }}
-            className="bg-pink-100 py-0 px-4 rounded-sm text-pink-500"
+            className="bg-pink-200 py-0 px-4 rounded-sm text-pink-800"
           >
             {children}
           </m.section>

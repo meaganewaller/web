@@ -33,7 +33,7 @@ export default function Connections() {
   return (
     <Container gridName="grid-in-outlinks" title="Let&apos;s Connect!">
       <ul
-        className="flex w-full flex-wrap items-center justify-between p-4 text-lg text-pink-700"
+        className="flex w-full flex-wrap items-center justify-between p-4 text-lg text-cobalt_blue-700 font-extra"
       >
         {links.map((link) => (
           <li
@@ -41,10 +41,11 @@ export default function Connections() {
             className="md:p-2"
           >
             <Link
-              path={link.link}
-              label={link.name}
-              className="text-xl text-pink-700 hover:text-pink-800 dark:text-pink-300 dark:hover:text-pink-200"
-            />
+              href={link.link}
+              className="text-xl text-cobalt_blue-700 hover:text-cobalt_blue-800 dark:text-cobalt_blue-800 dark:hover:text-cobalt_blue-900"
+            >
+              {link.name}
+            </Link>
           </li>
         ))}
       </ul>

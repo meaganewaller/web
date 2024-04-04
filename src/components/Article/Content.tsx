@@ -3,6 +3,9 @@
 
 import type { Components } from "react-markdown";
 
+import { MDXRemote } from "@/components/MDXRemote";
+import type { MDXRemoteSerializeResult } from "next-mdx-remote";
+
 import cn from "@/utils/cn";
 import { Children, memo, useState } from "react";
 import type { ReactNode } from "react";
@@ -12,14 +15,13 @@ import { FiClipboard, FiToggleLeft, FiToggleRight } from "react-icons/fi";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
-import rehypeRaw from "rehype-raw";
-import remarkGfm from "remark-gfm";
 import Note from "@/components/Note";
 import Tab, { type TabProps } from "@/components/Tab";
 import Tabs, { type TabsProps } from "@/components/Tabs";
 import Accordion, { type AccordionProps } from "@/components/Accordion";
 import Anchor, { type AnchorProps } from '@/components/Anchor'
 import { m } from "framer-motion";
+import Link from "next/link";
 
 import type { NoteProps } from "@/components/Note";
 
@@ -32,7 +34,7 @@ interface CustomComponents extends Components {
 }
 
 export type ContentProps = {
-  markdown: string;
+  mdxSource: MDXRemoteSerializeResult;
   className?: string;
 };
 
@@ -79,17 +81,17 @@ const CodeBlock = ({
   // parse and format "inline" CodeBlocks, (e.g. `single ticked`) or full code blocks (e.g. ``` )
   if (inline || !language)
     return (
-      <code className="p-1 m-1 text-lg text-primary-700 bg-pink-200 rounded-md font-monoItalic dark:text-zinc-300 dark:bg-zinc-800">
+      <code className="p-1 m-1 text-lg text-pink-700 bg-pink-800 rounded-md font-monoItalic dark:text-grayscale-300 dark:bg-zinc-800">
         {children}
       </code>
     );
 
   return (
     <div className="my-4">
-      <div className="flex justify-between items-center py-2 px-4 bg-gradient-to-b from-primary-500 via-primary-400 to-primary-300">
+      <div className="flex justify-between items-center py-2 px-4 bg-gradient-to-b from-pink-500 via-aqua-400 to-purple-300">
         <button
           type="button"
-          className="text-primary-100 focus:outline-none"
+          className="text-pink-100 focus:outline-none"
           onClick={toggleLineNumbers}
         >
           {showLineNumbers ? (
@@ -215,70 +217,92 @@ const components: Partial<CustomComponents> = {
   tab: Tab,
   h1: ({ node, children, ...props }) => {
     return (
-      <h1
-        {...props}
-        style={{ marginTop: "2rem" }}
-        className="pt-8 font-monoItalic"
-      >
-        {children}
-      </h1>
+      <Link
+        href={`#${getHeadingId(children)}`}>
+        <h1
+          {...props}
+          style={{ marginTop: "2rem" }}
+          className="pt-8 font-monoItalic text-4xl leading-tight text-pink-700 dark:text-zinc-300 dark:text-opacity-90"
+          id={getHeadingId(children)}
+        >
+          {children}
+        </h1>
+      </Link>
     );
   },
   h2: ({ node, children, ...props }) => {
     return (
-      <h2
-        className="pt-5 font-monoItalic text-4xl leading-tight text-pink-700 dark:text-zinc-300 dark:text-opacity-90"
-        {...props}
-        id={getHeadingId(children)}
-        style={{ marginTop: "1.8rem" }}
-      >
-        {children}
-      </h2>
+      <Link
+        href={`#${getHeadingId(children)}`}>
+        <h2
+          className="pt-5 font-monoItalic text-4xl leading-tight text-pink-700 dark:text-zinc-300 dark:text-opacity-90"
+          {...props}
+          id={getHeadingId(children)}
+          style={{ marginTop: "1.8rem" }}
+        >
+          {children}
+        </h2>
+      </Link>
     );
   },
   h3: ({ node, children, ...props }) => {
     return (
-      <h3
-        {...props}
-        style={{ marginTop: "1.6rem" }}
-        id={getHeadingId(children)}
-        className="pt-4 font-monoItalic text-3xl leading-tight text-pink-600 dark:text-zinc-300 dark:text-opacity-90"
-      >
-        {children}
-      </h3>
+      <Link
+        href={`#${getHeadingId(children)}`}>
+        <h3
+          {...props}
+          style={{ marginTop: "1.6rem" }}
+          id={getHeadingId(children)}
+          className="pt-4 font-monoItalic text-3xl leading-tight text-pink-700 dark:text-zinc-300 dark:text-opacity-90"
+        >
+          {children}
+        </h3>
+      </Link>
     );
   },
   h4: ({ node, children, ...props }) => {
     return (
-      <h4
-        {...props}
-        style={{ marginTop: "1.4rem" }}
-        className="pt-3 font-monoItalic"
-      >
-        {children}
-      </h4 >
+      <Link
+        href={`#${getHeadingId(children)}`}>
+
+        <h4
+          {...props}
+          style={{ marginTop: "1.4rem" }}
+          className="pt-3 font-monoItalic"
+        >
+          {children}
+        </h4 >
+      </Link>
     );
   },
   h5: ({ node, children, ...props }) => {
     return (
-      <h5
-        {...props}
-        style={{ marginTop: "1.2rem" }}
-        className="pt-2 font-monoItalic"
-      >
-        {children}
-      </h5>
+      <Link
+        href={`#${getHeadingId(children)}`}>
+
+        <h5
+          {...props}
+          style={{ marginTop: "1.2rem" }}
+          className="pt-2 font-monoItalic"
+        >
+          {children}
+        </h5>
+      </Link>
     );
   },
   h6: ({ node, children, ...props }) => {
     return (
-      <h6
-        {...props}
-        style={{ marginTop: "1rem" }}
-        className="pt-1 font-monoItalic"
-      >
-        {children}
-      </h6>
+      <Link
+        href={`#${getHeadingId(children)}`}>
+
+        <h6
+          {...props}
+          style={{ marginTop: "1rem" }}
+          className="pt-1 font-monoItalic"
+        >
+          {children}
+        </h6>
+      </Link>
     );
   },
   p: ({ node, ...props }) => {
@@ -300,7 +324,7 @@ const components: Partial<CustomComponents> = {
   accordion: Accordion,
 };
 
-function Content({ markdown, className = "" }: ContentProps) {
+function Content({ mdxSource, className = "" }: ContentProps) {
   return (
     <m.article
       variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
@@ -308,13 +332,7 @@ function Content({ markdown, className = "" }: ContentProps) {
       animate="visible"
       className={cn(className, "my-10")}
     >
-      <ReactMarkdown
-        rehypePlugins={[rehypeRaw]}
-        remarkPlugins={[remarkGfm]}
-        components={components}
-      >
-        {markdown}
-      </ReactMarkdown>
+      <MDXRemote {...mdxSource} />
     </m.article>
   );
 }

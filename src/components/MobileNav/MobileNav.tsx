@@ -23,7 +23,7 @@ const MobileNav = ({ sticky = false }: { sticky?: boolean }) => {
           <Menu>
             {({ open }) => (
               <>
-                <Menu.Button className={cn('flex h-9 w-9 items-center justify-center p-0 hover:text-pink-100')}>
+                <Menu.Button className={cn('flex h-9 w-9 items-center justify-center p-0 hover:text-blue-700')}>
                   <Hamburger size={18} className={cn('')} />
                 </Menu.Button>
                 {open && (
@@ -34,22 +34,24 @@ const MobileNav = ({ sticky = false }: { sticky?: boolean }) => {
                     initial="hide"
                     animate="show"
                     className={cn(
-                      'absolute right-0 w-56 origin-top-right rounded-md border-2 border-primary-200 bg-primary-100 p-1',
+                      'absolute right-0 w-56 origin-top-right rounded-md border-2 border-pink-200 bg-purple-100 text-blue-900 p-1',
                     )}
                   >
                     {NAV_LINKS.map(({ path, label, icon }) => (
                       <Menu.Item key={path}>
                         {({ active }) => (
                           <Link
-                            path={path}
-                            label={label}
+                            href={path}
                             icon={icon}
+                            skewOnHover={false}
                             className={cn(
-                              'mx-1 my-0.5 flex items-center gap-2 rounded px-2 py-1.5 font-semibold text-muted-foreground transition-colors duration-150',
-                              'hover:bg-accent hover:text-accent-foreground',
-                              active ? 'bg-accent text-accent-foreground' : '',
+                              'mx-1 my-0.5 flex items-center gap-2 rounded px-2 py-1.5 font-semibold transition-colors duration-150',
+                              'hover:bg-yellow-200',
+                              active ? 'bg-blue-200 text-blue-900' : '',
                             )}
-                          />
+                          >
+                            {label}
+                          </Link>
                         )}
                       </Menu.Item>
                     ))}

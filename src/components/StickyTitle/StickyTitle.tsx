@@ -8,10 +8,9 @@ import useOnScroll from '@/hooks/use-on-scroll'
 import cn from '@/utils/cn'
 import { min } from '@/utils/screens'
 
-import MobileNav from '@/components/MobileNav'
-import ToggleDarkMode from '@/components/ToggleDarkMode'
-import Container from '@/components/Container'
-import BackButton from '@/components/BackButton'
+import MobileNav from "@/components/MobileNav"
+import ToggleDarkMode from "@/components/ToggleDarkMode"
+import Container from "@/components/Container"
 
 interface StickyTitleProps {
   title: string
@@ -49,7 +48,15 @@ const StickyTitle = ({ title, elementRef, gap = -210 }: StickyTitleProps) => {
   const isMinMd = useMediaQuery(min('md'))
 
   const scrollToTop = () => {
-    elementRef?.current?.scrollIntoView(false)
+    try {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      })
+    } catch {
+      window.scrollTo(0, 0)
+    }
   }
 
   return (
@@ -62,22 +69,21 @@ const StickyTitle = ({ title, elementRef, gap = -210 }: StickyTitleProps) => {
               animate="animate"
               variants={variants}
               transition={transition}
-              className={cn('fixed left-0 right-0 top-0 z-50 bg-primary-300')}
+              className={cn('fixed left-0 right-0 top-0 z-50 bg-pink-300 dark:bg-purple-1000')}
             >
-              <Container wide={true}>
+              <Container>
                 <div
                   className={cn(
-                    'flex h-16 items-center justify-between bg-primary-300',
+                    'flex h-16 items-center justify-between',
                   )}
                 >
-                  <BackButton />
                   <h1
-                    className={cn('cursor-pointer font-sans text-lg')}
+                    className={cn('cursor-pointer font-sans text-lg text-blue-900 dark:text-purple-200')}
                     onClick={scrollToTop}
                   >
                     {title}
                   </h1>
-                  <div className={cn('flex items-center gap-1')}>
+                  <div className={cn('flex items-center gap-1 text-blue-900 dark:text-purple-200')}>
                     <ToggleDarkMode />
                     <MobileNav sticky={true} />
                   </div>
@@ -90,13 +96,13 @@ const StickyTitle = ({ title, elementRef, gap = -210 }: StickyTitleProps) => {
               transition={transition}
               className={cn('fixed left-0 right-0 top-0 z-50')}
             >
-              <Container wide={true}>
+              <Container>
                 <div
                   className={cn(
-                    'flex h-16 items-center justify-between bg-primary-300 text-center shadow-sm backdrop-blur',
+                    'flex h-16 items-center justify-between text-center shadow-sm backdrop-blur',
                   )}
                 >
-                  <h1 className={cn('font-mono text-lg')}>{title}</h1>
+                  <h1 className={cn('font-sans text-lg')}>{title}</h1>
                 </div>
               </Container>
             </m.div>

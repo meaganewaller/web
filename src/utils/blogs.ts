@@ -3,6 +3,14 @@ import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import requests from "./requests";
 import type { PostResponse } from "@/types";
 import { fetchData } from "./fetchData";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeExternalLinks from "rehype-external-links";
+import remarkGfm from "remark-gfm";
+import remarkComment from "remark-comment";
+import { wrapInArticles } from "./remark/wrap-in-articles";
+import { highlightFirstHeading } from "./remark/highlight-first-heading";
+import remarkMdxDisableExplicitJsx from "remark-mdx-disable-explicit-jsx";
 
 export interface BlogPost {
   source: MDXRemoteSerializeResult;
@@ -42,7 +50,19 @@ export const getPost = async (slug: string): Promise<BlogPost> => {
 
   const post: PostResponse = postResponse;
 
-  const source = await serialize(post.content);
+  const source = await serialize(post.content, {
+    scope: {},
+    mdxOptions: {
+      rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }], [rehypeExternalLinks, { rel: ['nofollow'], target: '_blank' }]],
+      remarkPlugins: [
+        remarkGfm,
+        wrapInArticles,
+        highlightFirstHeading,
+        remarkComment,
+        remarkMdxDisableExplicitJsx,
+      ]
+    }
+  });
 
   return {
     source,

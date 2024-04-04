@@ -45,22 +45,23 @@ const Pagination: FC<PaginationProps> = ({ page, url, previousPostUrl, series })
   ];
 
   return (
-    <div className="flex p-2 flex-wrap bg-primary-500/20 rounded-full shadow-[0px_10px_15px_rgba(0,0,0,0.1)] justify-around w-full mt-32 dark:bg-zinc-800">
+    <div className="flex p-2 flex-wrap bg-pink-400 rounded-full shadow-[0px_10px_15px_rgba(0,0,0,0.1)] justify-around w-full mt-32 dark:bg-purple-800">
       {links.map((link) => {
         return (
           <div
             key={link.key}
-            className="text-primary-700 leading-10 text-center text-lg font-medium cursor-pointer select-none transition-all duration-300 ease-in-out"
+            className="leading-10 text-center text-lg font-medium cursor-pointer select-none transition-all duration-300 ease-in-out"
           >
             {link.label === 'gap' && <div>...</div>}
             {link.url !== undefined && link.url !== null &&
               <Link
-                path={link.url}
-                label={link.label}
+                href={link.url}
                 className={cn([
-                  "text-primary-700 py-1.5 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-primary-500 dark:text-orange-200 dark:hover:text-orange-50",
-                  link.active && "bg-primary-500 text-primary-100 underline-offset-4 underline decoration-pink-500 dark:bg-orange-500 dark:text-orange-900 dark:underline-offset-4 dark:underline dark:decoration-orange-100"
-                ])} />
+                  "text-pink-900 py-1.5 px-4 rounded-full transition-all duration-300 ease-in-out hover:text-pink-800 dark:text-purple-200 dark:hover:text-orange-50",
+                  link.active && "bg-pink-100 text-pink-900 underline-offset-4 underline decoration-pink-900 dark:bg-purple-500 dark:text-purple-900 dark:underline-offset-4 dark:underline dark:decoration-purple-1000"
+                ])}>
+                {link.label}
+              </Link>
             }
           </div>
         );

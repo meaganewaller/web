@@ -21,27 +21,27 @@ const GlobalStyles = css`
   html {
     ${tw`
       antialiased \
-      bg-primary-100 \
-      text-neutral-900 \
+      bg-pink-100 \
+      text-blue-900 \
       font-serif \
       transition ease-in-out duration-300
     `}
 
     &.dark {
-      ${tw`bg-neutral-900 text-neutral-100`}
+      ${tw`bg-purple-1100 text-purple-100`}
 
       * {
         --tw-ring-offset-color: #0c0e10;
 
         &::selection {
-          ${tw`bg-primary-100 text-primary-600`}
+          ${tw`bg-green-300 text-green-900`}
         }
       }
     }
   }
 
   *::selection {
-    ${tw`bg-primary-500 text-primary-100`}
+    ${tw`bg-purple-400 text-purple-900`}
   }
 
   @supports (font-variation-settings: normal) {
@@ -51,7 +51,7 @@ const GlobalStyles = css`
   }
 
   #nprogress .bar {
-    ${tw`h-1 bg-info-500`}
+    ${tw`h-1 bg-teal-500`}
   }
 `;
 
@@ -85,7 +85,7 @@ export const Providers: React.FC<Props> = ({ children }) => {
               animate='enter'
               exit='exit'
               variants={pageVariants}
-              className='transition-color flex min-h-screen flex-col bg-primary-100 dark:bg-zinc-900 text-neutral-900 dark:text-neutral-100'
+              className='transition-color flex flex-col'
             >
               <EmotionStyles styles={GlobalStyles} />
               <TailwindStyles />
@@ -93,7 +93,7 @@ export const Providers: React.FC<Props> = ({ children }) => {
               <ToastProvider position="top-center" />
             </m.div>
             <Suspense fallback={null}>
-              <ProgressBar height='4px' color='#9f7aea' options={{ showSpinner: false }} />
+              <ProgressBar height='4px' color='#00ced1' options={{ showSpinner: false }} />
             </Suspense>
           </ThemeProvider>
         </LazyMotion>

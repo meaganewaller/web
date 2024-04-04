@@ -27,10 +27,11 @@ export function QuickInfo() {
             <strong className="mr-2">working at:</strong>
             senior dev consultant @{' '}
             <Link
-              path="https://testdouble.com"
-              label="test double"
+              href="https://testdouble.com"
               className=""
-            />
+            >
+              test double
+            </Link>
           </li>
           <li className="text-lg relative">
             <strong className="mr-2">sign:</strong>

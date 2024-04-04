@@ -14,20 +14,21 @@ export default function RecentPosts({ posts }: IPosts) {
       title="Recent Posts"
       gridName="grid-in-recent-posts"
     >
-      <ul className="table w-full justify-between text-lg">
+      <ul className="table w-full justify-between text-lg font-extra">
         {posts.map((post: PostResponse, i: number) => (
           <li
             key={post.slug}
             className={cn(
-              'group table-row hover:bg-yellow-100 hover:text-yellow-500 hover:decoration-yellow-400 dark:hover:bg-purple-800 dark:hover:text-purple-200 dark:hover:decoration-purple-300',
-              i % 2 === 0 && 'bg-purple-200/80 dark:bg-purple-950/80',
+              'group table-row hover:bg-light_orange-800 hover:text-light_orange-300 hover:decoration-light_orange-400 dark:hover:bg-cobalt_blue-200 dark:hover:text-cobalt_blue-800 dark:hover:decoration-cobalt_blue-700',
+              i % 2 !== 0 && 'bg-heliotrope-800/80 dark:bg-cobalt_blue-200/80',
             )}
           >
             <Link
-              path={`/blog/${post.slug}`}
-              className="group table-cell px-4 py-2 text-xl group-hover:italic text-primary-700"
-              label={post.title}
-            />
+              href={`/blog/${post.slug}`}
+              className="group table-cell px-4 py-2 text-xl group-hover:italic"
+            >
+              {post.title}
+            </Link>
           </li>
         ))}
       </ul>

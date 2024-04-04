@@ -1,22 +1,30 @@
-import Providers from "@/providers";
-import { Suspense } from "react";
-import type { Metadata, Viewport } from "next";
-import Header from "@/components/Header";
-import Loading from "./loading";
-import {
-  DM_Sans as Sans,
-  EB_Garamond as Serif,
-  Victor_Mono as Mono,
-  Press_Start_2P,
-} from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import '@/styles/globals.css'
+import { fontSans, fontSerif, fontMono, fontMonoItalic, fontPixel, fontDisplay, fontExtra } from '@/lib/fonts'
+import type { Metadata, Viewport } from 'next'
 
-import "@/styles/globals.css";
+import Analytics from '@/components/Analytics'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
+import NowPlaying from '@/components/NowPlaying'
+import Providers from '@/providers'
+import createMetadata from '@/utils/metadata'
+import cn from '@/utils/cn'
 
-export interface LayoutProps {
-  children: React.ReactNode;
-}
+export const metadata: Metadata = {
+  title: {
+    default: 'meagan waller',
+    template: `%s - meagan waller`
+  },
+  description: `meagan waller's personal website and blog`,
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' }
+  ],
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+};
 
 export const viewport: Viewport = {
   initialScale: 1,
@@ -26,96 +34,58 @@ export const viewport: Viewport = {
   width: 'device-width',
 }
 
-
-const title = `meagan waller | it's a blog!`;
-const description = `meagan waller's personal website and blog`;
-const images = `${process.env.NEXT_PUBLIC_BASE_URL}/favicon.ico`;
-
-export const metadata: Metadata = {
-  title: {
-    template: "%s | meagan waller",
-    default: title,
-  },
-  icons: [images],
-  openGraph: {
-    title,
-    description,
-    images: [images],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: [images],
-    creator: "@meaganewaller",
-  },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
-  description,
-  alternates: {
-    canonical: "/",
-    languages: {
-      "en-US": "/en-US",
-    },
-  },
-};
-
-const sans = Sans({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["400", "700"],
-  display: "swap",
-  variable: "--font-sans",
-});
-
-const serif = Serif({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["400", "700"],
-  display: "swap",
-  variable: "--font-serif",
-});
-
-const mono = Mono({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-  variable: "--font-mono",
-  adjustFontFallback: false,
-});
-
-const mono_italic = Mono({
-  subsets: ["latin"],
-  style: "italic",
-  display: "swap",
-  variable: "--font-mono-italic",
-  weight: ["400", "700"],
-});
-
-const pixel = Press_Start_2P({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-  variable: "--font-pixel",
-});
-
-export default function RootLayout({ children }: LayoutProps) {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en" suppressHydrationWarning className={`${sans.variable} ${serif.variable} ${mono.variable} ${pixel.variable} ${mono_italic.variable} font-sans scroll-smooth`}>
-      <head>
-        <meta charSet="utf-8" />
-      </head>
-      <body className="debug-screens antialiased">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn(
+        fontSans.variable,
+        fontSerif.variable,
+        fontMono.variable,
+        fontPixel.variable,
+        fontMonoItalic.variable,
+        fontDisplay.variable,
+        fontExtra.variable,
+        'scroll-smooth',
+      )}
+    >
+      <head />
+      <body className={cn('min-h-screen bg-rose_pink-900 font-sans antialiased scroll-smooth')}>
         <Providers>
           <div id="__app">
             <Header />
-            <Suspense fallback={<Loading />}>
-              <main className="mx-auto my-8 h-screen max-w-[95%]">{children}</main>
-            </Suspense>
+            <main className='flex-1'>{children}</main>
+            <Footer />
+            <NowPlaying />
           </div>
           <Analytics />
-          <SpeedInsights />
         </Providers>
       </body>
     </html>
-  );
+  )
+
 }
+
+export default RootLayout
+// export default function RootLayout({ children }: LayoutProps) {
+//   return (
+//     <html lang="en" suppressHydrationWarning className={`${sans.variable} ${serif.variable} ${mono.variable} ${pixel.variable} ${mono_italic.variable} ${display.variable} font-sans scroll-smooth`}>
+//       <head>
+//         <meta charSet="utf-8" />
+//       </head>
+//       <body className="debug-screens">
+//         <Providers>
+//           <div id="__app">
+//             <Header />
+//             <Suspense fallback={<Loading />}>
+//               <main className="mx-auto mt-3 overscroll-none max-w-[98%] lg:max-w-[96%] xl:max-w-[94%] 2xl:max-w-[92%]">{children}</main>
+//             </Suspense>
+//           </div>
+//           <Analytics />
+//           <SpeedInsights />
+//         </Providers>
+//       </body>
+//     </html>
+//   );
+// }

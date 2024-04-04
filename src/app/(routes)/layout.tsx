@@ -2,15 +2,19 @@
 
 import PageLayout from '@/components/Layout';
 import Container from '@/components/Container'
+import BackButton from '@/components/BackButton'
 
 export default function RoutesLayout({ children }: { children: React.ReactNode }) {
   return (
-    <PageLayout>
-      <Container>
-        <div className="m-0 min-w-0 flex-grow flex-shrink basis-auto min-h-screen mt-24">
+    <div className="my-10 sm:my-12 md:my-14 lg:my-16 xl:my-18 2xl:my-20">
+      <Container wide={true}>
+        <PageLayout>
+          <div className="flex gap-1 font-medium leading-6 text-pink-300 text-lg mx-6">
+            <BackButton />
+          </div>
           {children}
-        </div>
+        </PageLayout>
       </Container>
-    </PageLayout>
+    </div>
   );
 }

@@ -2,28 +2,21 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Container from "@/components/Container";
+import PageHeader from "@/components/PageHeader";
+import Form from "./_components/Form";
 import EntriesList from '@/components/EntriesList';
-import GuestbookPanel from '@/components/GuestbookPanel';
-import { fetchData } from '@/utils/fetchData';
 import type { Pagy, GuestbookEntry } from '@/types';
+import { fetchData } from "@/utils/fetchData";
+import { toast } from 'react-hot-toast';
+import Pagination from '@/components/Pagination';
 import requests from '@/utils/requests';
 import EmptyState from '@/components/EmptyState';
-
-import Container from '@/components/Container';
-import PageHeader from '@/components/PageHeader';
-import { createMetadata } from '@/utils/metadata';
-import Pagination from '@/components/Pagination';
-import { toast } from 'react-hot-toast';
 
 interface GuestbookData {
   entries: GuestbookEntry[];
   pagy: Pagy;
 }
-
-createMetadata({
-  title: 'guestbook',
-  description: 'the official guestbook of meaganwaller.com',
-})
 
 export default function GuestbookPage() {
   const searchParams = useSearchParams();
@@ -32,22 +25,6 @@ export default function GuestbookPage() {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [guestbookData, setGuestbookData] = useState<GuestbookData | null>(null);
-
-  const onSendMessage = async (message: string, name: string, email: string) => {
-    try {
-      await addEntry(message, name, email);
-    } catch (error) {
-      console.error('Error adding guestbook entry', error);
-    }
-  };
-
-  const onRemoveMessage = async (id: string) => {
-    try {
-      await deleteEntry(id);
-    } catch (error) {
-      console.error('Error deleting guestbook entry', error);
-    }
-  }
 
   useEffect(() => {
     const fetchGuestbookEntries = async () => {
@@ -74,33 +51,6 @@ export default function GuestbookPage() {
     return data;
   };
 
-  const addEntry = async (message: string, name: string, email: string): Promise<GuestbookEntry | null> => {
-    const [data, error] = await fetchData<GuestbookEntry>(`api/guestbook`, {
-      method: 'POST',
-      body: {
-        name,
-        email,
-        body: message,
-      }
-    });
-
-    if (error) {
-      throw new Error(`Failed to add guestbook entry: ${error}`);
-    }
-
-    toast.success('Message submitted to the guestbook! Once approved, it will appear below.')
-    return data;
-  }
-
-  const deleteEntry = async (id: string): Promise<void> => {
-    const [data, error] = await fetchData(`/api/guestbook/${id}`, {
-      method: 'DELETE',
-    });
-    if (error) {
-      throw new Error(`Failed to delete guestbook entry: ${error}`);
-    }
-  }
-
   let entryUrl = `/guestbook?page=${currentPage}`;
   const previousEntryUrl = currentPage > 1 ? `/guestbook?page=${currentPage - 1}` : undefined;
 
@@ -123,12 +73,15 @@ export default function GuestbookPage() {
                 series={guestbookData.pagy.series}
               />
             )}
-            <GuestbookPanel onSendMessage={onSendMessage} />
+            <Form />
           </>
         ) : (
-          <EmptyState message={"The posts are playing hide and seek - we just can't find them!"} />
+          <EmptyState message={"The entries are playing hide and seek - we just can't find them!"} />
         )}
       </Container>
     </>
   )
+
+
+
 }

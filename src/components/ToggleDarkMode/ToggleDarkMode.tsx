@@ -10,17 +10,17 @@ const ToggleDarkMode = () => {
   const isDark = theme === 'dark'
   const duration = 0.7;
 
-  const moonVariants = {
-    checked: {
-      scale: 1,
-    },
-    unchecked: {
-      scale: 0,
-    },
-  };
-
   const sunVariants = {
     checked: {
+      scale: 1,
+    },
+    unchecked: {
+      scale: 0,
+    },
+  };
+
+  const moonVariants = {
+    checked: {
       scale: 0,
     },
     unchecked: {
@@ -28,8 +28,8 @@ const ToggleDarkMode = () => {
     },
   };
 
-  const scaleMoon = useMotionValue(isDark ? 1 : 0)
-  const scaleSun = useMotionValue(isDark ? 0 : 1)
+  const scaleMoon = useMotionValue(isDark ? 0 : 1)
+  const scaleSun = useMotionValue(isDark ? 1 : 0)
   const pathLengthMoon = useTransform(scaleMoon, [0.6, 1], [0.2, 1], { clamp: false })
   const pathLengthSun = useTransform(scaleSun, [0.6, 1], [0.2, 1], { clamp: false })
 

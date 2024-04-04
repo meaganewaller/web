@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react'
 
-export const useOnScroll = (margin = 200) => {
-  const [showFixed, setShowFixed] = useState(false);
+const useOnScroll = (threshold: number = 0): boolean => {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   useEffect(() => {
-    const onScroll = (e: Event) => {
-      const newShowFixed = window.scrollY > margin;
-      showFixed !== newShowFixed && setShowFixed(newShowFixed);
-    };
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > threshold)
+    }
+    onScroll()
 
-    document.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [threshold])
 
-    return () => document.removeEventListener("scroll", onScroll);
-  });
+  return isScrolled
+}
 
-  return { showFixed };
-};
-
-export default useOnScroll;
+export default useOnScroll

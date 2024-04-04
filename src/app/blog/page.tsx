@@ -13,7 +13,6 @@ import EmptyState from '@/components/EmptyState';
 
 import Container from "@/components/Container";
 import PageHeader from "@/components/PageHeader";
-import { createMetadata } from '@/utils/metadata'
 import Pagination from "@/components/Pagination";
 
 interface PostData {
@@ -49,11 +48,6 @@ const getPosts = async (
 
   return data
 };
-
-createMetadata({
-  title: 'the weblog',
-  description: 'the official blog of meaganwaller.com',
-});
 
 export default function BlogPage() {
   const searchParams = useSearchParams();
@@ -126,6 +120,7 @@ export default function BlogPage() {
               posts={blogData.posts}
               url={postUrl}
               page={currentPage}
+              showSeparator={true}
             />
             <Pagination page={currentPage} url={postUrl} previousPostUrl={previousPostUrl} series={blogData.pagy.series} />
           </>

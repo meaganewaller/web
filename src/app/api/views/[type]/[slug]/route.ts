@@ -31,8 +31,6 @@ export const POST = async (
 
     const currentViews = await countUserViews({ type, slug, sessionId });
 
-    console.log("Current Views:", currentViews)
-
     if (currentViews < MAX_VIEWS_PER_SESSION) {
       await createView({ type, slug, sessionId });
 

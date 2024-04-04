@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Article from "@/components/Article";
+import { getPost } from '@/utils/blogs'
 
 type Props = {
   params: {
@@ -24,9 +25,7 @@ export async function generateMetadata({
     return notFound();
   }
 
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_API_URL}/${resourceType}/${slug}`,
-  ).then((res) => res.json());
+  const { data } = await getPost(slug)
 
   if (!data) {
     return;
@@ -51,8 +50,8 @@ export async function generateMetadata({
       siteName: process.env.NEXT_PUBLIC_SITE_NAME,
       images: [
         {
-          url: data.cover_image,
-          alt: data.alt,
+          url: data.image,
+          alt: data.description,
           width: 1300,
           height: 630,
         },
@@ -65,7 +64,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${data.title} | ${process.env.NEXT_PUBLIC_SITE_NAME}`,
       description: data.meta_description,
-      images: [data.cover_image],
+      images: [data.image],
     },
   };
 }
@@ -74,13 +73,12 @@ export default async function Page({ params: { type, slug } }: Props) {
   if (type === "blog") {
     type = "posts";
   }
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_API_URL}/${type}/${slug}`,
-  ).then((res) => res.json());
+
+  const { source, data, content } = await getPost(slug)
 
   if (!data) {
     return notFound();
   }
 
-  return <Article article={data} />;
+  return <Article source={source} data={data} content={content} />;
 }

@@ -20,7 +20,7 @@ export interface Project {
 export interface PostResponse {
   comment_count: number;
   content: string;
-  cover_image: string;
+  image: any;
   description: string;
   meta_description: string;
   notion_created_at: string;
@@ -223,8 +223,9 @@ export interface GuestbookEntry {
   body: string
   name: string
   email: string
+  website?: string
   created_at: string
-  updated_at: string
+  updated_at?: string
   session_id: string
 }
 
@@ -232,6 +233,7 @@ export interface TGuestbookPayload {
   body: string
   name: string
   email: string
+  website?: string
   session_id?: string
 }
 
@@ -252,8 +254,9 @@ export type TGuestbook = {
   body: string
   name: string
   email: string
+  website?: string
   approved: boolean
   created_at: string
-  updated_at: string
+  updated_at?: string
   session_id: string
 }

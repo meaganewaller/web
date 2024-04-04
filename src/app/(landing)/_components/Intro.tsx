@@ -9,12 +9,12 @@ export default function Intro() {
       gridName="grid-in-about"
     >
       <>
-        <p className="font-extra text-md px-8 py-2 leading-relaxed">
+        <p className="font-extra text-lg px-8 py-2 leading-relaxed">
           <span className="font-bold italic">I wrote my first line of HTML on Microsoft Notepad in 2004 </span>
           and fell head-over-heels for how magical it all felt. The problem I was solving in 2004? My Neopets shop
           page wasn&apos;t pretty enough. I was 12 years old.
         </p>
-        <p className="font-extra text-md px-8 py-2 leading-relaxed">
+        <p className="font-extra text-lg px-8 py-2 leading-relaxed">
           I spent a couple days working up the courage to convince my parents to put their credit card information
           into form on a website and buy me a domain name. They did. And my first website was born. I learned
           everything—HTML/CSS, creating graphics in Paint Shop Pro and Animation Shop, and getting my website live—by
@@ -23,7 +23,7 @@ export default function Intro() {
         </p>
         <div className="font-pixel mb-7 flex place-content-end px-8 text-lg">
           <Link
-            className="text-xs text-purple-700 hover:text-purple-600 hover:decoration-purple-400 dark:text-pink-300 dark:hover:text-pink-200"
+            className="text-xs text-rose_pink hover:text-rose_pink-400 hover:decoration-purple-400 dark:text-rose_pink-800 dark:hover:text-rose_pink-900"
             href="/meagan"
           >
             Read more <LuArrowRight size={16} className="inline-flex" />
