@@ -16,7 +16,7 @@ interface Site {
   keywords?: string[]
 }
 
-export const BASE_URL = process.env.BASE_URL || `http://localhost:5100`;
+export const BASE_URL = process.env.BASE_URL || `http://localhost:5100`
 
 const site: Site = {
   url: BASE_URL,
@@ -24,8 +24,8 @@ const site: Site = {
   title: 'meagan waller',
   description: 'a web log',
   author: {
-    name: 'meagan waller',
-    url: 'https://meaganwaller.com',
+    name: 'Meagan Waller',
+    url: BASE_URL,
     email: 'meagan@meaganwaller.com',
     linkedIn: 'https://linkedin.com/in/meaganwaller',
     avatar: 'https://meaganwaller.com/avatar.jpg',

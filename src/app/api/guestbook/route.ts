@@ -1,6 +1,6 @@
-import { NextRequest } from 'next/server';
-import { getSessionId } from '@/utils/session';
-import { getErrorMessage, response } from "@/utils/api";
+import { NextRequest } from 'next/server'
+import { getSessionId } from '@/utils/session'
+import { getErrorMessage, response } from '@/utils/api'
 import { getGuestbookEntries } from '@/actions/guestbook'
 
 export const GET = async () => {
@@ -14,9 +14,9 @@ export const GET = async () => {
 }
 
 export async function POST(req: NextRequest) {
-  const sessionId = getSessionId(req);
+  const sessionId = getSessionId(req)
 
-  const body = await req.json();
+  const body = await req.json()
   const data = {
     name: body.name,
     email: body.email,
@@ -26,19 +26,19 @@ export async function POST(req: NextRequest) {
   }
   try {
     const resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/guestbook`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ guestbook_entry: data }),
-    });
+    })
 
     if (!resp.ok) {
-      throw new Error("Error");
+      throw new Error('Error')
     }
 
-    return new Response("ok", { status: 200 });
+    return new Response('ok', { status: 200 })
   } catch (e) {
-    return new Response("error", { status: 500 });
+    return new Response('error', { status: 500 })
   }
 }

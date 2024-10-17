@@ -17,13 +17,9 @@ type BreakpointKey = keyof typeof breakpoints
 
 const getBreakpointValue = (bp: BreakpointKey) => breakpoints[bp]
 
-export const min = (bp: BreakpointKey): string =>
-  `@media only screen and (min-width: ${getBreakpointValue(bp)})`
+export const min = (bp: BreakpointKey): string => `@media only screen and (min-width: ${getBreakpointValue(bp)})`
 
-export const max = (bp: BreakpointKey): string =>
-  `@media only screen and (max-width: ${getBreakpointValue(bp)})`
+export const max = (bp: BreakpointKey): string => `@media only screen and (max-width: ${getBreakpointValue(bp)})`
 
 export const between = (bpMin: BreakpointKey, bpMax: BreakpointKey): string =>
-  `@media only screen and (min-width: ${getBreakpointValue(
-    bpMin,
-  )}) and (max-width: ${getBreakpointValue(bpMax)})`
+  `@media only screen and (min-width: ${getBreakpointValue(bpMin)}) and (max-width: ${getBreakpointValue(bpMax)})`

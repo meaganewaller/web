@@ -1,432 +1,300 @@
 /** @type { import('tailwindcss').Config} */
 
-import typography from "@tailwindcss/typography";
-import svgDataUri from "mini-svg-data-uri";
-import type { Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
-import forms from "@tailwindcss/forms";
-import type { PluginAPI } from "tailwindcss/types/config";
-import animate from "tailwindcss-animate";
+import typography from '@tailwindcss/typography'
+import svgDataUri from 'mini-svg-data-uri'
+import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
+import forms from '@tailwindcss/forms'
+import type { PluginAPI } from 'tailwindcss/types/config'
+import animate from 'tailwindcss-animate'
 
-const sansFontFamily = ["var(--font-sans)", ...fontFamily.sans];
-const extraFontFamily = ["var(--font-extra)", ...fontFamily.sans];
-const serifFontFamily = ["var(--font-serif)", ...fontFamily.serif];
-const monoFontFamily = ["var(--font-mono)", ...fontFamily.mono];
-const monoItalicFontFamily = ["var(--font-mono-italic)", ...fontFamily.mono];
-const pixelFontFamily = ["var(--font-pixel)", ...fontFamily.mono];
-const displayFontFamily = ["var(--font-display)", ...fontFamily.sans];
+const sansFontFamily = ['var(--font-sans)', ...fontFamily.sans]
+const extraFontFamily = ['var(--font-extra)', ...fontFamily.sans]
+const serifFontFamily = ['var(--font-serif)', ...fontFamily.serif]
+const monoFontFamily = ['var(--font-mono)', ...fontFamily.mono]
+const monoItalicFontFamily = ['var(--font-mono-italic)', ...fontFamily.mono]
+const pixelFontFamily = ['var(--font-pixel)', ...fontFamily.mono]
+const displayFontFamily = ['var(--font-display)', ...fontFamily.sans]
 
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette')
 
 export default {
-  content: ["./src/**/*.{ts,tsx}"],
-  darkMode: "class",
-  mode: "jit",
+  content: ['./src/**/*.{ts,tsx}'],
+  darkMode: 'class',
+  mode: 'jit',
   important: true,
   theme: {
     colors: {
-      "transparent": "transparent",
-      "grayscale": {
-        "50": "rgb(248, 248, 248)",
-        "100": "rgb(244, 244, 244)",
-        "200": "rgb(239, 239, 239)",
-        "300": "rgb(232, 232, 232)",
-        "400": "rgb(221, 221, 221)",
-        "500": "rgb(213, 213, 213)",
-        "600": "rgb(196, 196, 196)",
-        "700": "rgb(182, 182, 182)",
-        "800": "rgb(170, 170, 170)",
-        "900": "rgb(123, 123, 123)",
-        "1000": "rgb(34, 34, 34)",
-        "1100": "rgb(22, 22, 22)"
+      transparent: 'transparent',
+      grayscale: {
+        '50': 'rgb(248, 248, 248)',
+        '100': 'rgb(244, 244, 244)',
+        '200': 'rgb(239, 239, 239)',
+        '300': 'rgb(232, 232, 232)',
+        '400': 'rgb(221, 221, 221)',
+        '500': 'rgb(213, 213, 213)',
+        '600': 'rgb(196, 196, 196)',
+        '700': 'rgb(182, 182, 182)',
+        '800': 'rgb(170, 170, 170)',
+        '900': 'rgb(123, 123, 123)',
+        '1000': 'rgb(34, 34, 34)',
+        '1100': 'rgb(22, 22, 22)',
       },
-      "red": {
-        "50": "rgb(255, 246, 244)",
-        "100": "rgb(255, 241, 238)",
-        "200": "rgb(255, 235, 231)",
-        "300": "rgb(255, 226, 220)",
-        "400": "rgb(255, 211, 202)",
-        "500": "rgb(255, 201, 190)",
-        "600": "rgb(255, 177, 161)",
-        "700": "rgb(255, 156, 136)",
-        "800": "rgb(255, 137, 113)",
-        "900": "rgb(239, 40, 0)",
-        "1000": "rgb(71, 12, 0)",
-        "1100": "rgb(48, 8, 0)"
+      red: {
+        '50': 'rgb(255, 246, 244)',
+        '100': 'rgb(255, 241, 238)',
+        '200': 'rgb(255, 235, 231)',
+        '300': 'rgb(255, 226, 220)',
+        '400': 'rgb(255, 211, 202)',
+        '500': 'rgb(255, 201, 190)',
+        '600': 'rgb(255, 177, 161)',
+        '700': 'rgb(255, 156, 136)',
+        '800': 'rgb(255, 137, 113)',
+        '900': 'rgb(239, 40, 0)',
+        '1000': 'rgb(71, 12, 0)',
+        '1100': 'rgb(48, 8, 0)',
       },
-      "aqua": {
-        "50": "rgb(228, 253, 249)",
-        "100": "rgb(212, 252, 245)",
-        "200": "rgb(194, 251, 241)",
-        "300": "rgb(153, 248, 232)",
-        "400": "rgb(93, 244, 219)",
-        "500": "rgb(33, 240, 205)",
-        "600": "rgb(15, 220, 186)",
-        "700": "rgb(14, 205, 173)",
-        "800": "rgb(13, 191, 161)",
-        "900": "rgb(9, 139, 117)",
-        "1000": "rgb(3, 40, 34)",
-        "1100": "rgb(2, 26, 22)"
+      aqua: {
+        '50': 'rgb(228, 253, 249)',
+        '100': 'rgb(212, 252, 245)',
+        '200': 'rgb(194, 251, 241)',
+        '300': 'rgb(153, 248, 232)',
+        '400': 'rgb(93, 244, 219)',
+        '500': 'rgb(33, 240, 205)',
+        '600': 'rgb(15, 220, 186)',
+        '700': 'rgb(14, 205, 173)',
+        '800': 'rgb(13, 191, 161)',
+        '900': 'rgb(9, 139, 117)',
+        '1000': 'rgb(3, 40, 34)',
+        '1100': 'rgb(2, 26, 22)',
       },
-      "violet": {
-        "50": "rgb(253, 246, 254)",
-        "100": "rgb(252, 240, 254)",
-        "200": "rgb(250, 233, 254)",
-        "300": "rgb(248, 224, 253)",
-        "400": "rgb(245, 209, 252)",
-        "500": "rgb(243, 199, 251)",
-        "600": "rgb(237, 174, 250)",
-        "700": "rgb(232, 152, 248)",
-        "800": "rgb(228, 133, 247)",
-        "900": "rgb(204, 24, 240)",
-        "1000": "rgb(62, 5, 74)",
-        "1100": "rgb(43, 3, 51)",
-        "DEFAULT": "rgb(228, 133, 247)"
+      violet: {
+        '50': 'rgb(253, 246, 254)',
+        '100': 'rgb(252, 240, 254)',
+        '200': 'rgb(250, 233, 254)',
+        '300': 'rgb(248, 224, 253)',
+        '400': 'rgb(245, 209, 252)',
+        '500': 'rgb(243, 199, 251)',
+        '600': 'rgb(237, 174, 250)',
+        '700': 'rgb(232, 152, 248)',
+        '800': 'rgb(228, 133, 247)',
+        '900': 'rgb(204, 24, 240)',
+        '1000': 'rgb(62, 5, 74)',
+        '1100': 'rgb(43, 3, 51)',
+        DEFAULT: 'rgb(228, 133, 247)',
       },
-      "yellow": {
-        "50": "rgb(253, 249, 227)",
-        "100": "rgb(252, 245, 209)",
-        "200": "rgb(250, 239, 182)",
-        "300": "rgb(249, 233, 155)",
-        "400": "rgb(245, 221, 100)",
-        "500": "rgb(243, 213, 64)",
-        "600": "rgb(229, 193, 14)",
-        "700": "rgb(212, 179, 13)",
-        "800": "rgb(199, 168, 13)",
-        "900": "rgb(144, 121, 9)",
-        "1000": "rgb(41, 34, 3)",
-        "1100": "rgb(26, 22, 2)"
+      yellow: {
+        '50': 'rgb(253, 249, 227)',
+        '100': 'rgb(252, 245, 209)',
+        '200': 'rgb(250, 239, 182)',
+        '300': 'rgb(249, 233, 155)',
+        '400': 'rgb(245, 221, 100)',
+        '500': 'rgb(243, 213, 64)',
+        '600': 'rgb(229, 193, 14)',
+        '700': 'rgb(212, 179, 13)',
+        '800': 'rgb(199, 168, 13)',
+        '900': 'rgb(144, 121, 9)',
+        '1000': 'rgb(41, 34, 3)',
+        '1100': 'rgb(26, 22, 2)',
       },
-      "teal": {
-        "50": "rgb(239, 251, 252)",
-        "100": "rgb(227, 248, 250)",
-        "200": "rgb(212, 244, 247)",
-        "300": "rgb(196, 240, 244)",
-        "400": "rgb(165, 232, 238)",
-        "500": "rgb(145, 227, 234)",
-        "600": "rgb(90, 213, 224)",
-        "700": "rgb(40, 200, 214)",
-        "800": "rgb(38, 187, 201)",
-        "900": "rgb(27, 135, 145)",
-        "1000": "rgb(8, 38, 41)",
-        "1100": "rgb(5, 25, 27)"
+      teal: {
+        '50': 'rgb(239, 251, 252)',
+        '100': 'rgb(227, 248, 250)',
+        '200': 'rgb(212, 244, 247)',
+        '300': 'rgb(196, 240, 244)',
+        '400': 'rgb(165, 232, 238)',
+        '500': 'rgb(145, 227, 234)',
+        '600': 'rgb(90, 213, 224)',
+        '700': 'rgb(40, 200, 214)',
+        '800': 'rgb(38, 187, 201)',
+        '900': 'rgb(27, 135, 145)',
+        '1000': 'rgb(8, 38, 41)',
+        '1100': 'rgb(5, 25, 27)',
       },
-      "orange": {
-        "50": "rgb(255, 247, 232)",
-        "100": "rgb(255, 243, 221)",
-        "200": "rgb(255, 237, 203)",
-        "300": "rgb(255, 229, 181)",
-        "400": "rgb(255, 215, 141)",
-        "500": "rgb(255, 206, 115)",
-        "600": "rgb(255, 182, 46)",
-        "700": "rgb(250, 163, 0)",
-        "800": "rgb(234, 152, 0)",
-        "900": "rgb(170, 110, 0)",
-        "1000": "rgb(48, 31, 0)",
-        "1100": "rgb(31, 20, 0)"
+      orange: {
+        '50': 'rgb(255, 247, 232)',
+        '100': 'rgb(255, 243, 221)',
+        '200': 'rgb(255, 237, 203)',
+        '300': 'rgb(255, 229, 181)',
+        '400': 'rgb(255, 215, 141)',
+        '500': 'rgb(255, 206, 115)',
+        '600': 'rgb(255, 182, 46)',
+        '700': 'rgb(250, 163, 0)',
+        '800': 'rgb(234, 152, 0)',
+        '900': 'rgb(170, 110, 0)',
+        '1000': 'rgb(48, 31, 0)',
+        '1100': 'rgb(31, 20, 0)',
       },
-      "lime": {
-        "50": "rgb(242, 251, 234)",
-        "100": "rgb(236, 249, 223)",
-        "200": "rgb(224, 245, 203)",
-        "300": "rgb(212, 241, 182)",
-        "400": "rgb(190, 234, 145)",
-        "500": "rgb(174, 229, 119)",
-        "600": "rgb(136, 217, 55)",
-        "700": "rgb(120, 202, 38)",
-        "800": "rgb(112, 189, 36)",
-        "900": "rgb(81, 137, 26)",
-        "1000": "rgb(23, 39, 7)",
-        "1100": "rgb(15, 25, 5)"
+      lime: {
+        '50': 'rgb(242, 251, 234)',
+        '100': 'rgb(236, 249, 223)',
+        '200': 'rgb(224, 245, 203)',
+        '300': 'rgb(212, 241, 182)',
+        '400': 'rgb(190, 234, 145)',
+        '500': 'rgb(174, 229, 119)',
+        '600': 'rgb(136, 217, 55)',
+        '700': 'rgb(120, 202, 38)',
+        '800': 'rgb(112, 189, 36)',
+        '900': 'rgb(81, 137, 26)',
+        '1000': 'rgb(23, 39, 7)',
+        '1100': 'rgb(15, 25, 5)',
       },
-      "green": {
-        "50": "rgb(238, 252, 245)",
-        "100": "rgb(224, 249, 236)",
-        "200": "rgb(213, 247, 230)",
-        "300": "rgb(193, 243, 218)",
-        "400": "rgb(160, 237, 199)",
-        "500": "rgb(135, 232, 183)",
-        "600": "rgb(76, 221, 149)",
-        "700": "rgb(39, 207, 123)",
-        "800": "rgb(37, 193, 115)",
-        "900": "rgb(27, 140, 83)",
-        "1000": "rgb(8, 40, 24)",
-        "1100": "rgb(5, 26, 16)"
+      green: {
+        '50': 'rgb(238, 252, 245)',
+        '100': 'rgb(224, 249, 236)',
+        '200': 'rgb(213, 247, 230)',
+        '300': 'rgb(193, 243, 218)',
+        '400': 'rgb(160, 237, 199)',
+        '500': 'rgb(135, 232, 183)',
+        '600': 'rgb(76, 221, 149)',
+        '700': 'rgb(39, 207, 123)',
+        '800': 'rgb(37, 193, 115)',
+        '900': 'rgb(27, 140, 83)',
+        '1000': 'rgb(8, 40, 24)',
+        '1100': 'rgb(5, 26, 16)',
       },
-      "blue": {
-        "50": "rgb(245, 249, 253)",
-        "100": "rgb(238, 245, 252)",
-        "200": "rgb(230, 240, 250)",
-        "300": "rgb(219, 234, 248)",
-        "400": "rgb(202, 223, 245)",
-        "500": "rgb(190, 216, 243)",
-        "600": "rgb(162, 200, 237)",
-        "700": "rgb(139, 186, 233)",
-        "800": "rgb(119, 174, 229)",
-        "900": "rgb(40, 125, 210)",
-        "1000": "rgb(12, 36, 60)",
-        "1100": "rgb(7, 23, 39)"
+      blue: {
+        '50': 'rgb(245, 249, 253)',
+        '100': 'rgb(238, 245, 252)',
+        '200': 'rgb(230, 240, 250)',
+        '300': 'rgb(219, 234, 248)',
+        '400': 'rgb(202, 223, 245)',
+        '500': 'rgb(190, 216, 243)',
+        '600': 'rgb(162, 200, 237)',
+        '700': 'rgb(139, 186, 233)',
+        '800': 'rgb(119, 174, 229)',
+        '900': 'rgb(40, 125, 210)',
+        '1000': 'rgb(12, 36, 60)',
+        '1100': 'rgb(7, 23, 39)',
       },
-      "purple": {
-        "50": "rgb(250, 247, 253)",
-        "100": "rgb(247, 242, 253)",
-        "200": "rgb(244, 236, 251)",
-        "300": "rgb(239, 228, 250)",
-        "400": "rgb(231, 214, 247)",
-        "500": "rgb(226, 206, 246)",
-        "600": "rgb(213, 185, 242)",
-        "700": "rgb(203, 167, 238)",
-        "800": "rgb(194, 152, 236)",
-        "900": "rgb(157, 89, 224)",
-        "1000": "rgb(49, 16, 83)",
-        "1100": "rgb(33, 10, 55)"
+      purple: {
+        '50': 'rgb(250, 247, 253)',
+        '100': 'rgb(247, 242, 253)',
+        '200': 'rgb(244, 236, 251)',
+        '300': 'rgb(239, 228, 250)',
+        '400': 'rgb(231, 214, 247)',
+        '500': 'rgb(226, 206, 246)',
+        '600': 'rgb(213, 185, 242)',
+        '700': 'rgb(203, 167, 238)',
+        '800': 'rgb(194, 152, 236)',
+        '900': 'rgb(157, 89, 224)',
+        '1000': 'rgb(49, 16, 83)',
+        '1100': 'rgb(33, 10, 55)',
       },
-      "pink": {
-        "50": "rgb(255, 246, 251)",
-        "100": "rgb(255, 240, 248)",
-        "200": "rgb(255, 233, 245)",
-        "300": "rgb(255, 224, 241)",
-        "400": "rgb(255, 207, 233)",
-        "500": "rgb(255, 197, 228)",
-        "600": "rgb(255, 170, 215)",
-        "700": "rgb(255, 147, 205)",
-        "800": "rgb(255, 126, 195)",
-        "900": "rgb(238, 0, 127)",
-        "1000": "rgb(75, 0, 40)",
-        "1100": "rgb(52, 0, 28)"
-      }
+      pink: {
+        '50': 'rgb(255, 246, 251)',
+        '100': 'rgb(255, 240, 248)',
+        '200': 'rgb(255, 233, 245)',
+        '300': 'rgb(255, 224, 241)',
+        '400': 'rgb(255, 207, 233)',
+        '500': 'rgb(255, 197, 228)',
+        '600': 'rgb(255, 170, 215)',
+        '700': 'rgb(255, 147, 205)',
+        '800': 'rgb(255, 126, 195)',
+        '900': 'rgb(238, 0, 127)',
+        '1000': 'rgb(75, 0, 40)',
+        '1100': 'rgb(52, 0, 28)',
+      },
     },
     container: {
       center: true,
-      padding: "2rem",
+      padding: '2rem',
       screens: {
-        "2xl": "1400px",
+        '2xl': '1400px',
       },
     },
     fontSize: {
-      xs: ["0.8125rem", { lineHeight: "1.5rem" }],
-      sm: ["0.875rem", { lineHeight: "1.5rem" }],
-      base: ["1rem", { lineHeight: "1.75rem" }],
-      lg: ["1.125rem", { lineHeight: "1.75rem" }],
-      xl: ["1.375rem", { lineHeight: "2rem" }],
-      "2xl": ["1.5625rem", { lineHeight: "2rem" }],
-      "3xl": ["1.875rem", { lineHeight: "2.25rem" }],
-      "4xl": ["2.5rem", { lineHeight: "2.5rem" }],
-      "5xl": ["3.125rem", { lineHeight: "3.5rem" }],
-      "6xl": ["3.75rem", { lineHeight: "1" }],
-      "7xl": ["4.375rem", { lineHeight: "1" }],
-      "8xl": ["6rem", { lineHeight: "1" }],
-      "9xl": ["8rem", { lineHeight: "1" }],
+      xs: ['0.8125rem', { lineHeight: '1.5rem' }],
+      sm: ['0.875rem', { lineHeight: '1.5rem' }],
+      base: ['1rem', { lineHeight: '1.75rem' }],
+      lg: ['1.125rem', { lineHeight: '1.75rem' }],
+      xl: ['1.375rem', { lineHeight: '2rem' }],
+      '2xl': ['1.5625rem', { lineHeight: '2rem' }],
+      '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+      '4xl': ['2.5rem', { lineHeight: '2.5rem' }],
+      '5xl': ['3.125rem', { lineHeight: '3.5rem' }],
+      '6xl': ['3.75rem', { lineHeight: '1' }],
+      '7xl': ['4.375rem', { lineHeight: '1' }],
+      '8xl': ['6rem', { lineHeight: '1' }],
+      '9xl': ['8rem', { lineHeight: '1' }],
     },
     extend: {
-      typography: (theme: (value: string) => void) => ({
-        DEFAULT: {
-          css: {
-            color: 'hsl(var(--foreground))',
-            a: {
-              textDecoration: 'none',
-              color: 'hsl(var(--primary))',
-              '&:hover': {
-                textDecoration: 'underline',
-                color: 'hsl(var(--primary))',
-              },
-              code: { color: 'hsl(var(--primary))' },
-            },
-            'h2, h3, h4, h5, h6': {
-              position: 'relative',
-              color: 'hsl(var(--foreground))',
-            },
-            img: {
-              margin: '0 auto',
-            },
-            'code, pre code': {
-              fontFamily: 'var(--font-fira-code)',
-            },
-            'code[data-theme*=" "], code[data-theme*=" "] span': {
-              color: 'var(--shiki-light)',
-              backgroundColor: 'var(--shiki-light-bg)',
-            },
-            '[data-rehype-pretty-code-figure]': {
-              position: 'relative',
-            },
-            ':not(pre) > code': {
-              padding: '0.12em 0.25em',
-              borderRadius: '0.375rem',
-              display: 'inline-flex',
-              lineHeight: '1.2',
-              background: 'hsl(var(--accent))',
-              color: 'hsl(var(--accent-foreground))',
-              border: '1px solid hsl(var(--border))',
-              '&::before, &::after': {
-                content: 'none',
-              },
-            },
-            pre: {
-              background: 'hsl(var(--code))',
-              padding: '1.5rem 0',
-              lineHeight: 2,
-              '[data-line-numbers]': {
-                '[data-line]::before': {
-                  counterIncrement: 'lineNumber',
-                  content: 'counter(lineNumber)',
-                  display: 'inline-block',
-                  width: '1rem',
-                  marginRight: '1rem',
-                  textAlign: 'right',
-                  color: 'hsl(var(--muted-foreground) / 0.6)',
-                },
-              },
-              '> code': {
-                display: 'grid',
-                counterReset: 'lineNumber',
-                '> [data-line]': {
-                  padding: '0 2.5rem 0 1.5rem',
-                  borderLeft: '2px solid transparent',
-                },
-                '> [data-highlighted-line]': {
-                  borderLeftColor: theme('colors.red.300'),
-                  background: 'hsl(var(--primary) / 0.2)',
-                },
-              },
-            },
-            '[data-rehype-pretty-code-title]': {
-              backgroundColor: '#f3f3f3',
-              color: '#24292e',
-              borderTopLeftRadius: '0.5rem',
-              borderTopRightRadius: '0.5rem',
-              padding: '0.75rem 1.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-            },
-            '[data-rehype-pretty-code-title] ~ pre': {
-              marginTop: 0,
-              borderTopLeftRadius: 0,
-              borderTopRightRadius: 0,
-              borderTopWidth: 0,
-            },
-            '[data-rehype-pretty-code-title] ~ pre ~ button': {
-              top: '3.75rem !important',
-            },
-            blockquote: {
-              color: 'hsl(var(--foreground))',
-              borderLeftColor: 'hsl(var(--accent))',
-            },
-            'p strong': {
-              color: 'hsl(var(--foreground))',
-            },
-          },
-        },
-        dark: {
-          css: {
-            'code[data-theme*=" "], code[data-theme*=" "] span': {
-              color: 'var(--shiki-dark)',
-              backgroundColor: 'var(--shiki-dark-bg)',
-            },
-            pre: {
-              border: '1px solid hsl(var(--border))',
-              '> code': {
-                '> [data-highlighted-line]': {
-                  background: 'hsl(var(--primary) / 0.1)',
-                },
-              },
-            },
-            '[data-rehype-pretty-code-title]': {
-              backgroundColor: '#21252b',
-              color: '#d8d9d9',
-            },
-          },
-        },
-      }),
       gridTemplateAreas: {
-        landing: [
-          "recent-posts about",
-          "recent-posts about",
-          "outlinks outlinks",
-        ],
-        landingMobile: [
-          "recent-posts recent-posts",
-          "about about",
-          "outlinks outlinks",
-        ],
+        landing: ['recent-posts about', 'recent-posts about', 'outlinks outlinks'],
+        landingMobile: ['recent-posts recent-posts', 'about about', 'outlinks outlinks'],
       },
       gridTemplateColumns: {
-        landing: "2fr 4fr",
+        landing: '2fr 4fr',
       },
       height: {
-        windowBarHeight: "4rem",
-        navbarHeight: "13.125rem",
+        windowBarHeight: '4rem',
+        navbarHeight: '13.125rem',
         sidebarHeight: `calc(100vh - 13.125rem)`,
       },
       width: {
-        sidebarWidth: "15.625rem",
+        sidebarWidth: '15.625rem',
         contentWidth: `calc(100vw - 15.625rem)`,
       },
       minHeight: {
-        navbarHeight: "13.125rem",
+        navbarHeight: '13.125rem',
       },
       opacity: {
-        "marquee-left": "marquee-left var(--duration, 50s) linear infinite",
-        "marquee-up": "marquee-up var(--duration, 50s) linear infinite",
-        7: "0.07",
-        8: "0.08",
-        9: "0.09",
-        12: "0.12",
-        15: "0.15",
-        35: "0.35",
-        65: "0.65",
-        85: "0.85",
-        98: "0.98",
+        'marquee-left': 'marquee-left var(--duration, 50s) linear infinite',
+        'marquee-up': 'marquee-up var(--duration, 50s) linear infinite',
+        7: '0.07',
+        8: '0.08',
+        9: '0.09',
+        12: '0.12',
+        15: '0.15',
+        35: '0.35',
+        65: '0.65',
+        85: '0.85',
+        98: '0.98',
       },
       borderWidth: {
-        3: "3px",
+        3: '3px',
       },
       outlineWidth: {
-        3: "3px",
+        3: '3px',
       },
       zIndex: {
-        1: "1",
-        2: "2",
-        3: "3",
-        5: "5",
-        15: "15",
+        1: '1',
+        2: '2',
+        3: '3',
+        5: '5',
+        15: '15',
       },
       spacing: {
-        0.5: "2px",
-        1.5: "0.375rem",
-        1.6: "0.4375rem",
-        2.1: "0.5625rem",
-        2.5: "0.625rem",
-        3.2: "0.8125rem",
-        4.5: "1.125rem",
-        11: "2.75rem",
+        0.5: '2px',
+        1.5: '0.375rem',
+        1.6: '0.4375rem',
+        2.1: '0.5625rem',
+        2.5: '0.625rem',
+        3.2: '0.8125rem',
+        4.5: '1.125rem',
+        11: '2.75rem',
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-in-out",
-        "accordion-up": "accordion-up 0.2s ease-in-out",
-        equalize: "equalize 0.8s infinite",
-        "marquee-left": "marquee-left var(--duration, 50s) linear infinite",
-        "marquee-up": "marquee-up var(--duration, 50s) linear infinite",
-        "page-transition": "page-transition 300ms ease-in-out backwards",
-        marquee: "marquee 30s linear infinite",
-        marquee2: "marquee2 30s linear infinite",
-        "waving-hand": "wave 2s linear infinite",
+        'accordion-down': 'accordion-down 0.2s ease-in-out',
+        'accordion-up': 'accordion-up 0.2s ease-in-out',
+        equalize: 'equalize 0.8s infinite',
+        'marquee-left': 'marquee-left var(--duration, 50s) linear infinite',
+        'marquee-up': 'marquee-up var(--duration, 50s) linear infinite',
+        'page-transition': 'page-transition 300ms ease-in-out backwards',
+        marquee: 'marquee 30s linear infinite',
+        marquee2: 'marquee2 30s linear infinite',
+        'waving-hand': 'wave 2s linear infinite',
         glitch: 'glitch 1s linear infinite',
         'glitch-top': 'glitch-top 1s linear infinite',
         'glitch-bottom': 'glitch-bottom 1.5s linear infinite',
       },
       backgroundImage: {
-        "rainbow-gradient":
-          "linear-gradient(to right, #d25778, #ec585c, #e7d155, #56a8c6)",
-        "rainbow-gradient-inverse":
-          "linear-gradient(to right, #56a8c6, #e7d155, #ec585c, #d25778)",
+        'rainbow-gradient': 'linear-gradient(to right, #d25778, #ec585c, #e7d155, #56a8c6)',
+        'rainbow-gradient-inverse': 'linear-gradient(to right, #56a8c6, #e7d155, #ec585c, #d25778)',
         clouds: "url('/images/bg/clouds.gif')",
-        windowTitleBarButton: "linear-gradient(to bottom right, #9c9c9c, #fff)",
-        windowTitleBarButtonActive:
-          "linear-gradient(to bottom right, #444, #aaa)",
-        windowTitleBar: "repeating-linear-gradient(#fff, #000 2px)",
+        windowTitleBarButton: 'linear-gradient(to bottom right, #9c9c9c, #fff)',
+        windowTitleBarButtonActive: 'linear-gradient(to bottom right, #444, #aaa)',
+        windowTitleBar: 'repeating-linear-gradient(#fff, #000 2px)',
       },
       borderImage: {
         imageBorder: "url('/images/ui/imageBorder.png') 8 fill round",
@@ -439,66 +307,67 @@ export default {
         pixel: pixelFontFamily,
         extra: extraFontFamily,
         display: displayFontFamily,
+        heading: ['var(--font-heading)', ...fontFamily.sans],
       },
       fontWeight: {
-        normal: "400",
+        normal: '400',
       },
       lineHeight: {
-        relaxed: "1.75",
+        relaxed: '1.75',
       },
       saturate: {
-        125: "1.25",
+        125: '1.25',
       },
       transformOrigin: {
-        waving: "70% 70%",
+        waving: '70% 70%',
       },
-      transitionTimingFunction: { eio: "ease-in-out", DEFAULT: "ease-in-out" },
+      transitionTimingFunction: { eio: 'ease-in-out', DEFAULT: 'ease-in-out' },
       keyframes: {
-        "accordion-down": {
-          from: { height: "0px" },
-          to: { height: "var(--accordion-height)" },
+        'accordion-down': {
+          from: { height: '0px' },
+          to: { height: 'var(--accordion-height)' },
         },
-        "accordion-up": {
-          from: { height: "var(--accordion-height)" },
-          to: { height: "0px" },
+        'accordion-up': {
+          from: { height: 'var(--accordion-height)' },
+          to: { height: '0px' },
         },
         equalize: {
-          "0%, 100%": {
-            height: "0px",
+          '0%, 100%': {
+            height: '0px',
           },
-          "50%": {
-            height: "0.75rem",
+          '50%': {
+            height: '0.75rem',
           },
         },
-        "marquee-left": {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+        'marquee-left': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(calc(-100% - var(--gap)))' },
         },
-        "marquee-up": {
-          from: { transform: "translateY(0)" },
-          to: { transform: "translateY(calc(-100% - var(--gap)))" },
+        'marquee-up': {
+          from: { transform: 'translateY(0)' },
+          to: { transform: 'translateY(calc(-100% - var(--gap)))' },
         },
         marquee: {
-          "0%": { transform: "translateX(100%)" },
-          "100%": { transform: "translateX(-100%)" },
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(-100%)' },
         },
         marquee2: {
-          "0%": { transform: "translateX(100%)" },
-          "100%": { transform: "translateX(-100%)" },
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(-100%)' },
         },
-        "page-transition": {
-          "0%": { transform: "scale(0.975)", opacity: "0" },
-          "100%": { transform: "scale(1)", opacity: "1" },
+        'page-transition': {
+          '0%': { transform: 'scale(0.975)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
         },
         wave: {
-          "0%": { transform: "rotate(0.0deg)" },
-          "10%": { transform: "rotate(14deg)" },
-          "20%": { transform: "rotate(-8deg)" },
-          "30%": { transform: "rotate(14deg)" },
-          "40%": { transform: "rotate(-4deg)" },
-          "50%": { transform: "rotate(10.0deg)" },
-          "60%": { transform: "rotate(0.0deg)" },
-          "100%": { transform: "rotate(0.0deg)" },
+          '0%': { transform: 'rotate(0.0deg)' },
+          '10%': { transform: 'rotate(14deg)' },
+          '20%': { transform: 'rotate(-8deg)' },
+          '30%': { transform: 'rotate(14deg)' },
+          '40%': { transform: 'rotate(-4deg)' },
+          '50%': { transform: 'rotate(10.0deg)' },
+          '60%': { transform: 'rotate(0.0deg)' },
+          '100%': { transform: 'rotate(0.0deg)' },
         },
         glitch: {
           '2%, 64%': {
@@ -532,7 +401,7 @@ export default {
           '62%': {
             transform: 'translate(-22px, 5px) skew(21deg)',
           },
-        }
+        },
       },
       listStyleType: {
         flower: '"✿ "',
@@ -543,34 +412,34 @@ export default {
     hoverOnlyWhenSupported: true,
   },
   plugins: [
-    function({ matchUtilities, theme }: PluginAPI) {
+    function ({ matchUtilities, theme }: PluginAPI) {
       matchUtilities(
         {
-          "grid-pattern": (value) => ({
+          'grid-pattern': (value) => ({
             backgroundImage: `url("${svgDataUri(
               `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="36" height="36" fill="none" stroke="${value}" stroke-dasharray="6 3" transform="scale(1)"><path d="M36 .5H1.5V36"/></svg>`,
             )}")`,
           }),
-          "bubble": (value) => ({
+          bubble: (value) => ({
             maskSize: `100% 100%`,
             maskRepeat: `no-repeat`,
             maskImage: `url("${svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1500" zoomAndPan="magnify" viewBox="0 0 1125 1499.999933" height="2000" preserveAspectRatio="none" version="1.0"><defs><clipPath id="ccde75188e"><path d="M 72.1875 1 L 1053 1 L 1053 1500 L 72.1875 1500 Z M 72.1875 1 " clip-rule="nonzero"/></clipPath></defs><g clip-path="url(#ccde75188e)"><path fill="${value}" d="M 1032.105469 557.785156 C 1044.582031 546.25 1052.691406 529.722656 1052.691406 511.640625 C 1052.691406 491.996094 1043.644531 474.539062 1029.296875 463 C 1042.707031 449.28125 1049.257812 429.640625 1046.140625 409.375 C 1042.707031 388.796875 1029.921875 372.273438 1012.765625 363.855469 C 1023.058594 347.640625 1025.554688 326.75 1017.757812 307.421875 C 1009.957031 288.089844 994.050781 274.996094 975.335938 270.007812 C 981.574219 251.921875 979.703125 231.03125 968.164062 213.886719 C 956.625 196.738281 937.910156 187.382812 918.570312 186.757812 C 921.066406 167.742188 914.515625 147.785156 899.542969 133.445312 C 884.574219 119.101562 864.300781 113.800781 845.273438 117.230469 C 843.402344 98.210938 833.109375 80.128906 815.332031 69.214844 C 797.550781 58.617188 776.652344 57.679688 758.875 65.164062 C 752.949219 46.769531 738.914062 31.492188 719.261719 24.941406 C 699.613281 18.394531 679.027344 22.136719 663.121094 33.050781 C 653.453125 16.523438 636.296875 4.363281 615.710938 2.183594 C 594.8125 0 575.476562 8.105469 562.375 22.136719 C 549.277344 8.105469 529.9375 0 509.351562 2.183594 C 488.765625 4.363281 471.609375 16.210938 461.941406 33.050781 C 446.035156 21.824219 425.449219 18.394531 405.800781 24.941406 C 386.148438 31.492188 371.800781 47.078125 366.1875 65.476562 C 348.410156 57.992188 327.511719 58.925781 309.734375 69.527344 C 291.953125 80.128906 281.347656 98.210938 279.789062 117.542969 C 260.765625 114.113281 240.488281 119.414062 225.519531 133.757812 C 210.546875 148.097656 203.996094 167.742188 206.492188 187.070312 C 187.152344 187.695312 168.75 197.359375 156.898438 214.507812 C 145.359375 231.65625 143.175781 252.546875 149.726562 270.628906 C 131.011719 275.617188 114.792969 288.714844 107.308594 308.042969 C 99.507812 327.375 102.316406 347.953125 112.296875 364.476562 C 95.140625 373.207031 82.355469 389.730469 78.921875 410.308594 C 75.804688 429.953125 82.667969 449.59375 96.078125 463.3125 C 82.042969 474.847656 72.683594 492.308594 72.683594 511.953125 C 72.683594 530.347656 80.484375 546.871094 93.269531 558.097656 C 80.792969 569.632812 72.683594 586.15625 72.683594 604.242188 C 72.683594 622.636719 80.484375 639.160156 93.269531 650.382812 C 80.792969 661.921875 72.683594 678.445312 72.683594 696.527344 C 72.683594 714.925781 80.484375 731.449219 93.269531 742.671875 C 80.792969 754.210938 72.683594 770.734375 72.683594 788.816406 C 72.683594 807.210938 80.484375 823.738281 93.269531 834.960938 C 80.792969 846.496094 72.683594 862.710938 72.683594 881.105469 C 72.683594 899.5 80.484375 916.027344 93.269531 927.25 C 80.792969 938.785156 72.683594 955.3125 72.683594 973.394531 C 72.683594 991.789062 80.484375 1008.3125 93.269531 1019.539062 C 80.792969 1031.074219 72.683594 1047.597656 72.683594 1065.683594 C 72.683594 1084.078125 80.484375 1100.601562 93.269531 1111.828125 C 80.792969 1123.363281 72.683594 1139.574219 72.683594 1157.972656 C 72.683594 1176.367188 80.484375 1192.890625 93.269531 1204.113281 C 80.792969 1215.652344 72.683594 1232.175781 72.683594 1250.257812 C 72.683594 1268.65625 80.484375 1285.179688 93.269531 1296.402344 C 80.792969 1307.941406 72.683594 1324.464844 72.683594 1342.546875 C 72.683594 1360.941406 80.792969 1377.46875 93.269531 1388.691406 C 92.648438 1389.316406 91.710938 1389.9375 91.085938 1390.5625 C 89.527344 1392.121094 88.28125 1393.367188 87.03125 1395.238281 C 85.785156 1396.796875 84.539062 1398.355469 83.289062 1400.226562 C 82.042969 1401.785156 81.105469 1403.65625 80.171875 1405.527344 C 79.234375 1407.398438 78.300781 1409.269531 77.675781 1411.140625 C 76.738281 1413.011719 76.117188 1414.882812 75.492188 1416.753906 C 74.867188 1418.625 74.554688 1420.804688 73.933594 1422.675781 C 73.621094 1424.546875 73.308594 1426.730469 72.996094 1428.601562 C 72.683594 1432.964844 72.683594 1434.835938 72.683594 1437.019531 C 72.683594 1439.203125 72.683594 1441.074219 72.996094 1443.253906 C 73.308594 1445.4375 73.621094 1447.308594 73.933594 1449.492188 C 74.246094 1451.359375 74.867188 1453.542969 75.492188 1455.414062 C 76.117188 1457.285156 76.738281 1459.15625 77.675781 1461.027344 C 78.613281 1462.898438 79.234375 1464.769531 80.171875 1466.640625 C 81.105469 1468.507812 82.042969 1470.378906 83.289062 1471.9375 C 84.539062 1473.496094 85.472656 1475.367188 87.03125 1476.925781 C 88.28125 1478.488281 89.839844 1480.046875 91.085938 1481.605469 C 92.648438 1483.164062 94.207031 1484.410156 95.765625 1485.65625 C 97.324219 1486.90625 98.886719 1488.152344 100.757812 1489.398438 C 102.316406 1490.644531 104.1875 1491.582031 106.058594 1492.515625 C 107.929688 1493.453125 109.800781 1494.386719 111.671875 1495.011719 C 113.542969 1495.636719 115.417969 1496.570312 117.289062 1497.195312 C 119.160156 1497.816406 121.34375 1498.441406 123.214844 1498.753906 C 125.085938 1499.0625 127.269531 1499.375 129.140625 1499.6875 C 131.324219 1500 133.195312 1500 135.378906 1500 C 137.5625 1500 139.433594 1500 141.617188 1499.6875 C 143.800781 1499.375 145.671875 1499.0625 147.855469 1498.753906 C 149.726562 1498.441406 151.910156 1497.816406 153.78125 1497.195312 C 155.652344 1496.570312 157.835938 1495.945312 159.707031 1495.011719 C 161.578125 1494.074219 163.449219 1493.453125 165.320312 1492.515625 C 167.191406 1491.582031 169.0625 1490.644531 170.625 1489.398438 C 172.183594 1488.152344 174.054688 1486.90625 175.613281 1485.65625 C 177.171875 1484.410156 178.734375 1482.851562 180.292969 1481.605469 C 181.539062 1480.355469 182.476562 1479.421875 183.410156 1478.175781 C 194.953125 1491.582031 211.792969 1500 230.820312 1500 C 249.847656 1500 266.691406 1491.582031 278.230469 1478.175781 C 289.769531 1491.582031 306.613281 1500 325.640625 1500 C 344.667969 1500 361.507812 1491.582031 373.050781 1478.175781 C 384.589844 1491.582031 401.433594 1500 420.457031 1500 C 439.484375 1500 456.328125 1491.582031 467.867188 1478.175781 C 479.410156 1491.582031 496.25 1500 515.277344 1500 C 534.304688 1500 551.148438 1491.582031 562.6875 1478.175781 C 574.226562 1491.582031 591.070312 1500 610.097656 1500 C 629.125 1500 645.964844 1491.582031 657.507812 1478.175781 C 669.046875 1491.582031 685.890625 1500 704.914062 1500 C 723.941406 1500 740.785156 1491.582031 752.324219 1478.175781 C 763.867188 1491.582031 780.707031 1500 799.734375 1500 C 818.761719 1500 835.605469 1491.582031 847.144531 1478.175781 C 858.683594 1491.582031 875.527344 1500 894.554688 1500 C 913.582031 1500 930.421875 1491.582031 941.964844 1478.175781 C 942.898438 1479.421875 944.148438 1480.667969 945.082031 1481.605469 C 946.640625 1483.164062 948.203125 1484.410156 949.761719 1485.65625 C 951.320312 1486.90625 952.878906 1488.152344 954.75 1489.398438 C 956.3125 1490.644531 958.183594 1491.582031 960.054688 1492.515625 C 961.925781 1493.453125 963.796875 1494.386719 965.667969 1495.011719 C 967.539062 1495.636719 969.410156 1496.570312 971.59375 1497.195312 C 973.464844 1497.816406 975.648438 1498.441406 977.519531 1498.753906 C 979.390625 1499.0625 981.574219 1499.375 983.757812 1499.6875 C 985.628906 1500 987.8125 1500 989.996094 1500 C 992.179688 1500 994.050781 1500 996.234375 1499.6875 C 998.105469 1499.375 1000.289062 1499.0625 1002.160156 1498.753906 C 1004.03125 1498.441406 1006.214844 1497.816406 1008.085938 1497.195312 C 1009.957031 1496.570312 1011.832031 1495.945312 1013.703125 1495.011719 C 1015.574219 1494.074219 1017.445312 1493.453125 1019.316406 1492.515625 C 1021.1875 1491.582031 1023.058594 1490.644531 1024.617188 1489.398438 C 1026.175781 1488.152344 1028.050781 1486.90625 1029.609375 1485.65625 C 1031.167969 1484.410156 1032.726562 1482.851562 1034.289062 1481.605469 C 1035.847656 1480.046875 1037.09375 1478.796875 1038.34375 1476.925781 C 1039.589844 1475.367188 1040.835938 1473.808594 1042.085938 1471.9375 C 1043.332031 1470.378906 1044.269531 1468.507812 1045.203125 1466.640625 C 1046.140625 1464.769531 1047.074219 1462.898438 1047.699219 1461.027344 C 1048.632812 1459.15625 1049.257812 1457.285156 1049.882812 1455.414062 C 1050.507812 1453.542969 1050.816406 1451.359375 1051.441406 1449.492188 C 1051.753906 1447.621094 1052.066406 1445.4375 1052.378906 1443.253906 C 1052.691406 1441.074219 1052.691406 1439.203125 1052.691406 1437.019531 C 1052.691406 1434.835938 1052.691406 1432.964844 1052.378906 1430.785156 C 1052.066406 1428.601562 1051.753906 1426.730469 1051.441406 1424.859375 C 1051.128906 1422.988281 1050.507812 1420.804688 1049.882812 1418.9375 C 1049.257812 1417.066406 1048.636719 1415.195312 1047.699219 1413.324219 C 1046.761719 1411.453125 1046.140625 1409.582031 1045.203125 1407.710938 C 1044.269531 1405.839844 1043.332031 1404.28125 1042.085938 1402.410156 C 1040.835938 1400.851562 1039.589844 1398.980469 1038.34375 1397.421875 C 1037.09375 1395.863281 1035.535156 1394.304688 1034.289062 1392.746094 C 1033.351562 1391.808594 1032.726562 1391.1875 1031.792969 1390.5625 C 1044.582031 1379.027344 1052.691406 1362.503906 1052.691406 1344.105469 C 1052.691406 1325.710938 1044.890625 1309.1875 1032.105469 1297.964844 C 1044.582031 1286.425781 1052.691406 1270.214844 1052.691406 1251.820312 C 1052.691406 1233.421875 1044.890625 1216.898438 1032.105469 1205.675781 C 1044.582031 1194.136719 1052.691406 1177.613281 1052.691406 1159.53125 C 1052.691406 1141.136719 1044.890625 1124.609375 1032.105469 1113.386719 C 1044.582031 1101.851562 1052.691406 1085.324219 1052.691406 1067.242188 C 1052.691406 1048.847656 1044.890625 1032.320312 1032.105469 1021.097656 C 1044.582031 1009.5625 1052.691406 993.035156 1052.691406 974.953125 C 1052.691406 956.558594 1044.890625 940.035156 1032.105469 928.808594 C 1044.582031 917.273438 1052.691406 901.058594 1052.691406 882.664062 C 1052.691406 864.269531 1044.890625 847.746094 1032.105469 836.519531 C 1044.582031 824.984375 1052.691406 808.460938 1052.691406 790.375 C 1052.691406 772.292969 1044.890625 755.457031 1032.105469 744.230469 C 1044.582031 732.695312 1052.691406 716.171875 1052.691406 698.089844 C 1052.691406 679.691406 1044.890625 663.167969 1032.105469 651.945312 C 1044.582031 640.40625 1052.691406 623.882812 1052.691406 605.800781 C 1052.691406 585.53125 1044.582031 569.320312 1032.105469 557.785156 Z M 1032.105469 557.785156 " fill-opacity="1" fill-rule="nonzero"/></g></svg>`)}")`,
           }),
         },
         {
-          values: flattenColorPalette(theme("backgroundColor")),
-          type: "color",
+          values: flattenColorPalette(theme('backgroundColor')),
+          type: 'color',
         },
-      );
+      )
     },
     typography,
     animate,
-    require("@savvywombat/tailwindcss-grid-areas"),
-    require("tailwindcss-debug-screens"),
+    require('@savvywombat/tailwindcss-grid-areas'),
+    require('tailwindcss-debug-screens'),
     forms,
-    require("@tailwindcss/container-queries"),
+    require('@tailwindcss/container-queries'),
   ],
   variants: {
-    gridTemplateAreas: ["responsive"],
+    gridTemplateAreas: ['responsive'],
   },
-} satisfies Config;
+} satisfies Config

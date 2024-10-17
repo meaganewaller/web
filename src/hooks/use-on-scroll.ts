@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const useOnScroll = (threshold: number = 0): boolean => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)

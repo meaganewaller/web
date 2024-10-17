@@ -1,12 +1,6 @@
 'use client'
 
-import {
-  animate,
-  m,
-  useInView,
-  useMotionValue,
-  useTransform,
-} from 'framer-motion'
+import { animate, m, useInView, useMotionValue, useTransform } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 
 interface IncrementCounterProps {
@@ -15,11 +9,7 @@ interface IncrementCounterProps {
   duration?: number
 }
 
-const IncrementCounter = ({
-  from = 0,
-  to,
-  duration = 1,
-}: IncrementCounterProps) => {
+const IncrementCounter = ({ from = 0, to, duration = 1 }: IncrementCounterProps) => {
   const count = useMotionValue(from)
   const rounded = useTransform(count, (latest) => Math.round(latest))
 

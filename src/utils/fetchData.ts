@@ -1,8 +1,8 @@
 import type { TGuestbookPayload } from '@/types'
 
 type ExtendConfig = {
-  method?: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE',
-  headers?: Record<string, string>,
+  method?: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE'
+  headers?: Record<string, string>
   body?: string | TPayload | TGuestbookPayload
 }
 
@@ -24,12 +24,12 @@ export const fetchData = async <T = unknown>(url: string, config?: ExtendConfig)
     })
 
     if (!response.ok) {
-      throw new Error(response.statusText);
+      throw new Error(response.statusText)
     }
 
-    const data: T = await response.json();
-    return [data, null] as const;
+    const data: T = await response.json()
+    return [data, null] as const
   } catch (error) {
-    return [null, error] as const;
+    return [null, error] as const
   }
 }

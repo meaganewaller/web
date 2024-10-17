@@ -1,77 +1,70 @@
-'use client';
+'use client'
 
-import type { GuestbookEntry } from '@/types';
-import { useMemo } from 'react';
+import type { GuestbookEntry } from '@/types'
+import { useMemo } from 'react'
 import pluralize from '@/utils/pluralize'
-import EntryCard from '@/components/EntryCard';
+import EntryCard from '@/components/EntryCard'
 
 interface EntriesListProps {
-  entries: GuestbookEntry[];
-  page?: number;
-  url?: string;
-  showSeparator?: boolean;
+  entries: GuestbookEntry[]
+  page?: number
+  url?: string
+  showSeparator?: boolean
 }
 
 interface EntriesCountProps {
-  entries: GuestbookEntry[];
-  year: number;
+  entries: GuestbookEntry[]
+  year: number
 }
 
 export const EntriesCount = ({ entries, year }: EntriesCountProps) => {
   const count = useMemo(() => {
     return entries.filter((a) => {
       if (!a.created_at) {
-        return false;
+        return false
       }
-      return new Date(a.created_at).getFullYear() === year;
-    }).length;
-  }, [entries, year]);
+      return new Date(a.created_at).getFullYear() === year
+    }).length
+  }, [entries, year])
 
   return (
-    <span className="mb-1 block rounded-full border border-solid border-primary-400 bg-primary-300 p-2 font-mono text-xs uppercase text-primary-800">
+    <span className="mb-1 block rounded-full border border-solid border-pink-400 bg-pink-300 p-2 font-mono text-xs uppercase text-pink-800">
       {count} {pluralize('entry', count)}
     </span>
   )
 }
 
 interface EntryTimelineSeparatorProps {
-  entries: GuestbookEntry[];
-  currentEntry: GuestbookEntry;
-  previousEntry: GuestbookEntry | null;
+  entries: GuestbookEntry[]
+  currentEntry: GuestbookEntry
+  previousEntry: GuestbookEntry | null
 }
 
-export const EntryTimelineSeparator = ({
-  entries,
-  currentEntry,
-  previousEntry,
-}: EntryTimelineSeparatorProps) => {
+export const EntryTimelineSeparator = ({ entries, currentEntry, previousEntry }: EntryTimelineSeparatorProps) => {
   if (!currentEntry.created_at || (previousEntry && !previousEntry.created_at)) {
-    return <></>;
+    return <></>
   }
 
-  const currentEntryDate = new Date(currentEntry.created_at);
-  const currentEntryYear = currentEntryDate.getFullYear();
+  const currentEntryDate = new Date(currentEntry.created_at)
+  const currentEntryYear = currentEntryDate.getFullYear()
 
-  let previousEntryYear: number | null = null;
-
+  let previousEntryYear: number | null = null
 
   if (previousEntry?.created_at) {
-    const previousEntryDate = new Date(previousEntry.created_at);
-    previousEntryYear = previousEntryDate.getFullYear();
+    const previousEntryDate = new Date(previousEntry.created_at)
+    previousEntryYear = previousEntryDate.getFullYear()
   }
 
   if (!Number.isNaN(currentEntryYear) && currentEntryYear !== previousEntryYear) {
     return (
-      <div className="mt-8 flex items-baseline justify-between border-b border-primary-700 md:mt-12">
-        <span className="font-pixel my-4 inline-block text-xl font-bold text-orange-500">
-          {currentEntryYear}
-        </span>
+      <div className="mt-8 flex items-baseline justify-between border-b border-pink-700 md:mt-12">
+        <span className="font-pixel my-4 inline-block text-xl font-bold text-orange-500">{currentEntryYear}</span>
         <EntriesCount entries={entries} year={currentEntryYear} />
       </div>
-    );
+    )
   }
 
-  return <></>;
+  return <></>
 }
 
 const EntriesList = ({ entries, page = 1, url, showSeparator = false }: EntriesListProps) => {
@@ -90,10 +83,9 @@ const EntriesList = ({ entries, page = 1, url, showSeparator = false }: EntriesL
             )}
             <EntryCard index={index} entry={entry} />
           </div>
-        ))
-      }
+        ))}
     </>
   )
 }
 
-export default EntriesList;
+export default EntriesList

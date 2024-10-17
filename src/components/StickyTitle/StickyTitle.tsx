@@ -8,9 +8,9 @@ import useOnScroll from '@/hooks/use-on-scroll'
 import cn from '@/utils/cn'
 import { min } from '@/utils/screens'
 
-import MobileNav from "@/components/MobileNav"
-import ToggleDarkMode from "@/components/ToggleDarkMode"
-import Container from "@/components/Container"
+import MobileNav from '@/components/MobileNav'
+import ToggleDarkMode from '@/components/ToggleDarkMode'
+import Container from '@/components/Container'
 
 interface StickyTitleProps {
   title: string
@@ -69,21 +69,17 @@ const StickyTitle = ({ title, elementRef, gap = -210 }: StickyTitleProps) => {
               animate="animate"
               variants={variants}
               transition={transition}
-              className={cn('fixed left-0 right-0 top-0 z-50 bg-pink-300 dark:bg-purple-1000')}
+              className={cn('fixed left-0 right-0 top-0 z-50 bg-purple-300 dark:bg-yellow-600')}
             >
               <Container>
-                <div
-                  className={cn(
-                    'flex h-16 items-center justify-between',
-                  )}
-                >
+                <div className={cn('flex h-16 items-center justify-between')}>
                   <h1
-                    className={cn('cursor-pointer font-sans text-lg text-blue-900 dark:text-purple-200')}
+                    className={cn('cursor-pointer font-extra text-xl text-purple-900 dark:text-yellow-100')}
                     onClick={scrollToTop}
                   >
                     {title}
                   </h1>
-                  <div className={cn('flex items-center gap-1 text-blue-900 dark:text-purple-200')}>
+                  <div className={cn('flex items-center gap-1 text-purple-900 dark:text-yellow-100')}>
                     <ToggleDarkMode />
                     <MobileNav sticky={true} />
                   </div>
@@ -97,12 +93,8 @@ const StickyTitle = ({ title, elementRef, gap = -210 }: StickyTitleProps) => {
               className={cn('fixed left-0 right-0 top-0 z-50')}
             >
               <Container>
-                <div
-                  className={cn(
-                    'flex h-16 items-center justify-between text-center shadow-sm backdrop-blur',
-                  )}
-                >
-                  <h1 className={cn('font-sans text-lg')}>{title}</h1>
+                <div className={cn('flex h-16 items-center justify-between text-center shadow-sm backdrop-blur')}>
+                  <h1 className={cn('text-lg')}>{title}</h1>
                 </div>
               </Container>
             </m.div>

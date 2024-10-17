@@ -1,7 +1,5 @@
-// 'use client';
-
-import Image from '@/components/Image';
-import Link from '@/components/Link';
+import Image from '@/components/Image'
+import Link from '@/components/Link'
 
 export function QuickInfo() {
   return (
@@ -11,7 +9,7 @@ export function QuickInfo() {
         width={200}
         height={200}
         alt="Meagan Waller's avatar"
-        className="border-image mr-[10px] md:h-[200px] w-auto rounded-[20px] border-[8px] border-solid w-full h-full md:w-[200px]"
+        className="border-image mr-[10px] md:h-[200px] w-auto rounded-[20px] border-[8px] border-solid h-full md:w-[200px]"
       />
       <div className="ml-3 h-full overflow-auto">
         <ul className="list-flower flex h-full list-inside flex-col justify-center">
@@ -26,10 +24,7 @@ export function QuickInfo() {
           <li className="text-lg relative">
             <strong className="mr-2">working at:</strong>
             senior dev consultant @{' '}
-            <Link
-              href="https://testdouble.com"
-              className=""
-            >
+            <Link href="https://testdouble.com" className="">
               test double
             </Link>
           </li>
@@ -48,5 +43,5 @@ export function QuickInfo() {
         </ul>
       </div>
     </div>
-  );
+  )
 }

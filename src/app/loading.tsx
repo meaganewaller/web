@@ -1,13 +1,24 @@
 import Container from '@/components/Container'
-import Skeleton from '@/components/Skeleton'
-import cn from '@/utils/cn'
+import PageLayout from '@/components/Layout'
 
 const Loading = () => {
   return (
-    <div className={cn('py-16', 'lg:py-20')}>
-      <Container>
-        <Skeleton className={cn('mb-4 h-10 w-full', 'md:w-3/4')} />
-        <Skeleton className={cn('mb-4 h-10 w-full', 'md:w-3/4')} />
+    <div className="my-10 sm:my-12 md:my-14 lg:my-16 xl:my-18 2xl:my-20">
+      <Container wide={true}>
+        <PageLayout>
+          <div className="loading p-[20%] text-center">
+            <h2 className="font-pixel m-0 text-xs uppercase tracking-wide text-lime-600">
+              {loadingMessages[Math.floor(Math.random() * loadingMessages.length)]}
+            </h2>
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </PageLayout>
       </Container>
     </div>
   )
@@ -37,7 +48,7 @@ const loadingMessages = [
   'transmitting thoughts to the mothership',
   'transmitting thoughts to the hive',
   'transmitting thoughts to the collective',
-];
+]
 
 // export default function Loading() {
 //   return (

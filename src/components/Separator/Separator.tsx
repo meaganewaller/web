@@ -11,7 +11,7 @@ const Separator = forwardRef<HTMLDivElement, SeparatorProps>(
       <div
         data-orientation={orientation}
         className={cn(
-          'shrink-0 bg-pink-100',
+          'shrink-0 bg-pink-400 dark:bg-green-800',
           orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
           className,
         )}
@@ -21,5 +21,7 @@ const Separator = forwardRef<HTMLDivElement, SeparatorProps>(
     )
   },
 )
+
+Separator.displayName = 'Separator'
 
 export default Separator

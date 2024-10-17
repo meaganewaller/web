@@ -1,5 +1,5 @@
 const tailwindPlugin = {
-	extends: ['plugin:tailwind/recommended'],
-};
+  extends: ['plugin:tailwind/recommended'],
+}
 
-module.exports = tailwindPlugin;
+module.exports = tailwindPlugin

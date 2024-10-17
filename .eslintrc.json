@@ -1,39 +1,13 @@
 {
-  "$schema": "https://json.schemastore.org/eslintrc",
-  "env": {
-    "browser": true,
-    "commonjs": true,
-    "es6": true,
-    "es2021": true,
-    "node": true
-  },
-  "root": true,
-  "parser": "@typescript-eslint/parser",
-  "extends": [
-    "eslint:recommended",
-    "next",
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "plugin:tailwindcss/recommended"
-  ],
-  "plugins": [
-    "@typescript-eslint",
-    "tailwindcss"
-  ],
+  "extends": "next/core-web-vitals",
   "rules": {
-    "tailwindcss/no-custom-classname": "off",
-    "tailwindcss/classnames-order": "error"
-  },
-  "settings": {
-    "tailwindcss": {
-      "callees": [
-        "cn"
-      ]
-    }
-  },
-  "next": {
-    "rootDir": true
-  },
-  "overrides": []
+    "react-hooks/exhaustive-deps": "off",
+    "sort-imports": [
+      "error",
+      {
+        "allowSeparatedGroups": true,
+        "ignoreDeclarationSort": true
+      }
+    ]
+  }
 }

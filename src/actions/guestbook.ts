@@ -1,21 +1,19 @@
 import type { GuestbookEntry } from '@/types'
 import { fetchData } from '@/utils/fetchData'
 
-export const getGuestbookEntries = async (): Promise<
-  GuestbookEntry[] | undefined
-> => {
+export const getGuestbookEntries = async (): Promise<GuestbookEntry[] | undefined> => {
   try {
     const [entries, error] = await fetchData<GuestbookEntry[]>(`${process.env.NEXT_PUBLIC_BASE_API_URL}/guestbook`)
 
     if (error || !entries) {
-      console.error("Error getting guestbook entries: ", error)
-      return undefined;
+      console.error('Error getting guestbook entries: ', error)
+      return undefined
     }
 
-    return entries;
+    return entries
   } catch (error) {
     console.error('Error getting guestbook entries: ', error)
-    return undefined;
+    return undefined
   }
 }
 
@@ -25,10 +23,10 @@ export const addEntry = async ({
   email,
   sessionId,
 }: {
-  message: string,
-  name: string,
-  email: string,
-  sessionId: string,
+  message: string
+  name: string
+  email: string
+  sessionId: string
 }) => {
   const submitData = { guestbook_entry: { body: message, name, email, session_id: sessionId } }
 
@@ -38,11 +36,10 @@ export const addEntry = async ({
       body: JSON.stringify(submitData),
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
     })
     if (res.ok) {
       return true
-
     } else {
       return false
     }

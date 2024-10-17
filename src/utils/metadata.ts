@@ -56,10 +56,10 @@ export const createMetadata = ({
   tags = [],
   title,
 }: {
-  date: string;
-  description: string;
-  tags: string[];
-  title: string;
+  date: string
+  description: string
+  tags: string[]
+  title: string
 }) => {
   const metadata = { ...defaultMetadata }
   metadata.title.default = title

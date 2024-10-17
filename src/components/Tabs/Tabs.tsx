@@ -1,57 +1,78 @@
-import type { FC, ReactElement } from "react";
-import { Children, useState } from "react";
-import Tab from "@/components/Tab";
-import styled from "@emotion/styled";
-import tw from "twin.macro";
+'use client'
 
-export interface TabsProps {
-  children?: ReactElement[];
+import React, { ReactNode, useMemo } from 'react'
+import { Tab as HeadlessTab } from '@headlessui/react'
+import clsx from 'clsx'
+
+interface TabData {
+  title: string
+  content: ReactNode
 }
 
-const TabsContainer = styled.div`
-  width: 600px;
-  margin: 10px auto;
-`;
+interface TabsProps {
+  children: ReactNode
+}
 
-const TabsDiv = styled.div`
-  ${tw`w-full overflow-x-auto w-[calc(100%_-_1rem)] whitespace-nowrap mx-2 my-0 pt-2 pb-0 px-0`};
+export function Tabs({ children }: TabsProps) {
+  // Get title and content of tabs
+  const tabs: TabData[] = useMemo(
+    () =>
+      (
+        React.Children.map(children, (child) => {
+          if (!React.isValidElement(child)) return null
 
-  & {
-    @media (min-width: 50rem) {
-      @apply w-[calc(100%_-_4rem)] mx-8 my-0;
-    }
-  }
-`;
-
-const TabButton = styled.button`
-  ${tw`uppercase leading-[0.8] inline-block ml-[-35px] relative whitespace-nowrap cursor-pointer mr-16 rounded-[6px_6px_0_0] border-[none] first-of-type:ml-[30px] before:skew-x-[25deg] before:rounded-[0_8px_0_0] before:-right-4 after:skew-x-[-25deg] after:rounded-[8px_0_0_0] after:-left-4 font-pixel bg-purple-500`};
-
-  & {
-    filter: drop-shadow(0px -3px 2px rgba(0, 0, 0, 0.05));
-  }
-`;
-
-const Tabs: FC<TabsProps> = ({ children }) => {
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const arrayChildren = Children.toArray(children) as ReactElement[];
-  const activeTabContent = arrayChildren[activeTabIndex]?.props?.children;
+          const title = child.props.title
+          const content = child.props.children
+          return { title, content }
+        }) as TabData[]
+      ).filter(Boolean),
+    [children],
+  )
 
   return (
-    <TabsContainer>
-      <TabsDiv>
-        {arrayChildren.map((child, index: number) => (
-          <TabButton
-            key={`${child.type}-${index}`}
-            onClick={() => setActiveTabIndex(index)}
-            className={index === activeTabIndex ? "bg-purple-500" : "bg-purple-800"}
+    <>
+      <div className="w-full rounded-lg border border-violet-700 dark:border-lime-300">
+        <HeadlessTab.Group>
+          <HeadlessTab.List
+            className="flex flex-wrap space-x-6 rounded-t-md border-b border-violet-600 bg-violet-500/70 px-4 text-center text-base font-medium dark:border-lime-600 dark:bg-lime-300/70 font-pixel"
+            id="defaultTab"
+            data-tabs-toggle="#defaultTabContent"
           >
-            {child?.props?.title ?? "Tab Title"}
-          </TabButton>
-        ))}
-      </TabsDiv>
-      <Tab isActive={true}>{activeTabContent}</Tab>
-    </TabsContainer>
-  );
-};
+            {tabs.map((tab, index) => (
+              <HeadlessTab
+                key={index}
+                className={({ selected }) =>
+                  clsx(
+                    selected
+                      ? 'border-violet-900 text-violet-900 dark:border-lime-900 dark:text-lime-900 border-b-4'
+                      : 'border-transparent text-violet-700 dark:text-lime-1000 hover:border-violet-900 hover:text-violet-900 dark:hover:border-lime-800 dark:hover:text-lime-800',
+                    '-mb-px whitespace-nowrap border-b px-1 py-3 text-base font-medium transition-colors duration-300',
+                  )
+                }
+              >
+                {tab.title}
+              </HeadlessTab>
+            ))}
+          </HeadlessTab.List>
+          <HeadlessTab.Panels className="text-xl text-violet-800 bg-violet-300/60 dark:text-green-1000/70 font-display py-8 px-4 dark:bg-lime-500/60">
+            {tabs.map((tab, index) => (
+              <HeadlessTab.Panel key={index}>
+                <p>{tab.content}</p>
+              </HeadlessTab.Panel>
+            ))}
+          </HeadlessTab.Panels>
+        </HeadlessTab.Group>
+      </div>
+    </>
+  )
+}
 
-export default Tabs;
+interface TabProps {
+  children: ReactNode
+}
+
+export function Tab({ children, ...props }: TabProps) {
+  return children
+}
+
+export default Tabs

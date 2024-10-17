@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import Icon from '@/components/Icon';
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import Icon from '@/components/Icon'
 
 const Search = () => {
-  const [query, setQuery] = useState('');
-  const router = useRouter();
+  const [query, setQuery] = useState('')
+  const router = useRouter()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
-  };
+    setQuery(event.target.value)
+  }
 
   const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    router.push(`/blog?query=${query}`);
-  };
+    event.preventDefault()
+    router.push(`/blog?query=${query}`)
+  }
 
   return (
     <div>
@@ -28,13 +28,13 @@ const Search = () => {
             value={query}
             onChange={handleInputChange}
           />
-          <button type="submit" className="mr-1 text-3xl text-primary-800">
+          <button type="submit" className="mr-1 text-3xl text-pink-800">
             <Icon name="search" width={30} />
           </button>
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

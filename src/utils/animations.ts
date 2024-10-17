@@ -1,5 +1,5 @@
-import { type Variants } from 'framer-motion';
-import { theme } from 'twin.macro';
+import { type Variants } from 'framer-motion'
+import { theme } from 'twin.macro'
 
 export const parentVariants: Variants = {
   visible: {
@@ -18,14 +18,14 @@ export const parentVariants: Variants = {
   },
   scaleWithPadding: {
     scale: 1.05,
-    padding: "0.5rem",
+    padding: '0.5rem',
     borderColor: theme`colors.pink.500`,
     boxShadow: `0 0 0 0.5rem ${theme`colors.pink.500`}`,
   },
   unscale: {
     scale: 1,
-    borderColor: "rgba(0,0,0,0)",
-    boxShadow: "unset",
+    borderColor: 'rgba(0,0,0,0)',
+    boxShadow: 'unset',
   },
   show: {
     opacity: 1,
@@ -34,5 +34,5 @@ export const parentVariants: Variants = {
   hide: {
     opacity: 0,
     x: -20,
-  }
-};
+  },
+}

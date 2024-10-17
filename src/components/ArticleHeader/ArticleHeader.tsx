@@ -21,40 +21,21 @@ const ArticleHeader = forwardRef<HTMLDivElement, ArticleHeaderProps>(
 
     return (
       <div className={cn('bg-pattern py-16', 'lg:py-20')} ref={ref} {...props}>
-        <Container
-          className={cn(
-            'pointer-events-none select-none overflow-hidden',
-            centered && 'text-center',
-          )}
-        >
-          <m.div
-            initial={animation.hide}
-            animate={animation.show}
-            transition={{ delay: 0.1 }}
-          >
-            <h1
-              className={cn(
-                'pb-2 font-display text-4xl font-bold',
-                'md:text-5xl',
-                'lg:text-6xl',
-              )}
-            >
-              {title}
-            </h1>
+        <Container className={cn('pointer-events-none select-none overflow-hidden', centered && 'text-center')}>
+          <m.div initial={animation.hide} animate={animation.show} transition={{ delay: 0.1 }}>
+            <h1 className={cn('pb-2 font-display text-4xl font-bold', 'md:text-5xl', 'lg:text-6xl')}>{title}</h1>
           </m.div>
           {description && (
-            <m.div
-              initial={animation.hide}
-              animate={animation.show}
-              transition={{ delay: 0.2 }}
-            >
-              <p className={cn('mt-2 font-sans text-xl')}>{description}</p>
+            <m.div initial={animation.hide} animate={animation.show} transition={{ delay: 0.2 }}>
+              <p className={cn('mt-2 font-sans text-xl font-thin')}>{description}</p>
             </m.div>
           )}
         </Container>
       </div>
     )
-  }
+  },
 )
+
+ArticleHeader.displayName = 'ArticleHeader'
 
 export default ArticleHeader

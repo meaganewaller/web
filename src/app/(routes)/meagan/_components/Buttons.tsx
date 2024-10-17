@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
 import Image from '@/components/Image'
-import _ from 'lodash';
+import _ from 'lodash'
 
 const buttons = [
   {
@@ -136,11 +136,10 @@ const buttons = [
     width: 91,
     height: 100,
   },
-];
+]
 
 export function Buttons() {
-  const setOfButtons = _.sampleSize(buttons, 10);
-  console.log(setOfButtons)
+  const setOfButtons = _.sampleSize(buttons, 10)
 
   return (
     <div className="relative mt-[2rem] flex overflow-x-hidden before:absolute before:left-0 before:z-10 before:h-full before:w-[5vw] motion-reduce:overflow-x-auto motion-reduce:before:hidden motion-reduce:after:hidden">
@@ -169,5 +168,5 @@ export function Buttons() {
         ))}
       </div>
     </div>
-  );
+  )
 }

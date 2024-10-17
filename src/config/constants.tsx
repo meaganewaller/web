@@ -1,9 +1,23 @@
-import { LuAtSign as AtSign, LuBookOpen as BookOpenText, LuLayoutDashboard as Dashboard, LuFileCode as FileCode, LuGithub as GitHub, LuHome as Home, LuLightbulb as LightBulb, LuLinkedin as LinkedIn, LuMedal as Medal, LuPencil as Pencil, LuRss as RSS, LuShapes as Shapes, LuMegaphone as Megaphone } from "react-icons/lu";
-export const MarkdownImageFromAssetManageAltConstant = "source protected";
-export const MAX_VIEWS_PER_SESSION = 30;
-export const MAX_SHARES_PER_SESSION = 10;
-export const MAX_REACTIONS_PER_SESSION = 20;
-import { IconType } from "react-icons";
+import {
+  LuAtSign as AtSign,
+  LuBookOpen as BookOpenText,
+  LuLayoutDashboard as Dashboard,
+  LuFileCode as FileCode,
+  LuGithub as GitHub,
+  LuHome as Home,
+  LuLightbulb as LightBulb,
+  LuLinkedin as LinkedIn,
+  LuMedal as Medal,
+  LuMegaphone as Megaphone,
+  LuPencil as Pencil,
+  LuRss as RSS,
+  LuShapes as Shapes,
+} from 'react-icons/lu'
+export const MarkdownImageFromAssetManageAltConstant = 'source protected'
+export const MAX_VIEWS_PER_SESSION = 30
+export const MAX_SHARES_PER_SESSION = 10
+export const MAX_REACTIONS_PER_SESSION = 20
+import { IconType } from 'react-icons'
 
 interface NavLink {
   path: string
@@ -59,7 +73,7 @@ export const NAV_LINKS: NavLink[] = [
     path: ROUTES.chat,
     label: 'Say Hi',
     icon: Megaphone,
-  }
+  },
 ]
 
 export const FOOTER_LINKS = [
@@ -129,5 +143,5 @@ export const FOOTER_ICON_LINKS: FooterIconLink[] = [
 ]
 
 export const OG = {
-  static: ""
+  static: '',
 }

@@ -1,6 +1,6 @@
-'use client';
+'use client'
 
-import PageLayout from '@/components/Layout';
+import PageLayout from '@/components/Layout'
 import Container from '@/components/Container'
 import BackButton from '@/components/BackButton'
 
@@ -16,5 +16,5 @@ export default function RoutesLayout({ children }: { children: React.ReactNode }
         </PageLayout>
       </Container>
     </div>
-  );
+  )
 }

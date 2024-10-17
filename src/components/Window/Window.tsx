@@ -6,5 +6,5 @@ export default function Window({ title, children }: { title: string; children: R
       </header>
       <div className="h-auto overflow-auto text-blue-700">{children}</div>
     </div>
-  );
+  )
 }

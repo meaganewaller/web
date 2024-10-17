@@ -1,15 +1,15 @@
-import { MotionProps } from "framer-motion";
+import { MotionProps } from 'framer-motion'
 
 // Default Transition
 const defaultTransitionValues = {
   duration: 0.75,
-  ease: "easeInOut",
-};
+  ease: 'easeInOut',
+}
 
 //Simple default Variants
 export const fadeInMotionVariants: MotionProps = {
-  initial: "hidden",
-  whileInView: "visible",
+  initial: 'hidden',
+  whileInView: 'visible',
   variants: {
     hidden: {
       opacity: 0,
@@ -19,22 +19,22 @@ export const fadeInMotionVariants: MotionProps = {
     },
   },
   transition: defaultTransitionValues,
-};
+}
 
 export const fadeInUpMotionVariants: MotionProps = {
-  initial: "hidden",
-  whileInView: "visible",
+  initial: 'hidden',
+  whileInView: 'visible',
   variants: {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0 },
   },
   transition: defaultTransitionValues,
-};
+}
 
 export const headingChildVariants = {
   variants: {
     hidden: {
-      y: "2rem",
+      y: '2rem',
       opacity: 0,
     },
     visible: {
@@ -43,15 +43,15 @@ export const headingChildVariants = {
     },
   },
   viewport: {
-    margin: "0px 0px 100px 0px",
+    margin: '0px 0px 100px 0px',
   },
   transition: defaultTransitionValues,
-};
+}
 
 //BigRibbon
 export const bigRibbonVariants = {
-  initial: "hidden",
-  whileInView: "visible",
+  initial: 'hidden',
+  whileInView: 'visible',
   variants: {
     hidden: {
       opacity: 0,
@@ -63,35 +63,35 @@ export const bigRibbonVariants = {
     },
   },
   viewport: {
-    margin: "0px 0px 50px 0px",
+    margin: '0px 0px 50px 0px',
   },
-  transition: { delay: 1, duration: 1, ease: "easeInOut" },
-};
+  transition: { delay: 1, duration: 1, ease: 'easeInOut' },
+}
 
 //ListMarquee
 export const listMarqueeVariants = {
-  initial: "hidden",
-  animate: "visible",
+  initial: 'hidden',
+  animate: 'visible',
   transition: {
     staggerChildren: 20,
   },
-};
+}
 
 export const listMarqueeChildVariants = {
   variants: {
     visible: {
-      x: ["100%", "-100%"],
+      x: ['100%', '-100%'],
       transition: {
         x: {
           repeat: Infinity,
-          repeatType: "loop",
+          repeatType: 'loop',
           duration: 40,
-          ease: "linear",
+          ease: 'linear',
         },
       },
     },
   },
-};
+}
 
 //Loading Container
 export const loadingContainerVariants: MotionProps = {
@@ -100,7 +100,7 @@ export const loadingContainerVariants: MotionProps = {
     visible: {
       opacity: [1, 0],
       transitionEnd: {
-        display: "none",
+        display: 'none',
       },
     },
   },
@@ -108,15 +108,15 @@ export const loadingContainerVariants: MotionProps = {
     duration: 0.25,
     delay: 1.25,
   },
-  initial: "initial",
-  animate: "visible",
-};
+  initial: 'initial',
+  animate: 'visible',
+}
 
 //Persistent Rotation Variants
 
 export const rotate360Variants: MotionProps = {
-  initial: "hidden",
-  whileInView: ["rotate", "immediateAnimations"],
+  initial: 'hidden',
+  whileInView: ['rotate', 'immediateAnimations'],
   variants: {
     hidden: {
       opacity: 0,
@@ -127,38 +127,38 @@ export const rotate360Variants: MotionProps = {
       transition: {
         duration: 60,
         repeat: Infinity,
-        ease: "linear",
+        ease: 'linear',
       },
     },
     immediateAnimations: {
       opacity: 1,
       scale: 1,
-      transition: { delay: 1.25, duration: 1, ease: "easeInOut" },
+      transition: { delay: 1.25, duration: 1, ease: 'easeInOut' },
     },
   },
   viewport: {
-    margin: "20% 0% 20% 0%",
+    margin: '20% 0% 20% 0%',
   },
-};
+}
 
 //Device Variants
 
 export const deviceMotionVariants: MotionProps = {
-  initial: "hidden",
-  whileInView: "visible",
+  initial: 'hidden',
+  whileInView: 'visible',
   variants: {
-    hidden: { opacity: 0, clipPath: "inset(0 80% 0 0 round 1.5rem)" },
-    visible: { opacity: 1, clipPath: "inset(0 0% 0 0 round 1.5rem)" },
+    hidden: { opacity: 0, clipPath: 'inset(0 80% 0 0 round 1.5rem)' },
+    visible: { opacity: 1, clipPath: 'inset(0 0% 0 0 round 1.5rem)' },
   },
   viewport: {
-    margin: "0% 0% -10% 0%",
+    margin: '0% 0% -10% 0%',
   },
-  transition: { duration: 1, ease: "easeInOut", delayChildren: 0.5 },
-};
+  transition: { duration: 1, ease: 'easeInOut', delayChildren: 0.5 },
+}
 
 export const deviceMotionChildVariants: MotionProps = {
-  initial: "hidden",
-  whileInView: "visible",
+  initial: 'hidden',
+  whileInView: 'visible',
   variants: {
     hidden: { opacity: 0 },
     visible: {
@@ -166,7 +166,7 @@ export const deviceMotionChildVariants: MotionProps = {
     },
   },
   viewport: {
-    margin: "0% 0% -10% 0%",
+    margin: '0% 0% -10% 0%',
   },
-  transition: { duration: 0.75, ease: "easeInOut", delay: 1 },
-};
+  transition: { duration: 0.75, ease: 'easeInOut', delay: 1 },
+}

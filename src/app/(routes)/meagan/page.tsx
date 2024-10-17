@@ -1,22 +1,21 @@
-import { Metadata } from 'next';
-import { Bio, Buttons, QuickInfo } from './_components/index';
+import { Metadata } from 'next'
+import { Bio, Buttons, QuickInfo } from './_components/index'
+import PageTitle from '@/components/PageTitle'
 
 export const metadata: Metadata = {
   title: 'about',
   description: 'about page',
-};
+}
 
 const Page = async (): Promise<JSX.Element> => {
   return (
-    <div>
-      <h1 className="font-pixel text-center text-2xl uppercase text-primary-600 before:pr-[7px] before:content-[url('/images/ui/leftsparkle.gif')] after:pl-[5px] after:content-[url('/images/ui/rightsparkle.gif')] lg:text-3xl">
-        About
-      </h1>
+    <div className="max-w-[80%] mx-auto mt-[5rem] py-10">
+      <PageTitle title="About" />
       <QuickInfo />
       <Bio />
       <Buttons />
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

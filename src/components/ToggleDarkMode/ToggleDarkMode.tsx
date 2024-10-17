@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
 import { m, useMotionValue, useTransform } from 'framer-motion'
-import cn from '@/utils/cn';
+import cn from '@/utils/cn'
 
-import useTheme from '@/hooks/use-theme';
+import useTheme from '@/hooks/use-theme'
 
 const ToggleDarkMode = () => {
-  const { theme, mounted, setTheme } = useTheme();
+  const { theme, mounted, setTheme } = useTheme()
   const isDark = theme === 'dark'
-  const duration = 0.7;
+  const duration = 0.7
 
   const sunVariants = {
     checked: {
@@ -17,7 +17,7 @@ const ToggleDarkMode = () => {
     unchecked: {
       scale: 0,
     },
-  };
+  }
 
   const moonVariants = {
     checked: {
@@ -26,7 +26,7 @@ const ToggleDarkMode = () => {
     unchecked: {
       scale: 1,
     },
-  };
+  }
 
   const scaleMoon = useMotionValue(isDark ? 0 : 1)
   const scaleSun = useMotionValue(isDark ? 1 : 0)
@@ -37,21 +37,11 @@ const ToggleDarkMode = () => {
     <button
       type="button"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className={cn('z-50 px-1 py-1')}
+      className={cn('z-50 px-1 py-1 text-purple-800 dark:text-yellow-200')}
       aria-label="Toggle Dark Mode"
     >
-      <m.div
-        initial={true}
-        animate={isDark ? 'checked' : 'unchecked'}
-        transition={{ duration }}
-      >
-        <m.svg
-          width="20"
-          height="20"
-          viewBox="0 0 25 25"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+      <m.div initial={true} animate={isDark ? 'checked' : 'unchecked'} transition={{ duration }}>
+        <m.svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           {mounted && (
             <>
               <m.path
@@ -199,7 +189,7 @@ const ToggleDarkMode = () => {
         </m.svg>
       </m.div>
     </button>
-  );
-};
+  )
+}
 
-export default ToggleDarkMode;
+export default ToggleDarkMode

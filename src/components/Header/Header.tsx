@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-import { m } from 'framer-motion';
+import { m } from 'framer-motion'
 
-import site from '@/config';
-import useOnScroll from '@/hooks/use-on-scroll';
-import cn from '@/utils/cn';
+import site from '@/config'
+import useOnScroll from '@/hooks/use-on-scroll'
+import cn from '@/utils/cn'
 
-import Logo from '@/components/Logo';
-import MobileNav from '@/components/MobileNav';
-import Navbar from '@/components/Navbar';
-import ToggleDarkMode from "@/components/ToggleDarkMode";
-import Container from '@/components/Container';
-import Separator from '@/components/Separator';
+import Logo from '@/components/Logo'
+import MobileNav from '@/components/MobileNav'
+import Navbar from '@/components/Navbar'
+import ToggleDarkMode from '@/components/ToggleDarkMode'
+import Container from '@/components/Container'
+import Separator from '@/components/Separator'
 
 const Header = () => {
-  const isScrolled = useOnScroll(210)
+  const isScrolled = useOnScroll(240)
 
   return (
     <m.header
       className={cn(
-        'saturate-110 top-0 z-50 flex h-[210px] bg-pink-200 dark:bg-purple-1000',
+        'saturate-110 top-0 z-50 flex h-[240px] bg-pink-200 dark:bg-green-1000',
         isScrolled ? 'shadow-sm' : '',
       )}
       initial={{ y: -100 }}

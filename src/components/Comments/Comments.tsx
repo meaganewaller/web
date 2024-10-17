@@ -1,5 +1,5 @@
-"use client";
-import Giscus from "@giscus/react";
+'use client'
+import Giscus from '@giscus/react'
 
 export default function Comments() {
   return (
@@ -19,5 +19,5 @@ export default function Comments() {
         loading="lazy"
       />
     </div>
-  );
+  )
 }

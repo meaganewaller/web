@@ -18,7 +18,8 @@ if (
   !twitterId ||
   !twitterUsername
 ) {
-  throw new Error('Required environment variables are missing!\ncheck your environment variables at `src/utils/env/client.ts`',
+  throw new Error(
+    'Required environment variables are missing!\ncheck your environment variables at `src/utils/env/client.ts`',
   )
 }
 

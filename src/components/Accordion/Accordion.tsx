@@ -1,35 +1,36 @@
-import { m, AnimatePresence } from "framer-motion";
-import { useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { AnimatePresence, m } from 'framer-motion'
+import { useState } from 'react'
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
-import React from 'react';
-import { ReactNode } from 'react';
+import React from 'react'
+import { ReactNode } from 'react'
 
 export type AccordionProps = {
-  label: string;
-  children: ReactNode;
-};
+  label: string
+  children: ReactNode
+}
 
 function Accordion({ label, children }: AccordionProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div
-      className="w-full mx-auto mb-6 outlined outline-pink-700 rounded-sm p-1 bg-pink-200"
-    >
+    <div className="w-full mx-auto mb-6 outlined outline-pink-700 rounded-sm p-1 bg-pink-200">
       <m.div
         initial={false}
-        animate={{ backgroundColor: isOpen ? "#FCC5DF" : "#Fee2EF" }}
+        animate={{ backgroundColor: isOpen ? '#FCC5DF' : '#Fee2EF' }}
         transition={{ duration: 0.2 }}
         onClick={() => setIsOpen(!isOpen)}
         className="rounded-sm"
       >
-        <button
-          className="flex justify-between items-center p-2 w-full text-left"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <button className="flex justify-between items-center p-2 w-full text-left" onClick={() => setIsOpen(!isOpen)}>
           <span className="text-lg font-monoItalic text-pink-900">{label}</span>
-          <m.span key={isOpen ? "up" : "down"} initial={{ rotate: 0 }} animate={{ rotate: 180 }}>{isOpen ? <FaChevronDown size={20} className="text-pink-800" /> : <FaChevronUp size={20} className="text-pink-800" />}</m.span>
+          <m.span key={isOpen ? 'up' : 'down'} initial={{ rotate: 0 }} animate={{ rotate: 180 }}>
+            {isOpen ? (
+              <FaChevronDown size={20} className="text-pink-800" />
+            ) : (
+              <FaChevronUp size={20} className="text-pink-800" />
+            )}
+          </m.span>
         </button>
       </m.div>
       <AnimatePresence initial={false}>
@@ -53,7 +54,7 @@ function Accordion({ label, children }: AccordionProps) {
   )
 }
 
-export default React.memo(Accordion);
+export default React.memo(Accordion)
 
 // function AccordionComponent({
 //   label,

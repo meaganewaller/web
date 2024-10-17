@@ -1,5 +1,6 @@
-import { Metadata } from 'next';
-import Form from './_components/Form';
+import { Metadata } from 'next'
+import Form from './_components/Form'
+import PageTitle from '@/components/PageTitle'
 
 export const metadata: Metadata = {
   title: 'say hi',
@@ -20,17 +21,15 @@ export const metadata: Metadata = {
       },
     ],
   },
-};
+}
 
 const Page = async (): Promise<JSX.Element> => {
   return (
     <div>
-      <h1 className="font-pixel text-center text-2xl uppercase text-primary-600 before:pr-[7px] before:content-[url('/images/ui/leftsparkle.gif')] after:pl-[5px] after:content-[url('/images/ui/rightsparkle.gif')] lg:text-3xl">
-        say hi!
-      </h1>
+      <PageTitle title="Say Hi" />
       <Form />
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

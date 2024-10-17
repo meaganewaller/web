@@ -1,3 +1,3 @@
 export * from './Anchor'
 export { default } from './Anchor'
-export type { AnchorProps, ArrowPosition } from './Anchor.types';
+export type { AnchorProps, ArrowPosition } from './Anchor.types'

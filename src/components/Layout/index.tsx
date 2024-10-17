@@ -7,7 +7,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default PageLayout;
+export default PageLayout

@@ -1,5 +1,5 @@
-import Search from "./Search";
-import Taxonomy from "./Taxonomy";
+import Search from './Search'
+import Taxonomy from './Taxonomy'
 
 const Sidebar = () => (
   <>
@@ -12,6 +12,6 @@ const Sidebar = () => (
       <Taxonomy />
     </div>
   </>
-);
+)
 
-export default Sidebar;
+export default Sidebar

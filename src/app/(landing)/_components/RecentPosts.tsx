@@ -10,22 +10,23 @@ interface IPosts {
 
 export default function RecentPosts({ posts }: IPosts) {
   return (
-    <Container
-      title="Recent Posts"
-      gridName="grid-in-recent-posts"
-    >
+    <Container title="Recent Posts" gridName="grid-in-recent-posts">
       <ul className="table w-full justify-between text-lg font-extra">
         {posts.map((post: PostResponse, i: number) => (
           <li
             key={post.slug}
             className={cn(
-              'group table-row hover:bg-light_orange-800 hover:text-light_orange-300 hover:decoration-light_orange-400 dark:hover:bg-cobalt_blue-200 dark:hover:text-cobalt_blue-800 dark:hover:decoration-cobalt_blue-700',
-              i % 2 !== 0 && 'bg-heliotrope-800/80 dark:bg-cobalt_blue-200/80',
+              'group table-row',
+              'hover:bg-yellow-200',
+              i % 2 !== 0 && 'bg-violet-300/80 dark:bg-green-900/80 dark:hover:bg-yellow-300',
             )}
           >
             <Link
               href={`/blog/${post.slug}`}
-              className="group table-cell px-4 py-2 text-xl group-hover:italic"
+              className={cn(
+                'group table-cell px-4 py-2 text-xl',
+                'text-violet-900 dark:text-green-300 dark:hover:text-green-900',
+              )}
             >
               {post.title}
             </Link>
@@ -33,5 +34,5 @@ export default function RecentPosts({ posts }: IPosts) {
         ))}
       </ul>
     </Container>
-  );
+  )
 }

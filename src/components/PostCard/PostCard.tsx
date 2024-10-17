@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import type { PostResponse } from "@/types";
-import { m } from 'framer-motion';
-import cn from '@/utils/cn';
-import { useMemo } from 'react';
-import Link from '@/components/Link';
+import type { PostResponse } from '@/types'
+import { m } from 'framer-motion'
+import cn from '@/utils/cn'
+import { useMemo } from 'react'
+import Link from '@/components/Link'
 
-import { formatDate } from '@/utils/date';
+import { formatDate } from '@/utils/date'
 
 export interface PostCardProps {
   post: PostResponse
@@ -17,15 +17,15 @@ export default function PostCard({ post, index }: PostCardProps) {
   const publishedDate = useMemo(
     () => (post.published_date ? formatDate(post.published_date) : null),
     [post.published_date],
-  );
+  )
 
   const isHighlighted = useMemo(() => {
-    return post.tags?.length && post.tags.length > 0 ? post.tags.indexOf('highlights') !== -1 : false;
-  }, [post.tags]);
+    return post.tags?.length && post.tags.length > 0 ? post.tags.indexOf('highlights') !== -1 : false
+  }, [post.tags])
 
   return (
     <m.div
-      className={cn('my-2 flex justify-between p-1', isHighlighted ? 'rounded-md bg-warning-200/40' : '')}
+      className={cn('my-2 flex justify-between p-1', isHighlighted ? 'rounded-md bg-yellow-200/40' : '')}
       key={post.slug}
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
@@ -35,12 +35,14 @@ export default function PostCard({ post, index }: PostCardProps) {
         <div className="flex flex-row items-center space-x-4">
           <Link
             href={`/blog/${post.slug}`}
-            className="decoration-none grow text-lg font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
-          >{post.title}</Link>
+            className="decoration-none grow text-lg font-semibold text-pink-800 hover:text-pink-700 dark:text-green-100 dark:hover:text-green-200"
+          >
+            {post.title}
+          </Link>
         </div>
-        {isHighlighted && (post.description?.length || 0) > 0 && <p className="text-primary-800">{post.description}</p>}
+        {isHighlighted && (post.description?.length || 0) > 0 && <p className="text-pink-800">{post.description}</p>}
       </div>
-      <p className="hidden space-x-2 whitespace-nowrap text-right text-sm text-primary-500 md:block dark:text-orange-200">
+      <p className="hidden space-x-2 whitespace-nowrap text-right text-xs text-pink-900 md:block dark:text-orange-200">
         <span>{publishedDate}</span>
       </p>
     </m.div>

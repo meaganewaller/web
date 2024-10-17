@@ -1,21 +1,16 @@
-'use client';
+'use client'
 
-import tw, { GlobalStyles as TailwindStyles } from 'twin.macro';
-import { css, Global as EmotionStyles } from '@emotion/react';
-import { ThemeProvider } from 'next-themes';
-import { Toaster as ToastProvider } from 'react-hot-toast';
+import tw, { GlobalStyles as TailwindStyles } from 'twin.macro'
+import { Global as EmotionStyles, css } from '@emotion/react'
+import { ThemeProvider } from 'next-themes'
+import { Toaster as ToastProvider } from 'react-hot-toast'
 import { useAnalytics } from '@/hooks'
-import { Theme } from '@/types';
+import { Theme } from '@/types'
 import React, { Suspense } from 'react'
 import { AppProgressBar as ProgressBar } from 'next-nprogress-bar'
-import {
-  domAnimation,
-  LazyMotion,
-  MotionConfig as MotionProvider,
-  m
-} from "framer-motion";
+import { LazyMotion, MotionConfig as MotionProvider, domAnimation, m } from 'framer-motion'
 
-import useMounted from '@/hooks/use-mounted';
+import useMounted from '@/hooks/use-mounted'
 
 const GlobalStyles = css`
   html {
@@ -53,21 +48,21 @@ const GlobalStyles = css`
   #nprogress .bar {
     ${tw`h-1 bg-teal-500`}
   }
-`;
+`
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const pageVariants = {
   initial: { opacity: 0 },
   enter: { opacity: 1, transition: { duration: 0.5 } },
   exit: { opacity: 0, transition: { duration: 0.5 } },
-};
+}
 
 export const Providers: React.FC<Props> = ({ children }) => {
-  const mounted = useMounted();
-  useAnalytics();
+  const mounted = useMounted()
+  useAnalytics()
 
   return (
     mounted && (
@@ -81,11 +76,11 @@ export const Providers: React.FC<Props> = ({ children }) => {
             disableTransitionOnChange
           >
             <m.div
-              initial='initial'
-              animate='enter'
-              exit='exit'
+              initial="initial"
+              animate="enter"
+              exit="exit"
               variants={pageVariants}
-              className='transition-color flex flex-col'
+              className="transition-color flex flex-col"
             >
               <EmotionStyles styles={GlobalStyles} />
               <TailwindStyles />
@@ -93,7 +88,7 @@ export const Providers: React.FC<Props> = ({ children }) => {
               <ToastProvider position="top-center" />
             </m.div>
             <Suspense fallback={null}>
-              <ProgressBar height='4px' color='#00ced1' options={{ showSpinner: false }} />
+              <ProgressBar height="4px" color="#00ced1" options={{ showSpinner: false }} />
             </Suspense>
           </ThemeProvider>
         </LazyMotion>
@@ -102,4 +97,4 @@ export const Providers: React.FC<Props> = ({ children }) => {
   )
 }
 
-export default Providers;
+export default Providers

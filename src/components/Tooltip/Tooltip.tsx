@@ -27,11 +27,10 @@ const Tooltip: FC<TooltipProps> = ({
   clickable,
 }) => {
   return (
-    <div className='tooltip-container'>
+    <div className="tooltip-container">
       {React.cloneElement(children as React.ReactElement, {
         'data-tooltip-id': selector,
-      })
-      }
+      })}
       <ReactTooltip
         id={selector}
         content={content}

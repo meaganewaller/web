@@ -1,95 +1,38 @@
 'use client'
 
-import { m, MotionProps } from 'framer-motion'
-import Image from 'next/image'
-import { ReactNode } from 'react'
-import { IconType } from 'react-icons'
+import cn from '@/utils/cn'
+import * as React from 'react'
+import { ButtonProps, Button as RACButton } from 'react-aria-components'
 
-type Props = MotionProps & {
-  color?: string
-  onClick?: () => void
-  size?: 'small' | 'medium' | 'large'
-  isLoading?: boolean
-  isDisabled?: boolean
-  children: ReactNode
-  buttonClassName?: string
-  type?: 'submit' | 'button' | 'reset'
-  id?: string
-  preStyled?: string
-  Icon?: IconType
-}
+export const buttonStyle =
+  'text-base uppercase py-5 px-10 font-bold inline-flex items-center justify-center gap-2 border-2 border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 duration-200 rounded-sm focus:ring-pink-500 ring-offset-background bg-pink-600 text-pink-100 hover:bg-pink-700 data-[pressed]:bg-pink-500' +
+  ' ' +
+  'data-[variant=accent]:bg-pink-600 data-[variant=accent]:text-pink-100 data-[variant=accent]:hover:bg-pink-700 data-[variant=accent]:data-[pressed]:bg-pink-500 data-[variant=accent]:active:bg-pink-500' +
+  ' ' +
+  'dark:bg-lime-800 dark:text-lime-100 dark:hover:bg-lime-700 dark:data-[pressed]:bg-lime-600 dark:active:bg-lime-600' +
+  ' ' +
+  'data-[variant=default]:bg-purple-500 data-[variant=default]:text-purple-100 data-[variant=default]:hover:bg-purple-600 data-[variant=default]:data-[pressed]:bg-purple-700 data-[variant=default]:active:bg-purple-700'
 
-export default function Button({
-  color = 'twitterBlue',
-  onClick,
-  size = 'medium',
-  children,
-  isLoading = false,
-  isDisabled = false,
-  buttonClassName = 'text-white uppercase',
-  type = 'submit',
-  id,
-  preStyled,
-  Icon,
-  ...rest
-}: Props) {
-  const sizes = {
-    small: 'py-1 px-2 text-sm',
-    medium: 'py-2 px-5 text-md',
-    large: 'py-3 px-6 text-lg',
+export type ButtonVariant = 'accent' | 'default'
+
+const Button = React.forwardRef<
+  HTMLButtonElement,
+  ButtonProps & {
+    variant?: ButtonVariant
+    disabled?: boolean
   }
-
-  type Colors = {
-    [key: string]: string
-  }
-
-  const colors: Colors = {
-    transparent: 'bg-transparent hover:bg-transparent active:bg-transparent',
-    pink: 'bg-pink-500 hover:bg-pink-700 active:bg-pink-800',
-    blue: 'bg-blue-500 hover:bg-blue-700 active:bg-blue-800',
-    red: 'bg-red-500 hover:bg-red-700 text-white',
-    green: 'bg-green-500 hover:bg-green-700 active:bg-green-800',
-    black: 'bg-black',
-    slate: 'bg-slate-600 hover:bg-slate-700 active:bg-slate-800',
-    white: 'bg-white  border border-gray-300',
-    gray: 'bg-gray-100 hover:bg-gray-200 active:bg-gray-300',
-    twitterBlue:
-      'bg-twitterBlue-500 hover:bg-twitterBlue-700 active:bg-twitterBlue-800',
-  }
-
-  // add disabled and loading states to button
-  const disabledClass = isDisabled ? 'opacity-50 cursor-not-allowed' : ''
-  const loadingClass = isLoading ? 'animate-pulse' : ''
-
+>(({ variant = 'accent', className = '', disabled, isDisabled, ...props }, ref) => {
   return (
-    <m.button
-      id={id}
-      type={type}
-      onClick={onClick}
-      disabled={isDisabled}
-      className={`${preStyled
-        ? preStyled
-        : `flex w-full  items-center justify-center rounded-full shadow  ${isDisabled || isLoading
-          ? 'cursor-not-allowed'
-          : 'cursor-pointer transition duration-100 hover:shadow-lg'
-        }`
-        }   ${!preStyled && sizes[size]} ${!preStyled && colors[color]
-        } ${disabledClass} ${loadingClass} ${!preStyled && buttonClassName}`}
-      {...rest}>
-      {Icon ? <Icon className="mr-5 text-2xl font-bold" /> : null}
-
-      {isLoading ? (
-        <div>
-          <Image
-            src="/images/svg/Spinner-1s-200px.svg"
-            alt="Loading"
-            width={30}
-            height={30}
-          />
-        </div>
-      ) : (
-        children
-      )}
-    </m.button>
+    <RACButton
+      {...props}
+      ref={ref}
+      isDisabled={disabled || isDisabled}
+      className={cn(buttonStyle, className)}
+      data-variant={variant}
+    />
   )
-}
+})
+
+Button.displayName = 'Button'
+
+export default Button

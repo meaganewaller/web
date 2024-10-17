@@ -1,5 +1,14 @@
 import '@/styles/globals.css'
-import { fontSans, fontSerif, fontMono, fontMonoItalic, fontPixel, fontDisplay, fontExtra } from '@/lib/fonts'
+import {
+  fontDisplay,
+  fontExtra,
+  fontHeading,
+  fontMono,
+  fontMonoItalic,
+  fontPixel,
+  fontSans,
+  fontSerif,
+} from '@/lib/fonts'
 import type { Metadata, Viewport } from 'next'
 
 import Analytics from '@/components/Analytics'
@@ -7,24 +16,23 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import NowPlaying from '@/components/NowPlaying'
 import Providers from '@/providers'
-import createMetadata from '@/utils/metadata'
 import cn from '@/utils/cn'
 
 export const metadata: Metadata = {
   title: {
     default: 'meagan waller',
-    template: `%s - meagan waller`
+    template: `%s - meagan waller`,
   },
   description: `meagan waller's personal website and blog`,
   themeColor: [
     { media: '(prefers-color-scheme: dark)', color: '#000000' },
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' }
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
   ],
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
-};
+}
 
 export const viewport: Viewport = {
   initialScale: 1,
@@ -47,15 +55,16 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         fontMonoItalic.variable,
         fontDisplay.variable,
         fontExtra.variable,
+        fontHeading.variable,
         'scroll-smooth',
       )}
     >
       <head />
-      <body className={cn('min-h-screen bg-rose_pink-900 font-sans antialiased scroll-smooth')}>
+      <body className={cn('min-h-screen debug-screens font-sans antialiased scroll-smooth')}>
         <Providers>
           <div id="__app">
             <Header />
-            <main className='flex-1'>{children}</main>
+            <main className="flex-1">{children}</main>
             <Footer />
             <NowPlaying />
           </div>
@@ -64,7 +73,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </body>
     </html>
   )
-
 }
 
 export default RootLayout
