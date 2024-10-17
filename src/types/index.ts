@@ -3,6 +3,19 @@ export interface Link {
   title: string
 }
 
+export interface Talk {
+  slug: string
+  tags?: string[]
+  links: Link[]
+  description: string
+  category: string
+  title: string
+  location: string
+  slidedeck: string
+  video: string
+  date: Date
+}
+
 export interface Project {
   slug: string
   tags?: string[]
@@ -15,6 +28,28 @@ export interface Project {
   icon_url: string
   date_started: Date
   date_ended?: Date
+}
+
+export interface TalkResponse {
+  comment_count: number
+  content: string
+  image: any
+  description: string
+  meta_description: string
+  notion_created_at: string
+  notion_updated_at: string
+  date: string
+  slug: string
+  tags: string[]
+  title: string
+  views: number
+  category: {
+    id: string
+    slug: string
+    description: string
+    cover_image: string
+    title: string
+  }
 }
 
 export interface PostResponse {

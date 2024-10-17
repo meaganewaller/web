@@ -25,6 +25,10 @@ const requests = {
     fetchAll: `${BASE_API_URL}/guestbook`,
     create: `${BASE_API_URL}/guestbook`,
   },
+  talks: {
+    fetchAll: `${BASE_API_URL}/talks`,
+    fetchBySlug: (slug: string) => `${BASE_API_URL}/talks/${slug}`,
+  }
 }
 
 export default requests
